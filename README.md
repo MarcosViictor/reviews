@@ -1,24 +1,18 @@
-#!/bin/bash
+# Setup do Projeto Django
 
-# Clonar o repositório
-git clone [URL_DO_REPOSITÓRIO]
-cd [NOME_DO_REPOSITORIO]
+Este guia irá te ajudar a clonar o repositório, configurar o ambiente virtual, instalar as dependências, realizar as migrações do banco de dados e rodar o servidor Django.
 
-# Criar e ativar o ambiente virtual
-python -m venv venv
-source venv/bin/activate
+## Pré-requisitos
 
-# Instalar as dependências
-pip install -r requirements.txt
+- Python instalado (recomenda-se a versão 3.7 ou superior)
+- Git instalado
 
-# Instalar Django se não estiver listado nas dependências
-pip install django
+## Passo a Passo
 
-# Realizar as migrações do banco de dados
-python manage.py migrate
+1. **Clonar o repositório**
 
-# Criar um superusuário
-python manage.py createsuperuser
+   Clone o repositório do projeto para o seu ambiente local:
 
-# Executar o servidor
-python manage.py runserver
+   ```bash
+   git clone [URL_DO_REPOSITÓRIO]
+   cd [NOME_DO_REPOSITORIO]
