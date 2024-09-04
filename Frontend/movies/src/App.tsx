@@ -1,17 +1,26 @@
 
 import './assets/styles/index.css'
-import { FaBeer } from "react-icons/fa";
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Home from './Pages/Home';
+import {GetMoviesProvider} from './context/GetMovies';
+import { GetSeriesProvider } from './context/GetSeries';
 
 function App() {
 
+    
   return (
-    <>
-      <h1 className=" font-bold underline bg-slate-400 p-10">
-      <FaBeer />
-    </h1>
-    {/* criar rootas aqui */}
+    <GetMoviesProvider>
+      <GetSeriesProvider>
+      <Router>
+        <Routes>
+          {/* <Route path='/login' element={<Login />} /> */}
+          <Route path='/' element={<Home/>} />
+        </Routes>
+      </Router>
+      </GetSeriesProvider>
+    </GetMoviesProvider>
+
       
-    </>
   )
 }
 
