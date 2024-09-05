@@ -28,7 +28,7 @@ export const GetSeriesProvider = ({ children }: { children: React.ReactNode })  
     useEffect(() => {
 
         const getSeries = async () : Promise<void>  => {
-            await api.get('/tv/popular')
+            await api.get('/trending/tv/day')
             .then(res => {
               console.log(res)
               setSeries(res.data.results)

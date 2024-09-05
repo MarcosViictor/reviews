@@ -1,0 +1,3 @@
+ul::-webkit-scrollbar {
+  height: 8px; /* Altura da barra de rolagem */
+}
