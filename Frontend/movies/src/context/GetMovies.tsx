@@ -1,17 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { api } from "./api";
-
-interface Movie {
-  id: number;
-  title: string;
-  overview: string;
-  popularity: number;
-  release_date: string;
-  vote_average: number;
-  vote_count: number;
-  poster_path: string;
-
-}
+import { Movie } from "../Types/Movie";
 
 interface MoviesContextType {
   movies: Movie[];

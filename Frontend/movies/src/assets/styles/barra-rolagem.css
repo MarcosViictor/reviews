@@ -1,3 +1,42 @@
-ul::-webkit-scrollbar {
-  height: 8px; /* Altura da barra de rolagem */
+body::-webkit-scrollbar {
+  width: 7px;
+  height: 10px;  
+             /* width of the entire scrollbar */
 }
+
+body::-webkit-scrollbar-track {
+  background: transparent;     
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: gray; 
+  border-radius: 20px; 
+
+}
+
+body::-webkit-scrollbar {
+  width: 7px;
+  height: 10px;  
+}
+
+ul::-webkit-scrollbar {
+  height: 8px; 
+}
+
+ul::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 10px; 
+}
+
+ul::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.1); 
+  border-radius: 10px;
+}
+
+/* Alterar o estilo quando estiver ativo ou sendo pressionado */
+/* ul::-webkit-scrollbar-thumb:hover {
+} */
+
+/* ul::-webkit-scrollbar-thumb:active {
+  background-color: rgba(0, 0, 0, 0.9);
+} */

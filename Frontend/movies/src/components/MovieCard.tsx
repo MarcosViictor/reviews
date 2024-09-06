@@ -21,7 +21,7 @@ const MovieCard = () => {
         {movies.length > 0 ? (
         <ul className='flex gap-5 w-[100%] overflow-x-auto '>
           {movies.map(movie => (
-            <li key={movie.id} className='relative'>
+            <li key={movie.id} className='relative mb-3'>
               <figure className='w-[11rem] '>
                   <img className="w-[500px] rounded-xl" src={imgFilme + movie.poster_path} alt={movie.title} />
                 </figure>

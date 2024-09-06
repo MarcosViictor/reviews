@@ -1,17 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { api } from "./api";
-
-interface Series {
-  id: number;
-  name: string;
-  overview: string;
-  popularity: number;
-  release_date: string;
-  vote_average: number;
-  vote_count: number;
-  poster_path: string;
-
-}
+import { Series } from "../Types/Series";
 
 interface SeriesContextType {
   series: Series[];

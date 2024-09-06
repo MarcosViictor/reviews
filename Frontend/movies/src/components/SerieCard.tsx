@@ -24,7 +24,7 @@ const SeriesCard = () => {
           <ul className='flex gap-5 w-[100%] overflow-x-auto'>
             {series.map(serie => (
              
-              <li key={serie.id} className='relative'>
+              <li key={serie.id} className='relative mb-3'>
                  <figure className='w-[11rem] '>
                   <img className="w-[500px] rounded-xl" src={imgSerie + serie.poster_path} alt={serie.name} />
                 </figure>
