@@ -3,6 +3,8 @@ import GetMoviesContext  from '../context/GetMovies.tsx'
 const imgFilme = import.meta.env.VITE_IMG;
 import { FaStar } from 'react-icons/fa';
 
+import '../assets/styles/container-filmes.css'
+
 const MovieCard = () => {
 
     const context = useContext(GetMoviesContext)
@@ -18,17 +20,18 @@ const MovieCard = () => {
     return (
         <section>
            <h2 className='text-[2rem] text-center mb-4 font-[700] text-white uppercase'>Top Filmes</h2>
+
         {movies.length > 0 ? (
-        <ul className='flex gap-5 w-[100%] overflow-x-auto '>
+        <ul className='container-filmes'>
           {movies.map(movie => (
-            <li key={movie.id} className='relative mb-3'>
-              <figure className='w-[11rem] '>
-                  <img className="w-[500px] rounded-xl" src={imgFilme + movie.poster_path} alt={movie.title} />
+            <li key={movie.id}>
+              <figure>
+                  <img src={imgFilme + movie.poster_path} alt={movie.title} />
                 </figure>
-                <div className="absolute bottom-0 w-full text-start text-white p-3 rounded-b-xl text-[1rem] " style={{ background: 'linear-gradient(to top, rgba(2, 1, 1.9, 1), transparent)' }}>
-                  <span className="font-[500]">{movie.title}</span>
-                  <div className="flex items-center gap-1">
-                    <FaStar />
+                <div className="nome-filme">
+                  <span>{movie.title}</span>
+                  <div className="estrela">
+                    <FaStar className='text-star'/>
                     {movie.vote_average}
                   </div>
                 </div>
@@ -36,8 +39,9 @@ const MovieCard = () => {
               </li>
           ))}
         </ul>
+
       ) : (
-        <p>Sem filmes disponíveis.</p>
+        <p>Carregando...</p>
       )}
         </section>
     )

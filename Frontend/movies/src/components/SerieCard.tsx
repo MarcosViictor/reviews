@@ -3,6 +3,8 @@ import GetSeriesContext  from '../context/GetSeries.tsx'
 const imgSerie = import.meta.env.VITE_IMG
 import { FaStar } from 'react-icons/fa';
 
+import '../assets/styles/container-filmes.css'
+
 const SeriesCard = () => {
 
     
@@ -18,20 +20,20 @@ const SeriesCard = () => {
      
     return (
         <section>
-          <h2 className='text-[2rem] text-center mb-4 font-[700] text-white uppercase'>Top Séries</h2>
+          <h2>Top Séries</h2>
           {series.length > 0 ? (
             
-          <ul className='flex gap-5 w-[100%] overflow-x-auto'>
+          <ul className='container-filmes'>
             {series.map(serie => (
              
-              <li key={serie.id} className='relative mb-3'>
-                 <figure className='w-[11rem] '>
-                  <img className="w-[500px] rounded-xl" src={imgSerie + serie.poster_path} alt={serie.name} />
+              <li key={serie.id}>
+                 <figure>
+                  <img src={imgSerie + serie.poster_path} alt={serie.name} />
                 </figure>
-                <div className="absolute bottom-0 w-full text-start text-white p-3 rounded-b-xl text-[1rem] " style={{ background: 'linear-gradient(to top, rgba(2, 1, 1.9, 1), transparent)' }}>
-                  <span className="font-[500]">{serie.name}</span>
-                  <div className="flex items-center gap-1">
-                    <FaStar />
+                <div className="nome-filme">
+                  <span>{serie.name}</span>
+                  <div className="estrela">
+                    <FaStar className='text-star'/>
                     {serie.vote_average}
                   </div>
                 </div>
