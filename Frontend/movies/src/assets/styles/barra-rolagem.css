@@ -33,6 +33,20 @@ ul::-webkit-scrollbar-track {
   border-radius: 10px;
 }
 
+figure::-webkit-scrollbar {
+  height: 8px; 
+}
+
+figure::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 10px; 
+}
+
+figure::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.1); 
+  border-radius: 10px;
+}
+
 /* Alterar o estilo quando estiver ativo ou sendo pressionado */
 /* ul::-webkit-scrollbar-thumb:hover {
 } */

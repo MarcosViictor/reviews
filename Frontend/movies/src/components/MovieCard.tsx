@@ -5,7 +5,7 @@ import { FaStar } from 'react-icons/fa';
 
 import '../assets/styles/container-filmes.css'
 
-const MovieCard = () => {
+const MovieCard : React.FC = () => {
 
     const context = useContext(GetMoviesContext)
 
