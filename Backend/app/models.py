@@ -18,6 +18,7 @@ class User (Base):
     email = models.EmailField(max_length=50, unique=True)
     safeword = models.CharField(max_length=50)
     date_birth = models.DateField()
+    img_user = models.CharField(max_length=255)
     
     def __str__(self):
         return self.name
@@ -43,7 +44,8 @@ class Movie (Base):
     genre_ids = models.CharField(max_length=40)
     vote_average = models.FloatField()
     release_date = models.DateField()
-    # backdrop_path: string
+    backdrop_path = models.CharField(max_length=255)
+    poster_path = models.CharField(max_length=255)
     
          
     def __str__(self):
@@ -58,7 +60,8 @@ class Series (Base):
     genre_ids = models.CharField(max_length=40)
     vote_average = models.FloatField()
     first_date = models.DateField()
-    poster_path = models.CharField(max_length=200)
+    backdrop_path = models.CharField(max_length=255)
+    poster_path = models.CharField(max_length=255)
     
     def __str__(self):
         return self.title
