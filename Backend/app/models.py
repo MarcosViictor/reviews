@@ -1,4 +1,4 @@
-from django import models
+from django.db import models
 from django.contrib.auth.hashers import make_password, check_password
 
 # Create your models here.
@@ -41,7 +41,7 @@ class Movie (Base):
     title = models.CharField(max_length=40)
     overview = models.TextField()
     genre_ids = models.CharField(max_length=40)
-    vote_avarage = models.DecimalField(max_digits=2, decimal_places=1)
+    vote_average = models.FloatField()
     release_date = models.DateField()
     # backdrop_path: string
     
@@ -56,7 +56,7 @@ class Series (Base):
     overview = models.TextField()
     popularity = models.IntegerField()
     genre_ids = models.CharField(max_length=40)
-    vote_avarage = models.DecimalField(max_digits=2, decimal_places=1)
+    vote_average = models.FloatField()
     first_date = models.DateField()
     poster_path = models.CharField(max_length=200)
     
@@ -65,7 +65,7 @@ class Series (Base):
     
     
         # LISTA    
-class List (User):
+class List (Base):
     name = models.CharField(max_length=255)
     overview = models.TextField()
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -85,7 +85,7 @@ class List_movies_series (Base):
 
         # Avaliação de séries
 class Overview_serie (Base):
-    vote_avarage = models.DecimalField(max_digits=2, decimal_places=1)
+    vote_average = models.FloatField()
     text = models.TextField()
     date_vote = models.DateField ()
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -103,7 +103,7 @@ class Comment_overview_series (Base):
     
     # Avaliação do Filme
 class Overview_movie (Base):
-    vote_avarage = models.DecimalField(max_digits=2, decimal_places=1)
+    vote_average = models.FloatField()
     text = models.TextField()
     date_vote = models.DateField ()
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)
