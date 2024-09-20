@@ -5,7 +5,9 @@ export default {
     extend: {
       colors: {
         star: '#127369',
-        fontColor: 'white'
+        fontColor: 'white',
+        barra: '#7B7B79',
+        selected: '#136157'
       },
       width: {
         imagem: '11rem',
@@ -25,6 +27,8 @@ export default {
       },
       backgroundColor: {
         button: '#127369',
+        sideBar: '#191815',
+        background: '#051119'
       },
       borderRadius: {
         borderRadius: '0.75rem',

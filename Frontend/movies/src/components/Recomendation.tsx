@@ -15,7 +15,7 @@ const Recomendation = () => {
     const {recomendation} = context;
     
     return (
-        <section className='p-2'> 
+        <section className='p-2 ml-16'> 
         {/* diminuir aqui o height*/}
         <figure className='grid grid-flow-col w-[screen] pb-2 overflow-x-scroll gap-[2rem] rounded-br-borderRadius'>
            {recomendation.map(recomendation => (
