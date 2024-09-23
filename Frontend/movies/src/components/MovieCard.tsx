@@ -25,8 +25,8 @@ const MovieCard : React.FC = () => {
         <ul className='container-filmes'>
           {movies.map(movie => (
             <li key={movie.id}>
-              <figure>
-                  <img src={imgFilme + movie.poster_path} alt={movie.title} />
+              <figure className='figPoster'>
+                  <img className='imgPoster' src={imgFilme + movie.poster_path} alt={movie.title} />
                 </figure>
                 <div className="nome-filme">
                   <span>{movie.title}</span>

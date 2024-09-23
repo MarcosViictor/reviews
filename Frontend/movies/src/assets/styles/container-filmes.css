@@ -26,12 +26,12 @@ h2 {
 
 }
 
-ul.container-filmes figure {
+ul.container-filmes .figPoster {
     width: 11rem;
 
 }
 
-ul.container-filmes img {
+ul.container-filmes .imgPoster {
     border-radius: 0.75rem
 }
 
@@ -45,7 +45,7 @@ ul.container-filmes .nome-filme {
     border-bottom-right-radius: 0.75rem;
     border-bottom-left-radius: 0.75rem;
     font-size: 1rem;
-    background: linear-gradient(to top, rgba(2, 1, 1.9, 1), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, 3), transparent);
 }
 
 ul.container-filmes span {

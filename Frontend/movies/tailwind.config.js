@@ -28,7 +28,12 @@ export default {
       backgroundColor: {
         button: '#127369',
         sideBar: '#191815',
-        background: '#051119'
+        background: '#051119',
+        search: 'rgba(76, 89, 88, 0.5)',
+        
+      },
+      backgroundImage: {
+        gradient: 'linear-gradient(to bottom, rgba(0,20, 0, 20), transparent)'
       },
       borderRadius: {
         borderRadius: '0.75rem',
