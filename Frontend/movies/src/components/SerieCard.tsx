@@ -27,8 +27,8 @@ const SeriesCard = () => {
             {series.map(serie => (
              
               <li key={serie.id}>
-                 <figure>
-                  <img src={imgSerie + serie.poster_path} alt={serie.name} />
+                 <figure className='figPoster'>
+                  <img className='imgPoster' src={imgSerie + serie.poster_path} alt={serie.name} />
                 </figure>
                 <div className="nome-filme">
                   <span>{serie.name}</span>
