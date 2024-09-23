@@ -7,6 +7,7 @@ import { GetSeriesProvider } from './context/GetSeries';
 import { GetRecomendationProvider } from './context/GetRecomendation';
 import { GetFavsProvider } from './context/GetFavs';
 import Favoritos from './Pages/Favoritos';
+import Cadastro from './Pages/Cadastro';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
                 <Routes>
                   <Route path='/favorites' element={< Favoritos />} />
                   <Route path='/' element={<Home/>} />
+                  <Route path='/cadastro' element={<Cadastro />} />
                 </Routes>
               </Router>
             </GetSeriesProvider>
