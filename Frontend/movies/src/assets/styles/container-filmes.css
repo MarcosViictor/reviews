@@ -10,6 +10,7 @@ ul.container-filmes {
 
 ul.container-filmes  li {
     position: relative;
+    cursor: pointer;
     margin-bottom: 0.75rem;
 }
 

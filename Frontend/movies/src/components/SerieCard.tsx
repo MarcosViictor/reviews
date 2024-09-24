@@ -1,21 +1,30 @@
 import { useContext } from 'react';
-import GetSeriesContext  from '../context/GetSeries.tsx'
+import GetContentContext  from '../context/GetContent.tsx'
 const imgSerie = import.meta.env.VITE_IMG
 import { FaStar } from 'react-icons/fa';
-
+import { Link } from 'react-router-dom';
 import '../assets/styles/container-filmes.css'
+import { useGetId } from '../context/IdContext.tsx';
 
 const SeriesCard = () => {
 
     
-    const context = useContext(GetSeriesContext)
+    const context = useContext(GetContentContext)
 
     if (!context) {
-        // Aqui você pode lançar um erro, retornar null, ou renderizar algum fallback
         throw new Error('useContext must be used within a GetSeriesProvider');
       }
 
     const {series} = context;
+
+    const {setId} = useGetId();
+
+
+    const getId = (id:number)  => {
+      setId(id)
+      console.log(id)
+      
+    }
 
      
     return (
@@ -25,8 +34,8 @@ const SeriesCard = () => {
             
           <ul className='container-filmes'>
             {series.map(serie => (
-             
-              <li key={serie.id}>
+              <Link to={`/overview-serie/${serie.id}`} key={serie.id}>
+              <li onClick={() => getId(serie.id)}>
                  <figure className='figPoster'>
                   <img className='imgPoster' src={imgSerie + serie.poster_path} alt={serie.name} />
                 </figure>
@@ -39,6 +48,7 @@ const SeriesCard = () => {
                 </div>
            
               </li>
+              </Link>
             ))}
           </ul>
         ) : (

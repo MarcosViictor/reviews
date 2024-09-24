@@ -1,42 +1,45 @@
-import GetFavsContext from "../context/GetFavs";
+import GetContentContext from "../context/GetContent";
 import { useContext } from "react";
 const imgFilme = import.meta.env.VITE_IMG;
 import FavIcon from '../assets/img/fav-icon.svg'
-
+import { Link } from "react-router-dom";
 import '../assets/styles/container-filmes.css'
 
 
 const Favs : React.FC = () => {
 
-    const context = useContext(GetFavsContext)
+    const context = useContext(GetContentContext)
 
     if (!context) {
-        // Aqui você pode lançar um erro, retornar null, ou renderizar algum fallback
-        throw new Error('useContext must be used within a GetFavsProvider');
+        throw new Error('useContext must be used within a GetContentProvider');
       }
 
-    const {movies} = context
+    const {favorites} = context
 
 
     return (
 
             <div >
-            {movies.length > 0 ? (
+            {favorites.length > 0 ? (
                 <ul className='container-filmes flex flex-wrap justify-center'>
-                {movies.map(movie => (
-                    <li key={movie.id}>
+                {favorites.map(favorite => (
+                    
+                    <Link to={`/overview-movie/${favorite.id}`} key={favorite.id}>
+                    <li>
+                        
                         <figure className="figPoster">
-                            <img className="imgPoster" src={imgFilme + movie.poster_path} alt={movie.title} />
+                            <img className="imgPoster" src={imgFilme + favorite.poster_path} alt={favorite.title} />
                         </figure>
                         <figure className="absolute top-0 w-full flex justify-end p-[0.8rem] z-30 bg-gradient">
                             <img src={FavIcon} alt="" />
                         </figure>
                         <div className="nome-filme">
-                            <span>{movie.title}</span>
+                            <span>{favorite.title || favorite.name}</span>
         
                         </div>
                 
                     </li>
+                    </Link>
                 ))}
                 </ul>
 

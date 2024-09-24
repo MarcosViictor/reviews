@@ -1,14 +1,14 @@
 import { useContext } from 'react';
-import GetRecomendationContext  from '../context/GetRecomendation.tsx'
+import GetContentContext  from '../context/GetContent.tsx'
 const imgFilme = import.meta.env.VITE_IMG;
 // import { FaStar } from 'react-icons/fa';
 
 const Recomendation = () => {
 
-    const context = useContext(GetRecomendationContext)
+    const context = useContext(GetContentContext)
 
     if (!context) {
-        // Aqui você pode lançar um erro, retornar null, ou renderizar algum fallback
+    
         throw new Error('useContext must be used within a GetMoviesProvider');
       }
 
