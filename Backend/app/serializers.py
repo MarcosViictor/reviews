@@ -79,16 +79,24 @@ class CommentOverviewSeriesSerializers(serializers.ModelSerializer):
     )
 
 
-class OverviewMovie(serializers.ModelSerializer):
-    model = Overview_movie
-    fields = (
-        'id',
-        'vote_average',
-        'text',
-        'date_vote',
-        'id_user',
-        'id_movie'
-    )
+class OverviewMovieSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Overview_movie
+        fields = (
+            'id',
+            'vote_average',
+            'text',
+            'date_vote',
+            'id_movie'
+        )
+
+    def create(self, validated_data):
+        if validated_data.get('id_movie') is None:
+            raise serializers.ValidationError("O campo 'id_movie' é obrigatório.")
+
+        # Criação do objeto Overview_movie com os dados validados
+        overview_movie = Overview_movie.objects.create(**validated_data)
+        return overview_movie
 
 class CommentOverviewMoviesSerializers(serializers.ModelSerializer):
     model = Comment_overview_movies
