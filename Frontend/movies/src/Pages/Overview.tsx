@@ -2,6 +2,11 @@ import Header from "../components/Header"
 import GetContentContext from "../context/GetContent"
 import { useParams } from "react-router-dom"
 import { useContext } from "react"
+import SideBar from "../components/SideBar";
+const imgFilme = import.meta.env.VITE_IMG;
+import { FaStar } from 'react-icons/fa';
+import { MdDateRange } from "react-icons/md";
+import { TfiStatsUp } from "react-icons/tfi";
 
 const Overview : React.FC = () => {
 
@@ -33,12 +38,56 @@ const Overview : React.FC = () => {
 
 
     return (
-        <section>
-            <Header />
-            <h1>{content.title || content.name }</h1>
+      <>
+        <SideBar />
+        <Header />
+        <section className="m-Body flex justify-center">
+             
+        <figure className=' w-full pb-2 rounded-br-borderRadius'>
+                     
+                    <div className='relative gap-4 m-auto'>
+                        <img
+                            className='w-[68%]  rounded-borderRadius object-cover filter blur-[2px]'
+                            src={imgFilme + content.backdrop_path}
+                            alt={content.title}
+                        />
+                        <div className='absolute inset-0 flex flex-row-reverse justify-end items-center p-10 text-white gap-4'>
+                            <span className="w-[40%] p-3 rounded-borderRadius bg-search flex flex-col">
+                                <h3 className='text-[2rem]  font-bold'>{content.title || content.name}</h3>
+                                <div className="flex gap-1 flex-col">
+                                  <div className="flex gap-5 items-center">
+                                    <span className="flex gap-1 items-center">
+                                      <FaStar />
+                                      {content.vote_average}
+                                    </span>
+                                    <span className="flex gap-1 items-center">
+                                      <MdDateRange />
+                                      {content.release_date || content.first_air_date}
+                                    </span>
+                                    <span className="flex gap-1 items-center">
+                                      <TfiStatsUp />
+                                      {content.popularity}
+                                    </span>
+                                  
+                                  </div>
+                                  <p className="w-full">{content.overview}</p>
+                                </div>
+                       
+                            </span>
+                            <img className='w-[23%] rounded-borderRadius ' src={imgFilme + content.poster_path} alt="" />
+                            
+                        </div>
+                    </div>
+                    
            
+         </figure>
+
+         {/* terminar parte lateral para avaliações */}
 
         </section>
+
+      </>
+        
     )
 }
 

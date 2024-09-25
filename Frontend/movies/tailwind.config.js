@@ -16,6 +16,9 @@ export default {
       height: {
         poster: '100%'
       },
+      margin: {
+        Body: '0 4rem 0 4.5rem '
+      },
       gap: {
         poster: '100px'
       },

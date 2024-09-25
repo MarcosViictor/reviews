@@ -14,7 +14,7 @@ const Home = () => {
             {/* <Header /> */}
             <Recomendation />
             
-                <main className='mr-16 ml-[4.5rem] flex flex-col gap-4 mt-5'>
+                <main className='m-Body flex flex-col gap-4 mt-5'>
                     
                     <MovieCard />
                     <SeriesCard />
