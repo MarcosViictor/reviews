@@ -2,8 +2,8 @@ from urllib import request as url_request  # Importa o módulo request do urllib
 from rest_framework import generics, status
 from rest_framework.response import Response
 import json 
-from ..models import Overview_movie
-from ..serializers import OverviewMovieSerializers
+from ...models import Overview_movie
+from ...serializers import OverviewMovieSerializers
 
 class MovieReviewCreateView(generics.CreateAPIView):
     serializer_class = OverviewMovieSerializers
