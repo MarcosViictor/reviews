@@ -86,7 +86,9 @@ class List_movies_series (Base):
     
     
 
-        # Avaliação de séries
+        
+
+# Avaliação de séries
 class Overview_serie (Base):
     vote_average = models.FloatField()
     text = models.TextField()
