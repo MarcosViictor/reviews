@@ -1,4 +1,4 @@
-from urllib import request as url_request  # Importa o módulo request do urllib
+from urllib import request as url_request  
 from rest_framework import generics, status
 from rest_framework.response import Response
 import json 
@@ -9,9 +9,8 @@ class MovieReviewCreateView(generics.CreateAPIView):
     serializer_class = OverviewMovieSerializers
     
     def get_movie(self, id_movie):
-        nome = 'Batman'
         api_key = '7b5f38eb16357785db52918aed0d33f5'
-        url = f"https://api.themoviedb.org/3/search/movie?query={nome}&api_key=7b5f38eb16357785db52918aed0d33f5"
+        url = f"https://api.themoviedb.org/3/search/movie?query={id_movie}&api_key=7b5f38eb16357785db52918aed0d33f5"
         
         try:
             with url_request.urlopen(url) as response:  
@@ -44,7 +43,7 @@ class MovieReviewCreateView(generics.CreateAPIView):
             }
         )
 
-        # Adiciona os dados do filme à requisição
+        
         request.data['vote_average'] = movie_details.get('vote_average')
         request.data['date_vote'] = movie_details.get('release_date')
         
