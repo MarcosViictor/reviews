@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'reviews.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',  # Define que está usando PostgreSQL
+        'NAME': 'cinezone',           # Substitua pelo nome do seu banco de dados
+        'USER': 'postgres',                     # Substitua pelo seu nome de usuário do PostgreSQL
+        'PASSWORD': 'root6',                   # Substitua pela senha do seu banco de dados
+        'HOST': 'localhost',                       # Use 'localhost' se o banco estiver rodando localmente
+        'PORT': '5432',                            # A porta padrão do PostgreSQL é 5432
     }
 }
 
