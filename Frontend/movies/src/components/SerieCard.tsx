@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import GetContentContext  from '../context/GetContent.tsx'
 const imgSerie = import.meta.env.VITE_IMG
-import { FaStar } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import '../assets/styles/container-filmes.css'
 import { useGetId } from '../context/IdContext.tsx';
+import Loading from './Loading.tsx';
+import StarRating from './Rating.tsx';
 
 const SeriesCard = () => {
 
@@ -42,8 +43,7 @@ const SeriesCard = () => {
                 <div className="nome-filme">
                   <span>{serie.name}</span>
                   <div className="estrela">
-                    <FaStar className='text-star'/>
-                    {serie.vote_average}
+                   <StarRating rating={serie.vote_average}/>
                   </div>
                 </div>
            
@@ -52,7 +52,7 @@ const SeriesCard = () => {
             ))}
           </ul>
         ) : (
-          <p>Sem séries disponíveis.</p>
+          <Loading />
         )}
         </section>
     )
