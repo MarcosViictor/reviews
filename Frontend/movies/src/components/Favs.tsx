@@ -21,7 +21,7 @@ const Favs : React.FC = () => {
 
             <div >
             {favorites.length > 0 ? (
-                <ul className='container-filmes flex flex-wrap justify-center'>
+                <ul className='container-filmes flex flex-wrap justify-center px-[10rem] '>
                 {favorites.map(favorite => (
                     
                     <Link to={`/overview-movie/${favorite.id}`} key={favorite.id}>
