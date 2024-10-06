@@ -1,6 +1,6 @@
 import {FaRegStar, FaStar } from "react-icons/fa";
 import FavIcon from '../assets/img/fav.svg'
-// import FavIconLikedfrom from '../assets/img/fav-icon.svg'
+import FavIconLikedfrom from '../assets/img/fav-icon.svg'
 import ListIcon from  '../assets/img/list.svg'
 import React, { useState } from "react";
 
@@ -11,7 +11,11 @@ const Review = () => {
     const [rating, setRating] = useState<number>(0);
     const [reviewText, setReviewText] = useState<string>('');
     const [date, setDate] = useState<string>()
+    const [isLiked, setIsLiked] = useState<boolean>(true)
 
+    const handleLike = () => {
+        setIsLiked(!isLiked) //muda pra não isLiked ou seja, false
+    }
 
 
 
@@ -74,12 +78,16 @@ const Review = () => {
                 </button>
 
                 <div className="flex justify-around pt-4 items-center">
-                    <button className="flex flex-col items-center gap-2" onClick={() => send}>
-                        <img className="w-11" src={FavIcon} alt="" />
+
+                    <button className="flex flex-col items-center gap-2" onClick={handleLike}>
+                        {isLiked ? <img className="w-11" src={FavIcon} /> : <img className="w-11" src={FavIconLikedfrom} />}
+
                         <span>Favoritar</span>
+                        
                     </button>
                     <button className="flex flex-col items-center gap-2">
-                        <img className="w-12 mb-[-10px]" src={ListIcon} alt="" />
+                        <img className="w-12 mb-[-10px]" src={ListIcon} />
+
                         <span>Adicionar à Lista</span>
                     </button>
             </div>
