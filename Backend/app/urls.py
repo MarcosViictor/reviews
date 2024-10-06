@@ -1,5 +1,4 @@
 from django.urls import path
-from .views.overviews.overview_movie import MovieReviewCreateView
 from .views.list_filmes_e_series.list_movies import ListMoviesView
 from .views.list_filmes_e_series.list_series import ListSeriesViews
 from .views.list_filmes_e_series.list_series_popular import ListSeriesPopularViews
@@ -15,7 +14,6 @@ from .views.genres.genres import GenresView
 
 urlpatterns = [
     #Urls para consumir API do TMDB
-    path('movies/review/', MovieReviewCreateView.as_view(), name='movie-review-create'),
     path('movies/list/', ListMoviesView.as_view(), name='list-movie'),
     path('series/list', ListSeriesViews.as_view(), name= 'list-series'),
     path('series/popular/', ListSeriesPopularViews.as_view(), name = 'lis-serie-popular'),
