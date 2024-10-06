@@ -1,19 +1,19 @@
-# Use a imagem oficial do Python como base
+# usando a imagem oficial do python, com o slim pois o slim é mais leve
 FROM python:3.11-slim
 
-# Definir o diretório de trabalho dentro do contêiner
+# Define o diretorio onde meu aplicativo django está
 WORKDIR /app
 
-# Copiar os arquivos de requisitos (requirements.txt) para o contêiner
+# copio arquivo requirements.txt para o contêiner docker
 COPY requirements.txt /app/
 
-# Instalar as dependências do projeto
+# Instalo as dependências do projeto
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copiar o restante do código do projeto para o contêiner
 COPY . /app/
 
-# Expor a porta onde o Django será executado (padrão: 8000)
+# Expor a porta onde o Django será executado (por padrão: 8000)
 EXPOSE 8000
 
 # Definir o comando padrão para rodar o servidor de desenvolvimento do Django
