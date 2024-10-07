@@ -6,7 +6,7 @@ from rest_framework import status
 class ListSeriesPopularViews(APIView):
 
     def get(self, request, *args, **kwargs):
-        url = "https://api.themoviedb.org/3/tv/popular"
+        url = "https://api.themoviedb.org/3/trending/tv/day"
 
         headers = {
             "accept": "application/json",

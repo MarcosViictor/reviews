@@ -11,83 +11,90 @@ interface ContentContextType {
   setRecomendation: React.Dispatch<React.SetStateAction<Movie[]>>;
   favorites: Movie[];
   setFavorites: React.Dispatch<React.SetStateAction<Movie[]>>;
-
-  
+  rated: Movie[];
+  setTopRated: React.Dispatch<React.SetStateAction<Movie[]>>;
 }
 
 const GetContentContext = createContext<ContentContextType | undefined>(undefined);
-
 
 export const GetContentProvider = ({ children }: { children: ReactNode }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [series, setSeries] = useState<Movie[]>([]);
   const [recomendation, setRecomendation] = useState<Movie[]>([]);
   const [favorites, setFavorites] = useState<Movie[]>([]);
-    
+  const [rated, setTopRated] = useState<Movie[]>([]);
 
-    useEffect(() => {
+  useEffect(() => {
+    const getMovies = async (): Promise<void> => {
+      try {
+        const res = await api.get('movies/popular/');
+        setMovies(res.data.results);
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
-        const getMovies = async () : Promise<void>  => {
-            await api.get('/movie/popular')
-            .then(res => {
-              console.log(res)
-              setMovies(res.data.results)
-            })
-            .catch(err => {
-              console.error(err)
-            })
-          }
+    const getSeries = async (): Promise<void> => {
+      try {
+        const res = await api.get('series/popular');
+        setSeries(res.data.results);
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
-          const getSeries = async () : Promise<void>  => {
-            await api.get('/trending/tv/day')
-            .then(res => {
-              console.log(res)
-              setSeries(res.data.results)
-            })
-            .catch(err => {
-              console.error(err)
-            })
-          }
+    const getRecomendation = async (): Promise<void> => {
+      try {
+        const res = await api.get('discovery/movie/');
+        setRecomendation(res.data.results);
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
-          const GetRecomendation = async () : Promise<void>  => {
-            await api.get('/movie/top_rated')
-            .then(res => {
-              console.log(res)
-              setRecomendation(res.data.results)
-            })
-            .catch(err => {
-              console.error(err)
-            })
-          }
+    const getFavorites = async (): Promise<void> => {
+      try {
+        const res = await api.get('movies/list/');
+        setFavorites(res.data.results);
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
-          const getFavorites = async () : Promise<void>  => {
-            await api.get('/movie/popular') //redefinir rota
-            .then(res => {
-              console.log(res)
-              setFavorites(res.data.results)
-            })
-            .catch(err => {
-              console.error(err)
-            })
-          }
+    const getTopRated = async (): Promise<void> => {
+      try {
+        const res = await api.get('discovery/movie/');
+        setTopRated(res.data.results);
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
-          GetRecomendation()
+    getRecomendation();
+    getTopRated();
+    getFavorites();
+    getSeries();
+    getMovies();
+  }, []);
 
-          getFavorites()
+  return (
+    <GetContentContext.Provider
+      value={{
+        movies,
+        setMovies,
+        series,
+        setSeries,
+        recomendation,
+        setRecomendation,
+        favorites,
+        setFavorites,
+        rated,
+        setTopRated,
+      }}
+    >
+      {children}
+    </GetContentContext.Provider>
+  );
+};
 
-          getSeries()
-
-          getMovies()
-      
-        
-    }, [])
-
-    return (
-        <GetContentContext.Provider  value={{ movies, setMovies, series, setSeries, recomendation, setRecomendation, favorites, setFavorites }}>
-            {children}
-        </GetContentContext.Provider>
-    )
-}
-
-export default GetContentContext
-
+export default GetContentContext;

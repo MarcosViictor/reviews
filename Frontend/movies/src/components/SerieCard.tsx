@@ -30,7 +30,7 @@ const SeriesCard = () => {
      
     return (
         <section>
-          <h2>Top Séries</h2>
+          <h2 className='text-[1.5rem] text-start mb-4 font-[700] text-white uppercase'>Séries Populares da semana</h2>
           {series.length > 0 ? (
             
           <ul className='container-filmes'>
