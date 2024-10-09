@@ -19,6 +19,9 @@ export default {
       margin: {
         Body: '0 4rem 0 4.5rem '
       },
+      screens: {
+        '2xl': '1745px',  // Nome personalizado, ex: 2xl
+      },
       gap: {
         poster: '100px'
       },

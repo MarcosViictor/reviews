@@ -25,7 +25,6 @@ const Review = () => {
         console.log(rating)
         console.log(date)
         setReviewText('')
-        setRating(0)
         setDate('')
 
         //função para enviar form
@@ -45,7 +44,7 @@ const Review = () => {
     }
 
     return (
-        <section  className="absolute right-0 w-[30%] mr-8 bg-search h-[77%] rounded-borderRadius px-6 text-white flex flex-col pt-4">
+        <section  className="absolute right-0 w-[30%] mr-8 bg-search min-h-[480px]  rounded-borderRadius px-6 text-white flex flex-col pt-6 2xl:min-h-[620px]">
             <div className="flex justify-center items-start ">
                 {[1, 2, 3, 4, 5].map((star) => (
                         <button key={star} className=" " onClick={() => handleRating(star)}>
@@ -58,11 +57,11 @@ const Review = () => {
                       ))}
             </div>
 
-            <div className="p-5 h-full">
+            <div className="p-5 h-full ">
                 <textarea
                      onChange={handleReviewChange}  
                      value={reviewText}  
-                     className="w-full h-[50%] mt-3 bg-search max-h-[50%] outline-none p-4 rounded-borderRadius" 
+                     className="w-full h-[150px] mt-3 bg-search max-h-[50%] max- outline-none p-4 rounded-borderRadius 2xl:h-[300px]" 
                      placeholder="Escreva sua avaliação:" 
                 />
                 <input 
@@ -77,7 +76,7 @@ const Review = () => {
                     Enviar
                 </button>
 
-                <div className="flex justify-around pt-4 items-center">
+                <div className="flex justify-around pt-5 items-center 2xl:pt-6">
 
                     <button className="flex flex-col items-center gap-2" onClick={handleLike}>
                         {isLiked ? <img className="w-11" src={FavIcon} /> : <img className="w-11" src={FavIconLikedfrom} />}
