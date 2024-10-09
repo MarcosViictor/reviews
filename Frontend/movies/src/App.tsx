@@ -6,6 +6,7 @@ import {GetContentProvider} from './context/GetContent';
 import Favoritos from './Pages/Favoritos';
 import { IdProvider } from './context/IdContext';
 import Overview from './Pages/Overview';
+import Lists from './Pages/Lists'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
                     <Route path='/' element={<Home/>} />
                     <Route path='/overview-movie/:id' element={<Overview />} />
                     <Route path='/overview-serie/:id' element={<Overview />} />
+                    <Route path='/lists' element={<Lists />} />
                   </Routes>
                 </Router>
               </IdProvider>
