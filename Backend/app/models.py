@@ -13,28 +13,19 @@ class Base (models.Model):
         
 
         # Filmes
-class Movie (Base):
-    id_tmdb = models.IntegerField(unique=True) # api do TMDB para pegar os filmes e séries
-    title = models.CharField(max_length=50) # título do filme traduzido
-    title_original = models.CharField(max_length=50) # título do filme original
-    overview = models.TextField(max_length=200) # sinopse do filme
-    popularity = models.FloatField() # popularidade do filme de acordo com a api
-    release_date = models.DateField() # data de lançamento do filme
-    length_film = models.IntegerField() # duração do filme
-    vote_average = models.FloatField() # média de votos do filme
-    genre_ids = models.CharField(max_length=50) # gênero do filme
-    language_original = models.CharField(max_length=20) # idioma original do filme
-    language = models.CharField(max_length=20) # idioma traduzido do filme
-    cast_movie = models.CharField(max_length=100) # elenco do filme
-    director_movie = models.CharField(max_length=100) # diretor do filme
-    poster_path = models.CharField(max_length=255) # poster do filme em url
-    
-         
-    def __str__(self):
+class Movie(models.Model):
+    tmdb_id = models.IntegerField(unique=True)  # Certifique-se de que o nome do campo está correto
+    title = models.CharField(max_length=255)
+    overview = models.TextField(null=True, blank=True)
+    release_date = models.DateField(null=True, blank=True)
+    vote_average = models.FloatField(default=0)
+    vote_count = models.IntegerField(default=0)
+    popularity = models.FloatField(default=0)
+    poster_path = models.URLField(max_length=500, null=True, blank=True)
+    backdrop_path = models.URLField(max_length=500, null=True, blank=True)
+
+    def _str_(self):
         return self.title
-    
-    
-        # Séries
 class Series (Base):
     id_tmdb = models.IntegerField(unique=True) # api do TMDB para pegar os filmes e séries
     title = models.CharField(max_length=50) # título da série traduzido

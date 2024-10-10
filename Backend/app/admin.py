@@ -1,22 +1,16 @@
 from django.contrib import admin
-
-
-# Register your models here.
-
 from .models import (
     Movie, Series, List, Overview_serie,
     Comment_overview_series, Overview_movie, Comment_overview_movies
 )
 
 
-@admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
-    # Filmes
-    list_display = ('title', 'title_original', 'release_date', 'vote_average', 'popularity', 'language', 'length_film')
-    search_fields = ('title', 'title_original', 'genre_ids', 'language', 'director_movie', 'cast_movie')
-    list_filter = ('release_date', 'vote_average', 'language', 'popularity')
+    list_display = ('title', 'release_date', 'vote_average', 'vote_count', 'popularity')
+    search_fields = ('title',)
+    list_filter = ('release_date', 'vote_average', 'popularity')
     ordering = ('-release_date',)
-
+admin.site.register(Movie, MovieAdmin)
 @admin.register(Series)
 class SeriesAdmin(admin.ModelAdmin):
     # Séries
