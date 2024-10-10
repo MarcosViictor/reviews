@@ -1,0 +1,459 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "backdrop_path": "/xsKGPcEnwTPI2CS3OrBVIEUzi1E.jpg",
+            "id": 214032,
+            "name": "Citadel: Diana",
+            "original_name": "Citadel: Diana",
+            "overview": "Milan, 2030: Diana Cavalieri is a double agent for the secret syndicate Citadel, who infiltrated Manticore, the rival agency that destroyed Citadel eight years ago. Trapped behind enemy lines, Diana has a chance to leave the agency forever, but she has to decide whether to trust a surprising ally: the heir of Manticore Italy, Edo Zani.",
+            "poster_path": "/o6QeJAIbBzZGSpOEtlVhv2GcyvO.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "it",
+            "genre_ids": [
+                18
+            ],
+            "popularity": 61.015,
+            "first_air_date": "2024-10-10",
+            "vote_average": 9.0,
+            "vote_count": 5,
+            "origin_country": [
+                "IT",
+                "US"
+            ]
+        },
+        {
+            "backdrop_path": "/ai8bVS8Suvu4ErBhmgBvtESirBY.jpg",
+            "id": 65942,
+            "name": "Re:ZERO -Starting Life in Another World-",
+            "original_name": "Re:ゼロから始める異世界生活",
+            "overview": "Natsuki Subaru, an ordinary high school  student, is on his way home from the convenience store when he finds  himself transported to another world. As he's lost and confused in a new  world where he doesn't even know left from right, the only person to  reach out to him was a beautiful girl with silver hair. Determined to  repay her somehow for saving him from his own despair, Subaru agrees to  help the girl find something she's looking for.",
+            "poster_path": "/5MrRCj7z92YLWMXHeWKp19eJPYv.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "ja",
+            "genre_ids": [
+                16,
+                35,
+                10759,
+                10765
+            ],
+            "popularity": 320.039,
+            "first_air_date": "2016-04-04",
+            "vote_average": 7.7,
+            "vote_count": 440,
+            "origin_country": [
+                "JP"
+            ]
+        },
+        {
+            "backdrop_path": "/tMLH2VDnTpZLYg7T4QPBjaaleVx.jpg",
+            "id": 100757,
+            "name": "Outer Banks",
+            "original_name": "Outer Banks",
+            "overview": "A tight-knit group of teens unearths a long-buried secret, setting off a chain of illicit events that takes them on an adventure they'll never forget.",
+            "poster_path": "/ovDgO2LPfwdVRfvScAqo9aMiIW.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "en",
+            "genre_ids": [
+                10759,
+                18,
+                9648
+            ],
+            "popularity": 351.786,
+            "first_air_date": "2020-04-15",
+            "vote_average": 8.392,
+            "vote_count": 878,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "backdrop_path": "/sLs4MmjvJ8RRNBgBeho9uUtnlB5.jpg",
+            "id": 117830,
+            "name": "Tomb Raider: The Legend of Lara Croft",
+            "original_name": "Tomb Raider: The Legend of Lara Croft",
+            "overview": "Thrust into a high-stakes chase around the world, fearless adventurer Lara Croft confronts her traumatic past while unraveling an ancient mystery.",
+            "poster_path": "/mIvbfZFLJGwNvJKJcnYIppSbWdI.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "en",
+            "genre_ids": [
+                10759,
+                16
+            ],
+            "popularity": 60.775,
+            "first_air_date": "2024-10-10",
+            "vote_average": 6.833,
+            "vote_count": 6,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "backdrop_path": "/tYLXJW1sZQU09VWY1BhSVPKGIwc.jpg",
+            "id": 138501,
+            "name": "Agatha All Along",
+            "original_name": "Agatha All Along",
+            "overview": "Agatha Harkness gathers a coven of witches and sets off down, down, down The Witches' Road.",
+            "poster_path": "/1tfCj5h0FEQ5xg8hzVjQgcuGlgN.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "en",
+            "genre_ids": [
+                10765,
+                9648,
+                35
+            ],
+            "popularity": 1099.227,
+            "first_air_date": "2024-09-18",
+            "vote_average": 7.5,
+            "vote_count": 214,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "backdrop_path": "/o0NsbcIvsllg6CJX0FBFY8wWbsn.jpg",
+            "id": 30984,
+            "name": "Bleach",
+            "original_name": "BLEACH",
+            "overview": "For as long as he can remember, Ichigo Kurosaki has been able to see ghosts. But when he meets Rukia, a Soul Reaper who battles evil spirits known as Hollows, he finds his life is changed forever. Now, with a newfound wealth of spiritual energy, Ichigo discovers his true calling: to protect the living and the dead from evil.",
+            "poster_path": "/2EewmxXe72ogD0EaWM8gqa0ccIw.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "ja",
+            "genre_ids": [
+                10759,
+                16,
+                10765
+            ],
+            "popularity": 414.939,
+            "first_air_date": "2004-10-05",
+            "vote_average": 8.38,
+            "vote_count": 1801,
+            "origin_country": [
+                "JP"
+            ]
+        },
+        {
+            "backdrop_path": "/rT4wofiMisPvUq411oKw0PUp0iN.jpg",
+            "id": 218347,
+            "name": "Sweetpea",
+            "original_name": "Sweetpea",
+            "overview": "Rhiannon Lewis doesn't make much of an impression - people walk past her in the street without a second glance. That is until she is pushed over the edge and loses control. Rhiannon's life transforms, but can she keep her killer secret?",
+            "poster_path": "/feoDYCy0AUD031gLqBmA9gC4pw1.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "en",
+            "genre_ids": [
+                35,
+                18
+            ],
+            "popularity": 57.379,
+            "first_air_date": "2024-10-10",
+            "vote_average": 1.5,
+            "vote_count": 2,
+            "origin_country": [
+                "GB"
+            ]
+        },
+        {
+            "backdrop_path": "/VSRmtRlYgd0pBISf7d34TAwWgB.jpg",
+            "id": 194764,
+            "name": "The Penguin",
+            "original_name": "The Penguin",
+            "overview": "Witness the The Penguin's rise to power in Gotham's criminal underworld in the aftermath of the Riddler killings.",
+            "poster_path": "/a2fqompEWB2GFp9GOdlqLcfEFfw.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "en",
+            "genre_ids": [
+                18,
+                80
+            ],
+            "popularity": 878.14,
+            "first_air_date": "2024-09-19",
+            "vote_average": 8.5,
+            "vote_count": 154,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "backdrop_path": "/NNC08YmJFFlLi1prBkK8quk3dp.jpg",
+            "id": 84773,
+            "name": "The Lord of the Rings: The Rings of Power",
+            "original_name": "The Lord of the Rings: The Rings of Power",
+            "overview": "Beginning in a time of relative peace, we follow an ensemble cast of characters as they confront the re-emergence of evil to Middle-earth. From the darkest depths of the Misty Mountains, to the majestic forests of Lindon, to the breathtaking island kingdom of Númenor, to the furthest reaches of the map, these kingdoms and characters will carve out legacies that live on long after they are gone.",
+            "poster_path": "/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "en",
+            "genre_ids": [
+                10759,
+                10765,
+                18
+            ],
+            "popularity": 1569.854,
+            "first_air_date": "2022-09-01",
+            "vote_average": 7.3,
+            "vote_count": 2925,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "backdrop_path": "/qhXdYysiamRu6moMGMZPQ4oVLvd.jpg",
+            "id": 95480,
+            "name": "Slow Horses",
+            "original_name": "Slow Horses",
+            "overview": "Follow a dysfunctional team of MI5 agents—and their obnoxious boss, the notorious Jackson Lamb—as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+            "poster_path": "/dnpatlJrEPiDSn5fzgzvxtiSnMo.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "en",
+            "genre_ids": [
+                80,
+                18,
+                35
+            ],
+            "popularity": 431.061,
+            "first_air_date": "2022-04-01",
+            "vote_average": 7.876,
+            "vote_count": 418,
+            "origin_country": [
+                "GB"
+            ]
+        },
+        {
+            "backdrop_path": "/sVZX95m6Ti66pzIDek3oKPWZyBa.jpg",
+            "id": 247721,
+            "name": "Teacup",
+            "original_name": "Teacup",
+            "overview": "Trapped on a farm in rural Georgia, a group of neighbours must put aside their differences and unite in the face of a mysterious and deadly threat.",
+            "poster_path": "/cP5zuQvWAFrgWptS0iXvDI3iND.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "en",
+            "genre_ids": [
+                9648,
+                10765,
+                18
+            ],
+            "popularity": 95.148,
+            "first_air_date": "2024-10-10",
+            "vote_average": 8.0,
+            "vote_count": 1,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "backdrop_path": "/4qvNAhSEqobkNSRLbiqTvanL5c7.jpg",
+            "id": 240411,
+            "name": "Dan Da Dan",
+            "original_name": "ダンダダン",
+            "overview": "In a bet to prove whether ghosts or aliens exist, two high schoolers face terrifying paranormal threats, gain superpowers and maybe even fall in love?!",
+            "poster_path": "/tiF5I6wF6tEUy39gmNtw3G1GYyz.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "ja",
+            "genre_ids": [
+                16,
+                10759,
+                35,
+                10765
+            ],
+            "popularity": 420.057,
+            "first_air_date": "2024-10-04",
+            "vote_average": 8.7,
+            "vote_count": 30,
+            "origin_country": [
+                "JP"
+            ]
+        },
+        {
+            "backdrop_path": "/juXVrBTNzYZcUsdBveNMHEEaB4R.jpg",
+            "id": 265156,
+            "name": "Deceitful Love",
+            "original_name": "Inganno",
+            "overview": "After turning 60, a wealthy woman suddenly falls in love with an attractive and much younger man, but her family raises doubts about his intentions.",
+            "poster_path": "/AgKGqINmSEkZExekGCMH68KMSmE.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "it",
+            "genre_ids": [
+                18
+            ],
+            "popularity": 58.894,
+            "first_air_date": "2024-10-09",
+            "vote_average": 6.0,
+            "vote_count": 1,
+            "origin_country": [
+                "IT"
+            ]
+        },
+        {
+            "backdrop_path": "/7bdug3V9bb4wcVzfGIGLHLhodeZ.jpg",
+            "id": 206925,
+            "name": "La Máquina",
+            "original_name": "La Máquina",
+            "overview": "After a devastating loss, Esteban “La Máquina” Osuna is at a low point in his boxing career. Lucky for him, his manager and best friend Andy Lujan is determined to get him back on top. But when a nefarious organization rears its head, the stakes of this rematch become life or death. Esteban must juggle his own personal demons and protect his family.",
+            "poster_path": "/hDsIZmWVr4kTJFjgZ8Gwzx6nDJD.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "en",
+            "genre_ids": [
+                18
+            ],
+            "popularity": 86.799,
+            "first_air_date": "2024-10-09",
+            "vote_average": 6.5,
+            "vote_count": 3,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "backdrop_path": "/h324Kf6pjDzGQiUrc4W2r4YcD9L.jpg",
+            "id": 225634,
+            "name": "Monsters",
+            "original_name": "Monsters",
+            "overview": "The story of the Menéndez brothers, who were convicted in 1996 of murdering their parents José and Mary Louise “Kitty” Menéndez.",
+            "poster_path": "/x9YC2rpXHUFMqI1hCekKDm9UE4w.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "en",
+            "genre_ids": [
+                18,
+                80
+            ],
+            "popularity": 717.968,
+            "first_air_date": "2024-09-19",
+            "vote_average": 7.571,
+            "vote_count": 170,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "backdrop_path": "/q3UGWifvIpdey1T2efX4dSmbZpU.jpg",
+            "id": 124364,
+            "name": "FROM",
+            "original_name": "FROM",
+            "overview": "Unravel the mystery of a nightmarish town in middle America that traps all those who enter. As the unwilling residents fight to keep a sense of normalcy and search for a way out, they must also survive the threats of the surrounding forest – including the terrifying creatures that come out when the sun goes down.",
+            "poster_path": "/pnrv8tfOcWxu4CrB8N7xK0jYJsR.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "en",
+            "genre_ids": [
+                9648,
+                18,
+                10765
+            ],
+            "popularity": 1467.202,
+            "first_air_date": "2022-02-20",
+            "vote_average": 8.144,
+            "vote_count": 1230,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "backdrop_path": "/xMgzRUA1RjxLQn05oJ8IFbf06AO.jpg",
+            "id": 259140,
+            "name": "Ranma1/2",
+            "original_name": "らんま1/2",
+            "overview": "Akane Tendo meets her new fiancé, Ranma Saotome, a martial arts prodigy with a twist: he magically transforms into a girl upon touching cold water.",
+            "poster_path": "/zQhwc27CWHM4zx9lJU9bI5FRQOm.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "ja",
+            "genre_ids": [
+                16,
+                10759,
+                35,
+                10765
+            ],
+            "popularity": 227.372,
+            "first_air_date": "2024-10-06",
+            "vote_average": 9.1,
+            "vote_count": 18,
+            "origin_country": [
+                "JP"
+            ]
+        },
+        {
+            "backdrop_path": "/yj8g84iczcJVg3zCxVGpfdEMMxg.jpg",
+            "id": 130853,
+            "name": "Bad Monkey",
+            "original_name": "Bad Monkey",
+            "overview": "A detective turned restaurant inspector in Southern Florida is pulled into a world of greed and corruption after a tourist finds a severed arm while fishing. And yes, there's a monkey.",
+            "poster_path": "/sDbpr5VoxlcQvzvWFECr7bXCAwg.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "en",
+            "genre_ids": [
+                35,
+                80
+            ],
+            "popularity": 250.922,
+            "first_air_date": "2024-08-13",
+            "vote_average": 7.4,
+            "vote_count": 64,
+            "origin_country": [
+                "US"
+            ]
+        },
+        {
+            "backdrop_path": "/a6ptrTUH1c5OdWanjyYtAkOuYD0.jpg",
+            "id": 37854,
+            "name": "One Piece",
+            "original_name": "ワンピース",
+            "overview": "Years ago, the fearsome Pirate King, Gol D. Roger was executed leaving a huge pile of treasure and the famous \"One Piece\" behind. Whoever claims the \"One Piece\" will be named the new King of the Pirates.\n\nMonkey D. Luffy, a boy who consumed a \"Devil Fruit,\" decides to follow in the footsteps of his idol, the pirate Shanks, and find the One Piece. It helps, of course, that his body has the properties of rubber and that he's surrounded by a bevy of skilled fighters and thieves to help him along the way.\n\nLuffy will do anything to get the One Piece and become King of the Pirates!",
+            "poster_path": "/cMD9Ygz11zjJzAovURpO75Qg7rT.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "ja",
+            "genre_ids": [
+                10759,
+                35,
+                16
+            ],
+            "popularity": 137.627,
+            "first_air_date": "1999-10-20",
+            "vote_average": 8.7,
+            "vote_count": 4639,
+            "origin_country": [
+                "JP"
+            ]
+        },
+        {
+            "backdrop_path": "/pPKiIJEEcV0E1hpVcWRXyp73ZpX.jpg",
+            "id": 95057,
+            "name": "Superman & Lois",
+            "original_name": "Superman & Lois",
+            "overview": "After years of facing megalomaniacal supervillains, monsters wreaking havoc on Metropolis, and alien invaders intent on wiping out the human race, The Man of Steel aka Clark Kent and Lois Lane come face to face with one of their greatest challenges ever: dealing with all the stress, pressures and complexities that come with being working parents in today's society.",
+            "poster_path": "/hoWkpACsrLgv4QMT4XCDrzoPdWN.jpg",
+            "media_type": "tv",
+            "adult": false,
+            "original_language": "en",
+            "genre_ids": [
+                18,
+                10765
+            ],
+            "popularity": 382.637,
+            "first_air_date": "2021-02-23",
+            "vote_average": 8.1,
+            "vote_count": 2347,
+            "origin_country": [
+                "US"
+            ]
+        }
+    ],
+    "total_pages": 1000,
+    "total_results": 20000
+}

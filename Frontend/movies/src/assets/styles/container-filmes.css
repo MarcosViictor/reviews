@@ -1,0 +1,60 @@
+ul.container-filmes {
+    display: flex;
+    gap: 1.25rem;
+    width: 100%;
+    overflow-x: auto;
+   
+
+   
+}
+
+ul.container-filmes  li {
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 0.75rem;
+}
+
+h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+    border-bottom: solid 2px #bfbfbf;
+    padding-bottom: 10px;
+  
+
+}
+
+ul.container-filmes .figPoster {
+    width: 11rem;
+
+}
+
+ul.container-filmes .imgPoster {
+    border-radius: 0.75rem
+}
+
+ul.container-filmes .nome-filme {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: start;
+    color: white;
+    padding: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+    font-size: 1rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 3), transparent);
+}
+
+ul.container-filmes span {
+    font-weight: 500;
+}
+
+ul.container-filmes .estrela {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}

@@ -1,0 +1,20 @@
+# usando a imagem oficial do python, com o slim pois o slim é mais leve
+FROM python:3.11-slim
+
+# Define o diretorio onde meu aplicativo django está
+WORKDIR /app
+
+# copio arquivo requirements.txt para o contêiner docker
+COPY requirements.txt /app/
+
+# Instalo as dependências do projeto
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+# Copiar o restante do código do projeto para o contêiner
+COPY . /app/
+
+# Expor a porta onde o Django será executado (por padrão: 8000)
+EXPOSE 8000
+
+# Definir o comando padrão para rodar o servidor de desenvolvimento do Django
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
