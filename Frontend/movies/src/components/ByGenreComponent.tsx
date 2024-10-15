@@ -1,7 +1,7 @@
 import GetContentContext from "../context/GetContent";
 import { useContext } from "react";
 const imgFilme = import.meta.env.VITE_IMG;
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import '../assets/styles/container-filmes.css'
 
 
@@ -15,6 +15,8 @@ const ByGenreComponent : React.FC = () => {
 
     const {genreMovies} = context
 
+     const { id } = useParams<{ id: string }>();
+
 
     return (
 
@@ -23,7 +25,7 @@ const ByGenreComponent : React.FC = () => {
                 <ul className='container-filmes flex flex-wrap justify-center px-[10rem] '>
                 {genreMovies.map(movie => (
                     
-                    <Link to={`/overview-movie/${movie.id}`} key={movie.id}>
+                    <Link to={`/genre/${id}/overview-movie/${movie.id}`} key={movie.id}>
                     <li key={movie.id}>
                         
                         <figure className="figPoster">
