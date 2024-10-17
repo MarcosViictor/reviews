@@ -8,18 +8,22 @@ import { IdProvider } from './context/IdContext';
 import Overview from './Pages/Overview';
 import Lists from './Pages/Lists'
 import ByGenre from './Pages/ByGenre';
+import SearchPage from './Pages/SearchPage';
+import { SearchProvider } from './context/searchContext';
 
 function App() {
 
     
   return (
     <IdProvider>
-        <GetContentProvider>
+      <SearchProvider>
+          <GetContentProvider>
            
               <Router>
                   <Routes>
                     <Route path='/favorites' element={< Favoritos />} />
                     <Route path='/' element={<Home/>} />
+                    <Route path='/search/movie' element={<SearchPage />} />
                     <Route path='/overview-movie/:id' element={<Overview />} />
                     <Route path='/overview-serie/:id' element={<Overview />} />
                     <Route path='/lists' element={<Lists />} />
@@ -28,7 +32,8 @@ function App() {
                   </Routes>
                 </Router>
             
-        </GetContentProvider>
+          </GetContentProvider>
+        </SearchProvider>
     </IdProvider>
 
       

@@ -45,8 +45,8 @@ const genres = [
 
 
     return(
-        <>
-            <div className='m-auto'>
+        <section className='m-Body flex flex-col gap-4'>
+            <div className='m-auto '>
                 <ul className='grid grid-cols-4 gap-x-16 gap-y-8'>
                    {genres.map((genres, index) => (
 
@@ -61,7 +61,7 @@ const genres = [
                 </ul>
             </div>
 
-        </>
+        </section>
     )
 }
 
