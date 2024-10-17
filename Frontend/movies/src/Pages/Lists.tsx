@@ -5,7 +5,7 @@ const Lists = () => {
     return(
         <>
             <SideBar />
-            <Header />
+            {/* <Header /> */}
             
         </>
     )
