@@ -11,7 +11,7 @@ const SearchPage : React.FC = () => {
     return (
         <>
             <SideBar />
-            {/* <Header /> */}
+            <Header />
 
             <div className="flex flex-col gap-4">
                 {searchResult && searchResult.length > 0 ? <SearchResults /> : <Genres />}

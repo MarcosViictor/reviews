@@ -1,7 +1,9 @@
 import { createContext, useEffect, useState, ReactNode } from "react";
 import { api } from "./api";
 import { Movie } from "../Types/Movie";
+import {Review} from "../Types/Reviews"
 import { useGetId } from "./IdContext";
+
 import axios from "axios";
 
 interface ContentContextType {
@@ -17,6 +19,8 @@ interface ContentContextType {
   setTopRated: React.Dispatch<React.SetStateAction<Movie[]>>;
   genreMovies: Movie[];
   setGenreMovies:  React.Dispatch<React.SetStateAction<Movie[]>>;
+  reviews: Review[];
+  setReviews: React.Dispatch<React.SetStateAction<Review[]>>
 }
 
 const GetContentContext = createContext<ContentContextType | undefined>(undefined);
@@ -28,18 +32,43 @@ export const GetContentProvider = ({ children }: { children: ReactNode }) => {
   const [favorites, setFavorites] = useState<Movie[]>([]);
   const [rated, setTopRated] = useState<Movie[]>([]);
   const [genreMovies, setGenreMovies] = useState<Movie[]>([]);
+  const [reviews, setReviews] = useState<Review[]>([]);
 
   const {idGenre} = useGetId()
+  const {id} = useGetId()
 
 
   useEffect(() => {
+
+
+    
+
     const getMovies = async (): Promise<void> => {
       try {
         const res = await api.get('movies/popular/');
         setMovies(res.data.results);
+
+        const getReviews = async() : Promise<void> => {
+          try {
+            const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}/reviews?language=en-US`,
+              {
+                headers : {
+                   Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTJhMzA0YzE2ZmRhN2QzNmMxMWEzM2JlNzNmNmY0OSIsIm5iZiI6MTcyODY3NzA4OC40NTc4NzUsInN1YiI6IjY2N2IyZjdiOWEyMzkxMjUxOWU0NjhhMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.88BdLmUfZA85VLGhusWnsTu7xrh0POaqFoX5P9QQUBQ'}
+              });
+            setReviews(res.data.results);
+            console.log(res.data.results)
+          } catch (err) {
+            console.error(err)
+          }
+        }
+  
+        getReviews()
+
       } catch (err) {
         console.error(err);
       }
+
+     
     };
 
     const getSeries = async (): Promise<void> => {
@@ -103,8 +132,9 @@ export const GetContentProvider = ({ children }: { children: ReactNode }) => {
     getSeries();
     getMovies();
     getGenreMovie();
+    // getReviews();
 
-  }, [idGenre]);
+  }, [idGenre, id]);
 
   return (
     <GetContentContext.Provider
@@ -120,7 +150,9 @@ export const GetContentProvider = ({ children }: { children: ReactNode }) => {
         rated,
         setTopRated,
         genreMovies,
-        setGenreMovies
+        setGenreMovies,
+        reviews,
+        setReviews
       }}
     >
       {children}

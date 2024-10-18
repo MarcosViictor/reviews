@@ -8,7 +8,7 @@ const Favoritos : React.FC = () => {
     return(
         <section>
             <SideBar />
-            {/* <Header /> */}
+            <Header />
             <Favs/>
 
         </section>

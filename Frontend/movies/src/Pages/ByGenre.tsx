@@ -6,7 +6,7 @@ const ByGenre : React.FC = () => {
     return (
         <>
             <SideBar />
-            {/* <Header /> */}
+            <Header />
            <ByGenreComponent />
         </>
     )

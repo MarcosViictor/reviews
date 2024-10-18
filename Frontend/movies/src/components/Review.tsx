@@ -11,7 +11,7 @@ const Review = () => {
     const [rating, setRating] = useState<number>(0);
     const [reviewText, setReviewText] = useState<string>('');
     const [date, setDate] = useState<string>()
-    const [isLiked, setIsLiked] = useState<boolean>(true)
+    const [isLiked, setIsLiked] = useState<boolean>(true);
 
     const handleLike = () => {
         setIsLiked(!isLiked) //muda pra não isLiked ou seja, false
@@ -44,7 +44,7 @@ const Review = () => {
     }
 
     return (
-        <section  className="absolute right-0 w-[30%] mr-8 bg-search min-h-[480px]  rounded-borderRadius px-6 text-white flex flex-col pt-6 2xl:min-h-[620px]">
+        <section  className="absolute right-0 w-[30%] mr-8 bg-search min-h-[77%]  rounded-borderRadius px-6 text-white flex flex-col pt-6 2xl:min-h-[620px]">
             <div className="flex justify-center items-start ">
                 {[1, 2, 3, 4, 5].map((star) => (
                         <button key={star} className=" " onClick={() => handleRating(star)}>
@@ -61,7 +61,7 @@ const Review = () => {
                 <textarea
                      onChange={handleReviewChange}  
                      value={reviewText}  
-                     className="w-full h-[150px] mt-3 bg-search max-h-[50%] max- outline-none p-4 rounded-borderRadius 2xl:h-[300px]" 
+                     className="w-full h-[200px] mt-3 bg-search outline-none p-4 rounded-borderRadius 2xl:h-[300px]" 
                      placeholder="Escreva sua avaliação:" 
                 />
                 <input 
