@@ -9,6 +9,8 @@ import StarRating from "./Rating";
 import axios from "axios"; 
 import Loading from "./Loading";
 
+import { genreMapping } from "./genreMapping";
+
 const OverviewContainer: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { pathname } = useLocation();
@@ -16,6 +18,13 @@ const OverviewContainer: React.FC = () => {
   const [loading, setLoading] = useState(true); // Estado de carregamento
   const [content, setContent] = useState<any>(null); // Estado para armazenar o conteúdo selecionado
   const [error, setError] = useState<string | null>(null); // Estado de erro
+
+  const getGenreNames = (genreIds: number[] = []) => {
+    return genreIds
+        .map((id) => genreMapping[id])
+        .filter((name) => name !== undefined)
+        .join(' | ');
+};
 
   if (!context) {
     throw new Error('useContext must be used within a GetContentProvider');
@@ -77,45 +86,54 @@ const OverviewContainer: React.FC = () => {
   }
 
   return (
-    <section className="m-Body flex justify-center">
-      <figure className="w-full pb-2 rounded-br-borderRadius">
-        <div className="relative gap-4 m-auto">
+    <section className="grid grid-cols-3 gap-6 ml-20 mr-10 pt-9">
+
+      <div className="col-span-2">
+        <figure className="w-full rounded-br-borderRadius relative">
           <img
-            className="w-[68%] rounded-borderRadius object-cover filter blur-[2px]"
+            className="w-full h-full rounded-borderRadius object-cover filter blur-sm"
             src={content.backdrop_path ? imgFilme + content.backdrop_path : <Loading />}
             alt={content.title || content.name || 'Conteúdo sem título'}
           />
-          <div className="absolute inset-0 flex flex-row-reverse justify-end items-center p-10 text-white gap-4">
-            <span className="w-[40%] p-3 rounded-borderRadius bg-search flex flex-col">
-              <h3 className="text-[2rem] font-bold">{content.title || content.name || 'Título não disponível'}</h3>
-              <div className="flex gap-1 flex-col">
-                <div className="flex gap-5 items-center">
-                  <span className="flex gap-1 items-center">
-                    <StarRating rating={content.vote_average || 0} />
-                  </span>
-                  <span className="flex gap-1 items-center">
-                    <MdDateRange />
-                    {content.release_date || content.first_air_date || 'Data não disponível'}
-                  </span>
-                  <span className="flex gap-1 items-center">
-                    <TfiStatsUp />
-                    {content.popularity || 'Popularidade não disponível'}
-                  </span>
+            <div className="absolute inset-0 flex justify-center items-center bg-black/50 text-white p-6 rounded-borderRadius backdrop-blur-sm">
+              <div className="w-[80%] flex gap-6 items-center p-6 bg-black/50 rounded-lg shadow-lg">
+                <div className="flex-1">
+                  <h3 className="text-4xl font-bold">{content.title || content.name || 'Título não disponível'}</h3>
+                  <div className="flex gap-5 items-center text-lg mt-4">
+                    <span className="flex items-center gap-1">
+                      <StarRating rating={content.vote_average || 0} />
+                      {content.vote_average || '0'}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <MdDateRange />
+                      {new Date(content.release_date || content.first_air_date || 'Data não disponível').toLocaleDateString()}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <TfiStatsUp />
+                      {content.popularity || 'Popularidade não disponível'}
+                    </span>
+                  </div>
+                  <div className="mt-2 p-2 rounded ">
+                   <p className="text-[1.2rem] ">{getGenreNames(content.genre_ids)}</p>
+                  </div>
+                  <p className="rounded-lg p-4  border-2 border-slate-500 ">{content.overview || 'Descrição não disponível'}</p>
                 </div>
-                <p className="w-full">{content.overview || 'Descrição não disponível'}</p>
-              </div>
-            </span>
-            <img
-              className="w-[23%] rounded-borderRadius"
-              src={content.poster_path ? imgFilme + content.poster_path : '/path/to/placeholder.jpg'}
-              alt={content.title || 'Sem imagem'}
-            />
+                <img
+                  className="w-[30%] rounded-lg shadow-lg"
+                  src={content.poster_path ? imgFilme + content.poster_path : '/path/to/placeholder.jpg'}
+                  alt={content.title || 'Sem imagem'}
+                />
+            </div>
           </div>
-        </div>
-      </figure>
+        </figure>
+      </div>
 
-      <Review />
+      {/* Componente de Review */}
+      <div className="col-span-1 bg-gray-900/80 p-6 rounded-lg shadow-lg text-white">
+        <Review />
+      </div>
     </section>
+
   );
 };
 

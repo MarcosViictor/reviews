@@ -44,7 +44,7 @@ const Review = () => {
     }
 
     return (
-        <section  className="absolute right-0 w-[30%] mr-8 bg-search min-h-[77%]  rounded-borderRadius px-6 text-white flex flex-col pt-6 2xl:min-h-[620px]">
+        <section  className="//absolute //right-0 //w-[30%] mr-8 bg-search min-h-[77%]  rounded-borderRadius px-6 text-white flex flex-col pt-6 2xl:min-h-[620px]">
             <div className="flex justify-center items-start ">
                 {[1, 2, 3, 4, 5].map((star) => (
                         <button key={star} className=" " onClick={() => handleRating(star)}>

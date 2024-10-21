@@ -47,16 +47,17 @@ export const GetContentProvider = ({ children }: { children: ReactNode }) => {
       try {
         const res = await api.get('movies/popular/');
         setMovies(res.data.results);
+        console.log(res.data.results)
 
         const getReviews = async() : Promise<void> => {
           try {
-            const res = await axios.get(`https://api.themoviedb.org/3/movie/${id}/reviews?language=en-US`,
+            const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}/reviews?language=en-US`,
               {
                 headers : {
                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTJhMzA0YzE2ZmRhN2QzNmMxMWEzM2JlNzNmNmY0OSIsIm5iZiI6MTcyODY3NzA4OC40NTc4NzUsInN1YiI6IjY2N2IyZjdiOWEyMzkxMjUxOWU0NjhhMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.88BdLmUfZA85VLGhusWnsTu7xrh0POaqFoX5P9QQUBQ'}
               });
-            setReviews(res.data.results);
-            console.log(res.data.results)
+            setReviews(response.data.results);
+            console.log(response.data.results)
           } catch (err) {
             console.error(err)
           }

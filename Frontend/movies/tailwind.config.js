@@ -40,7 +40,7 @@ export default {
         poster: '100px'
       },
       borderWidth: {
-        
+        genreName: '1px solid white'
       },
       gridTemplateColumns: {
         20: 'repeat(20, 2fr, 2fr)', // Define 20 colunas de tamanho igual
@@ -50,6 +50,7 @@ export default {
         sideBar: '#191815',
         background: '#051119',
         search: 'rgba(76, 89, 88, 0.5)',
+        comments: 'rgba(233, 166, 166, 0.05)'
         
       },
       backgroundImage: {
