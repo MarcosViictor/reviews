@@ -13,47 +13,38 @@ class Base (models.Model):
         
 
         # Filmes
-class Movie (Base):
-    id_tmdb = models.IntegerField(unique=True) # api do TMDB para pegar os filmes e séries
-    title = models.CharField(max_length=50) # título do filme traduzido
-    title_original = models.CharField(max_length=50) # título do filme original
-    overview = models.TextField(max_length=200) # sinopse do filme
-    popularity = models.FloatField() # popularidade do filme de acordo com a api
-    release_date = models.DateField() # data de lançamento do filme
-    length_film = models.IntegerField() # duração do filme
-    vote_average = models.FloatField() # média de votos do filme
-    genre_ids = models.CharField(max_length=50) # gênero do filme
-    language_original = models.CharField(max_length=20) # idioma original do filme
-    language = models.CharField(max_length=20) # idioma traduzido do filme
-    cast_movie = models.CharField(max_length=100) # elenco do filme
-    director_movie = models.CharField(max_length=100) # diretor do filme
-    poster_path = models.CharField(max_length=255) # poster do filme em url
-    
-         
-    def __str__(self):
+class Movie(models.Model):
+    tmdb_id = models.IntegerField(unique=True)  # Certifique-se de que o nome do campo está correto
+    title = models.CharField(max_length=255)
+    overview = models.TextField(null=True, blank=True)
+    release_date = models.DateField(null=True, blank=True)
+    vote_average = models.FloatField(default=0)
+    vote_count = models.IntegerField(default=0)
+    popularity = models.FloatField(default=0)
+    poster_path = models.URLField(max_length=500, null=True, blank=True)
+    backdrop_path = models.URLField(max_length=500, null=True, blank=True)
+
+    def _str_(self):
         return self.title
-    
-    
-        # Séries
-class Series (Base):
-    id_tmdb = models.IntegerField(unique=True) # api do TMDB para pegar os filmes e séries
-    title = models.CharField(max_length=50) # título da série traduzido
-    title_original = models.CharField(max_length=50) # título da série original
-    overview = models.TextField(max_length=200) # sinopse da série
-    status = models.CharField(max_length=50) # status da série
-    num_season = models.IntegerField() # número de temporadas
-    num_episode = models.IntegerField() # número de episódios
-    popularity = models.FloatField() # popularidade da serie de acordo com a api
-    release_date = models.DateField() # data de lançamento da serie
-    length_serie = models.IntegerField() # duração da serie
-    vote_average = models.FloatField() # média de votos da serie
-    genre_ids = models.CharField(max_length=50) # gênero da serie
-    language_original = models.CharField(max_length=20) # idioma original da serie
-    language = models.CharField(max_length=20) # idioma traduzido da serie
-    cast_serie = models.CharField(max_length=100) # elenco da serie
-    director_serie = models.CharField(max_length=100) # diretor da serie
-    poster_path = models.CharField(max_length=255) # poster da serie em url
-    
+class Series(models.Model):
+    id_tmdb = models.IntegerField(unique=True)  # id do TMDB
+    title = models.CharField(max_length=100)  # título da série traduzido
+    title_original = models.CharField(max_length=100)  # título original
+    overview = models.TextField()  # sinopse pode ser longa, removi o max_length
+    status = models.CharField(max_length=50)  # status da série (e.g., 'Ended', 'Returning Series')
+    num_season = models.IntegerField()  # número de temporadas
+    num_episode = models.IntegerField()  # número de episódios
+    popularity = models.FloatField()  # popularidade da série de acordo com a API
+    release_date = models.DateField()  # data de lançamento da série
+    length_serie = models.IntegerField(null=True, blank=True)  # duração total da série (opcional)
+    vote_average = models.FloatField()  # média de votos da série
+    genre_ids = models.JSONField()  # lista de gêneros (JSON é uma boa opção para listas)
+    language_original = models.CharField(max_length=20)  # idioma original
+    language = models.CharField(max_length=20)  # idioma traduzido
+    cast_serie = models.TextField()  # elenco (usar TextField para uma lista grande)
+    director_serie = models.TextField()  # diretor (usar TextField para uma lista grande)
+    poster_path = models.URLField(max_length=255)  # poster da série (URL)
+
     def __str__(self):
         return self.title
     
