@@ -11,6 +11,8 @@ from .views.search.search_series import SearchSerieView
 from .views.image.image_movie import ImageMovieView
 from .views.genres.genres import GenresView
 from .views.overview.overview_movie import MovieOverviewListView, OverviewMovieDetailView, OverviewMovieListCreateView
+from .views.overview.overview_series import OverviewSeriesListCreateView, OverviewSeriesDetail
+
 
 urlpatterns = [
     #Urls para consumir API do TMDB
@@ -27,4 +29,6 @@ urlpatterns = [
     path('genres/', GenresView.as_view(), name= 'genres'),
     path('movies/overviews/', OverviewMovieListCreateView.as_view(), name='overview-list-create'),
     path('movies/overviews/<int:id_movie>/', OverviewMovieDetailView.as_view(), name='overview-detail'),
+    path('overview-series/', OverviewSeriesListCreateView.as_view(), name='overview-series-list-create'),  # Listar e criar
+    path('overview-series/<int:id_series>/', OverviewSeriesDetail.as_view(), name='overview-series-detail'),  # Detalhar, atualizar e deletar
 ]
