@@ -58,3 +58,11 @@ ul.container-filmes .estrela {
     align-items: center;
     gap: 0.25rem;
 }
+
+.multiline-truncated {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

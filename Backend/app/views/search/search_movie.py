@@ -8,7 +8,13 @@ class SearchMovieView(APIView):
 
     def get(self, request, *args, **kwargs):
 
-        url = 'https://api.themoviedb.org/3/search/movie?query=batman'
+        query = kwargs.get('query')
+
+        if not query:
+            return Response({"error": "Parâmetro 'query' é necessário."}, status=status.HTTP_400_BAD_REQUEST)
+
+        url = f'https://api.themoviedb.org/3/search/movie?query={query}'
+
 
         headers = {
             "accept": "application/json",
