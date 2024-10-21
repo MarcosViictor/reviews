@@ -50,7 +50,8 @@ export default {
         sideBar: '#191815',
         background: '#051119',
         search: 'rgba(76, 89, 88, 0.5)',
-        comments: 'rgba(233, 166, 166, 0.05)'
+        comments: 'rgba(233, 166, 166, 0.05)',
+        commentsHover: 'rgba(153, 82, 82, 0.05)'
         
       },
       backgroundImage: {

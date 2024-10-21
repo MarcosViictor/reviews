@@ -20,7 +20,7 @@ const Comments : React.FC = () => {
                 <h3 className="text-[2.2rem] ml-32 mt-6 text-white font-bold">Avaliações dos usuários: </h3>
                         {reviews.length > 0 ? (<div className="mx-32 grid grid-cols-3 gap-6 mt-4 text-white">
                             {reviews.map((review) => (
-                                <div key={review.id} className="flex flex-col items-start bg-comments rounded-borderRadius p-2">
+                                <div key={review.id} className="flex flex-col items-start bg-comments rounded-borderRadius p-2 cursor-pointer transition-all hover:bg-commentsHover">
                                     {review.author_details.avatar_path ? (
                                         <div className="flex pb-2">
                                             <img
