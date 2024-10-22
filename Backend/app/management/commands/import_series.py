@@ -7,7 +7,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         API_KEY = '7b5f38eb16357785db52918aed0d33f5'
-        url = f'https://api.themoviedb.org/3/tv/popular?api_key={API_KEY}&language=pt-BR&page=5'
+        url = f'https://api.themoviedb.org/3/tv/popular?api_key={API_KEY}&language=pt-BR&page=6'
         response = requests.get(url)
 
         if response.status_code == 200:
