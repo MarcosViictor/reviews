@@ -3,6 +3,8 @@ import Home from "../assets/img/home.svg"
 import Recentes from "../assets/img/recentes.svg"
 import Favoritos from "../assets/img/fav.svg"
 import Historico from "../assets/img/historico.svg"
+import Profile from '../assets/img/person-icon.svg'
+import Search from '../assets/img/search.svg'
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import styled from 'styled-components';
@@ -98,8 +100,17 @@ const SideBar: React.FC = () => {
                         </Span>
                     </li>
                     <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
+                        <img src={Search} alt="SVG Search" />
+                        <Span active={isActive} >
+                            <Link to="/search/movie">Pesquisar</Link>
+                        </Span>
+                    </li>
+                    <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
                         <img src={Recentes} alt="SVG Recentes" />
-                        <Span active={isActive} >Recentes</Span>
+                        <Span active={isActive} > 
+                            <Link to='/lists'>Listas</Link>
+                        </Span>
+                       
                     </li>
                     <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
                         <img src={Favoritos} alt="SVG Favoritos" />
@@ -110,6 +121,10 @@ const SideBar: React.FC = () => {
                     <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
                         <img src={Historico} alt="SVG Historico" />
                         <Span active={isActive} >Histórico</Span>
+                    </li>
+                    <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
+                        <img src={Profile} alt="SVG Perfil" />
+                        <Span active={isActive} >Perfil</Span>
                     </li>
                </Ul>
             </AsideStyle>
