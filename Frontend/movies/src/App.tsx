@@ -10,6 +10,7 @@ import Lists from './Pages/Lists'
 import ByGenre from './Pages/ByGenre';
 import SearchPage from './Pages/SearchPage';
 import { SearchProvider } from './context/searchContext';
+import HistoryPage from './Pages/HistoryPage';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
                     <Route path='/lists' element={<Lists />} />
                     <Route path='/genre/:id' element={<ByGenre />} />
                     <Route path='/genre/:id/overview-movie/:id' element={<Overview />} />
+                    <Route path='/history' element={<HistoryPage />} />
                   </Routes>
                 </Router>
             
