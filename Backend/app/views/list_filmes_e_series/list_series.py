@@ -10,7 +10,7 @@ class ListSeriesViews(APIView):
 
     def get(self, request, *args, **kwargs):
             
-        url = "https://api.themoviedb.org/3/trending/tv/day?language=en-US"
+        url = "https://api.themoviedb.org/3/trending/tv/day?language=pt-BR"
 
         headers = {
         "accept": "application/json",

@@ -7,7 +7,7 @@ import requests
 class ListMoviesView(APIView):
     
     def get(self, request, *args, **kwargs):
-        url = "https://api.themoviedb.org/3/trending/movie/day?language=en-US"
+        url = "https://api.themoviedb.org/3/trending/movie/day?language=pt-BR"
 
         headers = {
             "accept": "application/json",
