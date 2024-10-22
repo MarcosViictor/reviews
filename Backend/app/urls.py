@@ -10,8 +10,10 @@ from .views.search.search_movie import SearchMovieView
 from .views.search.search_series import SearchSerieView
 from .views.image.image_movie import ImageMovieView
 from .views.genres.genres import GenresView
-from .views.overview.overview_movie import MovieOverviewListView, OverviewMovieDetailView, OverviewMovieListCreateView
+from .views.overview.overview_movie import OverviewMovieDetailView, OverviewMovieListCreateView
 from .views.overview.overview_series import OverviewSeriesListCreateView, OverviewSeriesDetail
+from .views.comments.comments_movies import CommentsOverviewMovieView, CommentsOverviewMovieDetailView
+from .views.comments.comments_series import CommentOverviewSeriesDetailView, CommentOverviewSeriesView
 
 
 
@@ -32,4 +34,9 @@ urlpatterns = [
     path('movies/overviews/<int:id_movie>/', OverviewMovieDetailView.as_view(), name='overview-detail'),
     path('overview-series/', OverviewSeriesListCreateView.as_view(), name='overview-series-list-create'), 
     path('overview-series/<int:id_series>/', OverviewSeriesDetail.as_view(), name='overview-series-detail'),  
+    path('comments/overview/movies/', CommentsOverviewMovieView.as_view(), name= 'comments-list-create'),
+    path('comments/overview/movies/<int:id_comments_movies>/', CommentsOverviewMovieDetailView.as_view(), name= 'comments-detail'),
+    path('comments/overview/series/', CommentOverviewSeriesView.as_view(), name= 'comments-series-list-create'),
+    path('comments/overview/series/<int:id_comments_series>/', CommentOverviewSeriesDetailView.as_view(), name= 'comments-series-detail')
+
 ]

@@ -18,14 +18,18 @@ class OverviewSerieSerializer(serializers.ModelSerializer):
                   'date_overview',
                   'stars']
         
-    class CommentOverviewSeriesSerializer(serializers.ModelSerializer):
+class CommentOverviewSeriesSerializer(serializers.ModelSerializer):
         class Meta:
+            model = Comment_overview_series
             fields = ['id_overview_serie',
                       'text',
                       'date_comment']
             
 class CommentOverviewMoviesSerializers(serializers.ModelSerializer):
     class Meta:
-        fields = ['id_overview_movie',
-                  'text',
-                  'date_comment']
+        model = Comment_overview_movies  # Especifica o modelo correto
+        fields = [
+            'id_overview_movie',  # Chave estrangeira para o filme
+            'text',               # Texto do comentário
+            'date_comment'        # Data do comentário
+        ]
