@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: reviews  # Banco de dados definido no settings.py
+      POSTGRES_USER: postgres  # Usuário do banco de dados
+      POSTGRES_PASSWORD: root6  # Senha do banco de dados
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Para persistência de dados
+    ports:
+      - "5432:5432"  # Expõe a porta do PostgreSQL
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code  # Mapeia o diretório local do projeto para o contêiner
+    ports:
+      - "8000:8000"  # Expõe a porta do Django
+    depends_on:
+      - db  # Garante que o banco de dados esteja pronto antes de rodar o Django
+    environment:
+      - POSTGRES_DB=reviews
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root6
+      - DJANGO_DEBUG=True  # Define o ambiente como desenvolvimento (ajustar para produção)
+
+volumes:
+  postgres_data:  # Define um volume para persistência de dados do PostgreSQL
