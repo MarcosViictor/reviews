@@ -21,13 +21,14 @@ const Review = () => {
             try {
                 const res = await api.post('movies/overviews/', 
                 {
-                    id_movie: id,
+                    tmdb_id_input: id,
                     overview_text_movie: reviewText,
                     date_overview: date,
                     stars: rating
                 });
 
                 console.log(res.data);
+                setReviewText('')
 
              
             } catch (err) {
@@ -91,6 +92,7 @@ const Review = () => {
                     className="w-full  bg-search  outline-none p-2 rounded-borderRadius" 
                     onChange={handleDateChange}
                     value={date}
+                    id="email"
                     
                 />
 

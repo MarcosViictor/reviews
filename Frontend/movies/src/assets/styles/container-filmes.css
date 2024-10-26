@@ -66,3 +66,14 @@ ul.container-filmes .estrela {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+p.teste {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* Limita a 3 linhas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word; /* Força a quebra de palavras se necessário */
+    line-height: 1.5;
+    max-width: 45vw; /* Altere conforme necessário */
+}
