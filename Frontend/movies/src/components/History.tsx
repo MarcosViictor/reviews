@@ -5,18 +5,24 @@ import StarRating from "./Rating";
 import { Movie } from "../Types/Movie";
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { useGetId } from "../context/IdContext";
+import { Link } from "react-router-dom";
 
-interface OverviewItem {
+export interface OverviewItem {
     tmdb_id: number;
     date_overview: string;
     overview_text_movie: string;
     stars: number;
+    id  : number;
 }
 
 const History: React.FC = () => {
     const [overview, setOverview] = useState<OverviewItem[]>([]);
     const [movieDetails, setMovieDetails] = useState<Movie[]>([]);
     const imgFilme = import.meta.env.VITE_IMG;
+    const { setIdComment } = useGetId();
+
+
 
     const reviewsByDate = overview.reduce<{ [date: string]: OverviewItem[] }>((acc, item) => {
         const dateKey = format(new Date(item.date_overview), 'MMMM yyyy', {locale: ptBR}); 
@@ -24,6 +30,11 @@ const History: React.FC = () => {
         acc[dateKey].push(item);
         return acc;
     }, {});
+
+    const getIdComment = (id : number) => {
+        setIdComment(id)
+        console.log(id)
+    }
 
     useEffect(() => {
         const GetOverview = async () => {
@@ -60,31 +71,34 @@ const History: React.FC = () => {
                     {reviews.map((item, index) => {
                         const movie = movieDetails.find((movie) => movie.id === item.tmdb_id);
                         const formattedDate = format(new Date(item.date_overview), 'dd/MM/yyyy', { locale: ptBR }); 
+                        
 
                         return (
-                            <div key={index} className="text-white gap-8 border-b flex flex-col ml-[8rem] mr-[4.5rem]">
-                                {movie && (
-                                    <div className="flex items-start gap-5 cursor-pointer transition-all py-5 hover:bg-comments">
-                                        <div>
-                                            <img
-                                                className="w-32 rounded-borderRadius"
-                                                src={imgFilme + movie.poster_path || '/path/to/placeholder.jpg'}
-                                                alt={movie.title || 'Imagem indisponível'}
-                                            />
-                                        </div>
-                                        <div className="flex flex-col pt-6">
-                                            <p className="text-[1.3rem] font-semibold">
-                                                {movie.title || 'Título não disponível'}
-                                            </p>
-                                            <p className="text-sm text-gray-400">{formattedDate}</p> {/* Data completa */}
-                                            <div className="flex text-[1.3rem]">
-                                                <StarRating rating={item.stars} />
+                            <Link to={`/comments/${item.id}`} onClick={() => getIdComment(item.id)} key={index}>
+                
+                                <div className="text-white gap-8 border-b flex flex-col ml-[8rem] mr-[4.5rem]">
+                                    {movie && (
+                                        <div className="flex items-start gap-5 cursor-pointer transition-all p-5 hover:bg-comments">
+                                            <div>
+                                                <img
+                                                    className="w-20 rounded-borderRadius"
+                                                    src={imgFilme + movie.poster_path || '/path/to/placeholder.jpg'}
+                                                    alt={movie.title || 'Imagem indisponível'}
+                                                />
                                             </div>
-                                            <p className="teste pt-4">{item.overview_text_movie}</p>
+                                            <div className="flex flex-col items-start">
+                                                <p className="text-[1.3rem] font-semibold">
+                                                    {movie.title || 'Título não disponível'}
+                                                </p>
+                                                <p className="text-sm text-gray-400">{formattedDate}</p> {/* Data completa */}
+                                                <div className="flex text-[1.3rem]">
+                                                    <StarRating rating={item.stars} />
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                )}
-                            </div>
+                                    )}
+                                </div>
+                            </Link>
                         );
                     })}
                 </div>

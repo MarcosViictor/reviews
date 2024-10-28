@@ -8,6 +8,7 @@ class OverviewMovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Overview_movie
         fields = [
+            'id',
             'tmdb_id',  # Mostra o tmdb_id na resposta
             'tmdb_id_input',  # Usa tmdb_id_input para receber o ID no formulário
             'overview_text_movie',  # texto da avaliação

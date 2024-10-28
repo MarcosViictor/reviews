@@ -15,9 +15,10 @@ class OverviewMovieListCreateView(generics.ListCreateAPIView):
 
 class OverviewMovieDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = OverviewMovieSerializer
+    lookup_field = 'id'  # Usa o ID da avaliação para recuperar um comentário específico
+    lookup_url_kwarg = 'id'  # Parâmetro da URL a ser usado para buscar a avaliação correta
 
     def get_queryset(self):
-            # Obtém o tmdb_id dos parâmetros da URL
-            tmdb_id = self.kwargs.get('tmdb_id')
-            # Filtra as avaliações associadas ao filme com o tmdb_id fornecido
-            return Overview_movie.objects.filter(id_movie__tmdb_id=tmdb_id)
+        # Filtra avaliações, associadas ao tmdb_id de um filme específico
+        return Overview_movie.objects.all()
+

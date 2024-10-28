@@ -115,12 +115,14 @@ const SideBar: React.FC = () => {
                     <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
                         <img src={Favoritos} alt="SVG Favoritos" />
                         <Span active={isActive} >
-                        <Link to="/favorites">Favoritos</Link>
+                            <Link to="/favorites">Favoritos</Link>
                         </Span>
                     </li>
                     <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
                         <img src={Historico} alt="SVG Historico" />
-                        <Span active={isActive} >Histórico</Span>
+                        <Span active={isActive} >
+                            <Link to="/history">Histórico</Link>
+                        </Span>
                     </li>
                     <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
                         <img src={Profile} alt="SVG Perfil" />
