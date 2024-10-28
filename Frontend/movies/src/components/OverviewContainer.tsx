@@ -9,7 +9,7 @@ import StarRating from "./Rating";
 import axios from "axios"; 
 import Loading from "./Loading";
 
-import { genreMapping } from "./genreMapping";
+import { genreMapping } from "./GenreMapping";
 
 const OverviewContainer: React.FC = () => {
   const { id } = useParams<{ id: string }>();

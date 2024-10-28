@@ -2,7 +2,9 @@ import {FaRegStar, FaStar } from "react-icons/fa";
 import FavIcon from '../assets/img/fav.svg'
 import FavIconLikedfrom from '../assets/img/fav-icon.svg'
 import ListIcon from  '../assets/img/list.svg'
-import React, { useState } from "react";
+import React, { useState} from "react";
+import { api } from "../context/api";
+import { useParams } from "react-router-dom";
 
 
 
@@ -12,6 +14,27 @@ const Review = () => {
     const [reviewText, setReviewText] = useState<string>('');
     const [date, setDate] = useState<string>()
     const [isLiked, setIsLiked] = useState<boolean>(true);
+    const { id } = useParams<{ id: string }>();
+
+    
+        const PostReview = async () => {
+            try {
+                const res = await api.post('movies/overviews/', 
+                {
+                    tmdb_id_input: id,
+                    overview_text_movie: reviewText,
+                    date_overview: date,
+                    stars: rating
+                });
+
+                console.log(res.data);
+                setReviewText('')
+
+             
+            } catch (err) {
+                console.error(err)
+            };
+        }
 
     const handleLike = () => {
         setIsLiked(!isLiked) //muda pra não isLiked ou seja, false
@@ -19,17 +42,17 @@ const Review = () => {
 
 
 
-    const send = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault()
-        console.log(reviewText)
-        console.log(rating)
-        console.log(date)
-        setReviewText('')
-        setDate('')
+    // const send = (event: React.MouseEvent<HTMLButtonElement>) => {
+    //     event.preventDefault()
+    //     console.log(reviewText)
+    //     console.log(rating)
+    //     console.log(date)
+    //     setReviewText('')
+    //     setDate('')
 
-        //função para enviar form
+    //     //função para enviar form
         
-    }
+    // }
 
     const handleRating = (value: number) => {
         setRating(value);
@@ -69,10 +92,11 @@ const Review = () => {
                     className="w-full  bg-search  outline-none p-2 rounded-borderRadius" 
                     onChange={handleDateChange}
                     value={date}
+                    id="email"
                     
                 />
 
-                <button className="w-full bg-search rounded-borderRadius h-10 mt-3" onClick={send}>
+                <button className="w-full bg-search rounded-borderRadius h-10 mt-3" onClick={PostReview}>
                     Enviar
                 </button>
 
@@ -96,14 +120,7 @@ const Review = () => {
             
         </section>
     )
+
 }
 
 export default Review;
-
-{/* <div className="">
-                <span className="text-[3rem] flex justify-center gap-1 text-gray-400 py-4">
-                    
-                </span>
-               
-               <textarea className="w-full" name="" id=""/>
-            </div> */}
