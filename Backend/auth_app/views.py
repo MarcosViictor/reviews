@@ -1,12 +1,12 @@
-# auth_app/views.py
 from rest_framework import generics, status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import get_user_model
-from .serializers import UserSerializer
+from .serializers import UserSerializer, PostSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from .models import Post
 
 User = get_user_model()
 
@@ -29,21 +29,27 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
+        # Adiciona dados adicionais ao token
         token['username'] = user.username
         token['email'] = user.email
         return token
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
-    
+
     def post(self, request, *args, **kwargs):
-        # Verifica se o usuário está autenticado usando as credenciais
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            # Se a autenticação for bem-sucedida, retorna os dados do token
-            return Response(serializer.validated_data, status=status.HTTP_200_OK)
+            # Retorna o token e os dados adicionais do usuário
+            return Response({
+                'access': serializer.validated_data.get('access'),
+                'refresh': serializer.validated_data.get('refresh'),
+                'user': {
+                    'username': serializer.user.username,
+                    'email': serializer.user.email,
+                }
+            }, status=status.HTTP_200_OK)
         
-        # Se não estiver autenticado, retorna os erros
         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
 
 class UserStatusView(APIView):
@@ -52,13 +58,31 @@ class UserStatusView(APIView):
     def get(self, request):
         user = request.user
         return Response({
+            'detail': 'Usuário autenticado',
             'username': user.username,
             'email': user.email,
-            'token': request.META.get('HTTP_AUTHORIZATION'),
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'token_valid': True,
         })
 
 class TestAuthView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        return Response({'username': request.user.username})
+        return Response({
+            'detail': 'Autenticação bem-sucedida!',
+            'username': request.user.username,
+        })
+
+class PostListCreateView(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = PostSerializer
+
+    def get_queryset(self):
+        # Filtra os posts para exibir apenas os do usuário autenticado
+        return Post.objects.filter(owner=self.request.user)
+
+    def perform_create(self, serializer):
+        # Define o usuário autenticado como o dono do post
+        serializer.save(owner=self.request.user)

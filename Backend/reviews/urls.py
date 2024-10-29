@@ -1,9 +1,7 @@
-# reviews/urls.py
 from django.contrib import admin
-from django.urls import path, include  # Importando include para usar as URLs do app
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
- 
-    path('auth/', include('auth_app.urls')),  # Incluindo as URLs do auth_app
+    path('api/', include('auth_app.urls')),  # Inclui todas as rotas do seu app de autenticação com o prefixo `api/`
 ]
