@@ -95,3 +95,29 @@ class WatchListSerializer(serializers.ModelSerializer):
             watchlist.movies.add(movie)  # Adiciona o filme à lista de filmes da WatchList
 
         return watchlist
+    
+
+class FavoriteMovieSerializer(serializers.ModelSerializer):
+    tmdb_id = serializers.IntegerField()  # Campo de entrada para o ID do TMDb
+    favorite = serializers.BooleanField(default=False)  # Campo para marcar como favorito
+    title = serializers.CharField(read_only=True)  # O campo `title` agora é somente leitura
+
+    class Meta:
+        model = Movie
+        fields = ['id', 'tmdb_id', 'title', 'favorite']
+
+    def create(self, validated_data):
+        # Extrair o ID do TMDb e o valor de `favorite`
+        tmdb_id = validated_data.get('tmdb_id')
+        favorite = validated_data.get('favorite', False)
+
+        # Buscar ou criar o filme pelo `tmdb_id`
+        movie, created = Movie.objects.get_or_create(tmdb_id=tmdb_id)
+
+        if created:
+            # Título padrão, opcionalmente buscar na API
+            movie.title = 'Título Padrão'
+        movie.favorite = favorite  # Atualizar o status de favorito
+        movie.save()
+
+        return movie
