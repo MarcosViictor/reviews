@@ -1,6 +1,10 @@
 from rest_framework import serializers
-from app.models import Overview_movie, Overview_serie, Comment_overview_movies,Comment_overview_series, Movie
+from app.models import  Overview_movie, Overview_serie, Comment_overview_movies,Comment_overview_series, Movie, Series, WatchList
 
+class MovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = ['id', 'tmdb_id', 'title'] 
 class OverviewMovieSerializer(serializers.ModelSerializer):
     tmdb_id = serializers.IntegerField(source='id_movie.tmdb_id', read_only=True)  # Exibe o tmdb_id na resposta
     tmdb_id_input = serializers.IntegerField(write_only=True)  # Campo usado apenas para input (formulário)
@@ -32,10 +36,6 @@ class OverviewMovieSerializer(serializers.ModelSerializer):
             **validated_data  # Passa os demais campos (overview_text_movie, date_overview, stars)
         )
         return overview_movie
-
-
-
-
 class OverviewSerieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Overview_serie
@@ -53,9 +53,20 @@ class CommentOverviewSeriesSerializer(serializers.ModelSerializer):
             
 class CommentOverviewMoviesSerializers(serializers.ModelSerializer):
     class Meta:
-        model = Comment_overview_movies  # Especifica o modelo correto
+        model = Comment_overview_movies 
         fields = [
-            'id_overview_movie',  # Chave estrangeira para o filme
-            'text',               # Texto do comentário
-            'date_comment'        # Data do comentário
+            'id_overview_movie', 
+            'text',               
+            'date_comment'        
         ]
+
+class WatchListSerializer(serializers.ModelSerializer):
+    movies = MovieSerializer(many=True, read_only=True)
+    movies_ids = serializers.PrimaryKeyRelatedField(
+        queryset=Movie.objects.all(), many=True, write_only=True, source='movies'
+    )
+    series = serializers.PrimaryKeyRelatedField(queryset=Series.objects.all(), many=True, required=False)
+
+    class Meta:
+        model = WatchList
+        fields = ['id', 'name', 'movies', 'movies_ids', 'series']

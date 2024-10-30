@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (
-    Movie, Series, List, Overview_serie,
+    Movie, Series,Overview_serie,
     Comment_overview_series, Overview_movie, Comment_overview_movies
 )
 
@@ -19,13 +19,6 @@ class SeriesAdmin(admin.ModelAdmin):
     list_filter = ('release_date', 'status', 'vote_average', 'language', 'popularity')
     ordering = ('-release_date',)
 
-@admin.register(List)
-class ListAdmin(admin.ModelAdmin):
-    # Lista
-    list_display = ('name', 'id_movie', 'id_series', 'list_creation_date', 'privacy')
-    search_fields = ('name', 'description')
-    list_filter = ('privacy', 'list_creation_date')
-    ordering = ('-list_creation_date',)
 
 @admin.register(Overview_serie)
 class OverviewSerieAdmin(admin.ModelAdmin):

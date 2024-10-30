@@ -47,21 +47,7 @@ class Series(models.Model):
 
     def __str__(self):
         return self.title
-    
-    
-        # LISTA    
-class List (Base):
-    id_movie = models.ForeignKey (Movie, on_delete=models.CASCADE) #id da tabela filme
-    id_series = models.ForeignKey(Series, on_delete=models.CASCADE) # id da tabela série
-    list_creation_date = models.DateField() # data da criação da lista (metadado)
-    name = models.CharField(max_length=50) # nome da lista que o usuário vai dar
-    description = models.TextField(max_length=200) # descrição da lista criada
-    privacy = models.BooleanField(default=True) #opção de deixar a lista pública ou privada
-    
-    
-    def __str__(self):
-        return self.name
-    
+        
       
 
 # Avaliação de séries
@@ -96,7 +82,11 @@ class Comment_overview_movies (Base):
     id_overview_movie = models.ForeignKey (Overview_movie, on_delete=models.CASCADE) #id da avaliação do filme
     text = models.TextField(max_length=200) # comentário na avaliação feito no filme
     date_comment = models.DateField() # data do comentário feito na avaliação (metadado)
-    
-    
-    
+       
+class WatchList(Base):
+    name = models.CharField(max_length=255)  # Nome da lista
+    movies = models.ManyToManyField(Movie, blank=True)  # Relacionamento opcional com Movie
+    series = models.ManyToManyField(Series, blank=True)  # Relacionamento opcional com Series
 
+    def __str__(self):
+        return self.name
