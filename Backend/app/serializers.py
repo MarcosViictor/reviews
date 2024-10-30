@@ -60,13 +60,38 @@ class CommentOverviewMoviesSerializers(serializers.ModelSerializer):
             'date_comment'        
         ]
 
+# class WatchListSerializer(serializers.ModelSerializer):
+#     movies = MovieSerializer(many=True, read_only=True)
+#     movies_ids = serializers.PrimaryKeyRelatedField(
+#         queryset=Movie.objects.all(), many=True, write_only=True, source='movies'
+#     )
+#     series = serializers.PrimaryKeyRelatedField(queryset=Series.objects.all(), many=True, required=False)
+
+#     class Meta:
+#         model = WatchList
+#         fields = ['id', 'name', 'movies', 'movies_ids', 'series']
+
 class WatchListSerializer(serializers.ModelSerializer):
-    movies = MovieSerializer(many=True, read_only=True)
-    movies_ids = serializers.PrimaryKeyRelatedField(
-        queryset=Movie.objects.all(), many=True, write_only=True, source='movies'
+    movies = MovieSerializer(many=True, read_only=True)  # Apenas leitura para exibir filmes
+    movies_tmdb_ids = serializers.ListField(
+        child=serializers.IntegerField(), write_only=True, required=False
     )
     series = serializers.PrimaryKeyRelatedField(queryset=Series.objects.all(), many=True, required=False)
 
     class Meta:
         model = WatchList
-        fields = ['id', 'name', 'movies', 'movies_ids', 'series']
+        fields = ['id', 'name', 'movies', 'movies_tmdb_ids', 'series']
+
+    def create(self, validated_data):
+        movies_tmdb_ids = validated_data.pop('movies_tmdb_ids', [])
+        watchlist = WatchList.objects.create(**validated_data)
+
+        # Buscar ou criar filmes com base nos tmdb_ids fornecidos
+        for tmdb_id in movies_tmdb_ids:
+            movie, created = Movie.objects.get_or_create(tmdb_id=tmdb_id)
+            if created:
+                movie.title = 'Título Padrão'  # Preencher título padrão ou buscar na API
+                movie.save()
+            watchlist.movies.add(movie)  # Adiciona o filme à lista de filmes da WatchList
+
+        return watchlist
