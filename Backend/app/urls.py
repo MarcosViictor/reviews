@@ -1,6 +1,8 @@
 from msilib.schema import ListView
 from django.urls import path
 
+from .views.favorites.MovieFavorite.movie_favorite import FavoriteMovieDetailView, FavoriteMovieListView, FavoriteMovieView
+
 from .views.List.movie.add_list import WatchListCreateView, WatchListDetailView
 
 from .views.list_filmes_e_series.list_movies import ListMoviesView
@@ -43,7 +45,9 @@ urlpatterns = [
     path('comments/overview/series/', CommentOverviewSeriesView.as_view(), name= 'comments-series-list-create'),
     path('comments/overview/series/<int:id_comments_series>/', CommentOverviewSeriesDetailView.as_view(), name= 'comments-series-detail'),
     path('watchlists/', WatchListCreateView.as_view(), name='watchlist-list-create'),
-    path('watchlists/<int:pk>/', WatchListDetailView.as_view(), name='watchlist-detail')
-  
+    path('watchlists/<int:pk>/', WatchListDetailView.as_view(), name='watchlist-detail'),
+    path('movies/favorite/', FavoriteMovieView.as_view(), name='favorite-movie'),
+    path('movies/favorite/<int:pk>', FavoriteMovieDetailView.as_view(), name='favorite-detail-movie'),
+    path('movies/favorites/', FavoriteMovieListView.as_view(), name='favorite-movie-list')
 
 ]

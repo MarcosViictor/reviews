@@ -14,7 +14,7 @@ class Base (models.Model):
 
         # Filmes
 class Movie(models.Model):
-    tmdb_id = models.IntegerField(unique=True)  # Certifique-se de que o nome do campo está correto
+    tmdb_id = models.IntegerField(unique=True)  # ID do TMDb
     title = models.CharField(max_length=255)
     overview = models.TextField(null=True, blank=True)
     release_date = models.DateField(null=True, blank=True)
@@ -23,8 +23,9 @@ class Movie(models.Model):
     popularity = models.FloatField(default=0)
     poster_path = models.URLField(max_length=500, null=True, blank=True)
     backdrop_path = models.URLField(max_length=500, null=True, blank=True)
+    favorite = models.BooleanField(default=False)  # Novo campo para marcar como favorito
 
-    def _str_(self):
+    def __str__(self):
         return self.title
 class Series(models.Model):
     id_tmdb = models.IntegerField(unique=True)  # id do TMDB
@@ -47,7 +48,7 @@ class Series(models.Model):
 
     def __str__(self):
         return self.title
-        
+   
       
 
 # Avaliação de séries
