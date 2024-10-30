@@ -42,38 +42,37 @@ useEffect(() => {
 }, [id]);
 
 return (
-    <div>
-        <section className="bg-gray-800 rounded-lg shadow-lg p-6 max-w-2xl mx-auto flex flex-row gap-6">
-    {movie && (
-        <div>
-            <div className="flex-shrink-0">
+    <div className="flex items-center justify-center min-h-screen bg-gray-900">
+    <section className="bg-gray-800 rounded-lg shadow-lg p-6 max-w-2xl mx-auto flex flex-row gap-6 items-start w-[50rem]">
+        {movie && (
+            <div className="flex-shrink-0 flex gap-5">
                 <img
-                    className="w-48 h-auto rounded-lg shadow-md"
+                    className="w-36 h-52 rounded-lg shadow-md object-cover"
                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                     alt={movie.title}
                 />
-            </div>
-                
-                
-                <div className="flex flex-col justify-between">
-            <div className="mb-4">
-                <h3 className="text-2xl font-bold text-white mb-2">{movie.title}</h3>
-                <p className="text-sm text-gray-400">{commentOverview?.date_overview}</p>
-                <div className="flex items-center mb-4">
-                    <StarRating rating={commentOverview?.stars ?? 0} />
-                </div>
-                <p className="text-gray-200 text-justify">
-                    {commentOverview?.overview_text_movie}
-                </p>
-            </div>
-                </div>
-        </div>
-    )}
-</section>
 
-
+                <div className="flex flex-col">
+                    <h3 className="text-2xl font-bold text-white mb-1">{movie.title}</h3>
+                    <div className="mb-4">
+                        <p className="text-sm text-gray-400">
+                            {new Date(commentOverview?.date_overview || 'Data não disponível').toLocaleDateString()}
+                        </p>
+                        <div className="flex items-center mb-3">
+                            <StarRating rating={commentOverview?.stars ?? 0} />
+                        </div>
+                        <p className="text-gray-200 w-full max-w-sm break-words overflow-hidden">
+                            {commentOverview?.overview_text_movie}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        )}
         
-    </div>
+    </section>
+</div>
+
+
     )
 };  
 
