@@ -1,20 +1,22 @@
-# usando a imagem oficial do python, com o slim pois o slim é mais leve
-FROM python:3.11-slim
+# Use a imagem base do Python
+FROM python:3.10
 
-# Define o diretorio onde meu aplicativo django está
+# Instala as dependências do sistema para o PostgreSQL e outras
+RUN apt-get update && \
+    apt-get install -y libpq-dev gcc && \
+    rm -rf /var/lib/apt/lists/*
+
+# Define o diretório de trabalho no contêiner
 WORKDIR /app
 
-# copio arquivo requirements.txt para o contêiner docker
-COPY requirements.txt /app/
+# Copia o arquivo requirements.txt para o contêiner
+COPY requirements.txt .
 
-# Instalo as dependências do projeto
+# Instala as dependências do projeto
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copiar o restante do código do projeto para o contêiner
-COPY . /app/
+COPY . .
 
-# Expor a porta onde o Django será executado (por padrão: 8000)
-EXPOSE 8000
-
-# Definir o comando padrão para rodar o servidor de desenvolvimento do Django
+# Define o comando padrão para iniciar o Django
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
