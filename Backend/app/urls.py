@@ -1,4 +1,4 @@
-from msilib.schema import ListView
+# from msilib.schema import ListView
 from django.urls import path
 
 from .views.favorites.MovieFavorite.movie_favorite import FavoriteMovieDetailView, FavoriteMovieListView, FavoriteMovieView
