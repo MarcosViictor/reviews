@@ -14,7 +14,7 @@ class Base (models.Model):
 
         # Filmes
 class Movie(models.Model):
-    tmdb_id = models.IntegerField(unique=True)  # Certifique-se de que o nome do campo está correto
+    tmdb_id = models.IntegerField(unique=True)  # ID do TMDb
     title = models.CharField(max_length=255)
     overview = models.TextField(null=True, blank=True)
     release_date = models.DateField(null=True, blank=True)
@@ -23,8 +23,9 @@ class Movie(models.Model):
     popularity = models.FloatField(default=0)
     poster_path = models.URLField(max_length=500, null=True, blank=True)
     backdrop_path = models.URLField(max_length=500, null=True, blank=True)
+    favorite = models.BooleanField(default=False)  # Novo campo para marcar como favorito
 
-    def _str_(self):
+    def __str__(self):
         return self.title
 class Series(models.Model):
     id_tmdb = models.IntegerField(unique=True)  # id do TMDB
@@ -47,21 +48,7 @@ class Series(models.Model):
 
     def __str__(self):
         return self.title
-    
-    
-        # LISTA    
-class List (Base):
-    id_movie = models.ForeignKey (Movie, on_delete=models.CASCADE) #id da tabela filme
-    id_series = models.ForeignKey(Series, on_delete=models.CASCADE) # id da tabela série
-    list_creation_date = models.DateField() # data da criação da lista (metadado)
-    name = models.CharField(max_length=50) # nome da lista que o usuário vai dar
-    description = models.TextField(max_length=200) # descrição da lista criada
-    privacy = models.BooleanField(default=True) #opção de deixar a lista pública ou privada
-    
-    
-    def __str__(self):
-        return self.name
-    
+   
       
 
 # Avaliação de séries
@@ -96,7 +83,11 @@ class Comment_overview_movies (Base):
     id_overview_movie = models.ForeignKey (Overview_movie, on_delete=models.CASCADE) #id da avaliação do filme
     text = models.TextField(max_length=200) # comentário na avaliação feito no filme
     date_comment = models.DateField() # data do comentário feito na avaliação (metadado)
-    
-    
-    
+       
+class WatchList(Base):
+    name = models.CharField(max_length=255)  # Nome da lista
+    movies = models.ManyToManyField(Movie, blank=True)  # Relacionamento opcional com Movie
+    series = models.ManyToManyField(Series, blank=True)  # Relacionamento opcional com Series
 
+    def __str__(self):
+        return self.name

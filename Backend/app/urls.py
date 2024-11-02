@@ -1,4 +1,10 @@
+
 from django.urls import path
+
+from .views.favorites.MovieFavorite.movie_favorite import FavoriteMovieDetailView, FavoriteMovieListView, FavoriteMovieView
+
+from .views.List.movie.add_list import WatchListCreateView, WatchListDetailView
+
 from .views.list_filmes_e_series.list_movies import ListMoviesView
 from .views.list_filmes_e_series.list_series import ListSeriesViews
 from .views.list_filmes_e_series.list_series_popular import ListSeriesPopularViews
@@ -16,7 +22,6 @@ from .views.comments.comments_movies import CommentsOverviewMovieView, CommentsO
 from .views.comments.comments_series import CommentOverviewSeriesDetailView, CommentOverviewSeriesView
 
 
-
 urlpatterns = [
     #Urls para consumir API do TMDB
     path('movies/list/', ListMoviesView.as_view(), name='list-movie'),
@@ -30,6 +35,7 @@ urlpatterns = [
     path('search/series/', SearchSerieView.as_view(), name = 'search-series'),
     path('image/movie/', ImageMovieView.as_view(), name= 'image-movie'),
     path('genres/', GenresView.as_view(), name= 'genres'),
+    #Rotas de funções do backend
     path('movies/overviews/', OverviewMovieListCreateView.as_view(), name='overview-list-create'),
     path('movies/overviews/<int:id>/', OverviewMovieDetailView.as_view(), name='overview-detail'),
     path('overview-series/', OverviewSeriesListCreateView.as_view(), name='overview-series-list-create'), 
@@ -37,6 +43,11 @@ urlpatterns = [
     path('comments/overview/movies/', CommentsOverviewMovieView.as_view(), name= 'comments-list-create'),
     path('comments/overview/movies/<int:id_comments_movies>/', CommentsOverviewMovieDetailView.as_view(), name= 'comments-detail'),
     path('comments/overview/series/', CommentOverviewSeriesView.as_view(), name= 'comments-series-list-create'),
-    path('comments/overview/series/<int:id_comments_series>/', CommentOverviewSeriesDetailView.as_view(), name= 'comments-series-detail')
+    path('comments/overview/series/<int:id_comments_series>/', CommentOverviewSeriesDetailView.as_view(), name= 'comments-series-detail'),
+    path('watchlists/', WatchListCreateView.as_view(), name='watchlist-list-create'),
+    path('watchlists/<int:pk>/', WatchListDetailView.as_view(), name='watchlist-detail'),
+    path('movies/favorite/', FavoriteMovieView.as_view(), name='favorite-movie'),
+    path('movies/favorite/<int:pk>', FavoriteMovieDetailView.as_view(), name='favorite-detail-movie'),
+    path('movies/favorites/', FavoriteMovieListView.as_view(), name='favorite-movie-list')
 
 ]
