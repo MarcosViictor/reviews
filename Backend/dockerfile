@@ -1,23 +1,15 @@
-# Usando a imagem oficial do Python
-FROM python:3.11-slim
+FROM python:3.10
 
-# Define o diretório onde o aplicativo Django será executado
 WORKDIR /app
 
-# Instala dependências do sistema, incluindo libpq-dev
-RUN apt-get update && apt-get install -y libpq-dev gcc && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-# Copio o arquivo requirements.txt para o contêiner Docker
-COPY requirements.txt /app/
+COPY . .
 
-# Instalo as dependências do projeto
-RUN pip install --upgrade pip && pip install -r requirements.txt
+# Copia o script de entrada e torna-o executável
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-# Copio o restante do código do projeto para o contêiner
-COPY . /app/
-
-# Expor a porta onde o Django será executado (padrão: 8000)
-EXPOSE 8000
-
-# Definir o comando padrão para rodar o servidor de desenvolvimento do Django
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Usa o script de entrada como comando do contêiner
+CMD ["/entrypoint.sh"]

@@ -1,4 +1,3 @@
-
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -77,18 +76,34 @@ WSGI_APPLICATION = 'reviews.wsgi.application'
 
 
 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',  # Define que está usando PostgreSQL
+#         'NAME': 'reviews',           # Substitua pelo nome do seu banco de dados
+#         'USER': 'postgres',                     # Substitua pelo seu nome de usuário do PostgreSQL
+#         'PASSWORD': 'root6',                   # Substitua pela senha do seu banco de dados
+#         'HOST': 'localhost',                       # Use 'localhost' se o banco estiver rodando localmente
+#         'PORT': '5432',                            # A porta padrão do PostgreSQL é 5432
+#     }
+# }
+
+import os
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'reviews',
-        'USER': 'postgres',
-        'PASSWORD': 'root',  # Certifique-se de que esta senha corresponda à do docker-compose.yml
-        'HOST': 'db',            # Use o nome do serviço aqui
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME', 'reviews_db'),
+        'USER': os.getenv('DB_USER', 'user'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'password'),
+        'HOST': os.getenv('DB_HOST', 'db'),
+        'PORT': os.getenv('DB_PORT', '5432'),
+        'OPTIONS': {
+            'client_encoding': 'UTF8',
+        },
     }
 }
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
