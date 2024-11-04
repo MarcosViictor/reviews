@@ -1,21 +1,25 @@
 
 from django.urls import path
-
+# Lista de filmes favortitos
 from .views.favorites.MovieFavorite.movie_favorite import FavoriteMovieDetailView, FavoriteMovieListView, FavoriteMovieView
-
+# Adicionando filmes favoritos
 from .views.List.movie.add_list import WatchListCreateView, WatchListDetailView
-
+# Listar todos os filmes e series
 from .views.list_filmes_e_series.list_movies import ListMoviesView
 from .views.list_filmes_e_series.list_series import ListSeriesViews
 from .views.list_filmes_e_series.list_series_popular import ListSeriesPopularViews
 from .views.list_filmes_e_series.list_movies_popular import ListMoviesPopularViews
 from .views.list_filmes_e_series.list_all import ListAllView
+#Rota para descobrir e pesquisar novos filmes
 from .views.discovery.discovery_movie import DiscoveryMovieView
 from .views.discovery.discovery_series import DiscoverySeriesView
 from .views.search.search_movie import SearchMovieView
 from .views.search.search_series import SearchSerieView
+#Rota das imagens 
 from .views.image.image_movie import ImageMovieView
+#Rota dos genêros 
 from .views.genres.genres import GenresView
+#Rota para adicionar os Comentarios 
 from .views.overview.overview_movie import OverviewMovieDetailView, OverviewMovieListCreateView
 from .views.overview.overview_series import OverviewSeriesListCreateView, OverviewSeriesDetail
 from .views.comments.comments_movies import CommentsOverviewMovieView, CommentsOverviewMovieDetailView
