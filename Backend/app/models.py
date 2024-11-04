@@ -1,93 +1,92 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password, check_password
 
-# Create your models here.
+# Modelo base abstrato, contendo campos comuns para outros modelos
+class Base(models.Model):
+    criacao = models.DateTimeField(auto_now_add=True)  # Data e hora de criação do registro, adicionada automaticamente
+    atualizacao = models.DateTimeField(auto_now=True)  # Data e hora de atualização do registro, atualizada automaticamente
+    ativo = models.BooleanField(default=True)  # Indica se o registro está ativo
 
-class Base (models.Model):
-    criacao = models.DateTimeField(auto_now_add = True)
-    atualizacao = models.DateTimeField(auto_now = True)
-    ativo = models.BooleanField(default = True)
-    
     class Meta:
-        abstract = True
-        
+        abstract = True  # Define que este modelo é abstrato e não será criado no banco de dados
 
-        # Filmes
+
+# Modelo de filme, representando dados de filmes com informações do TMDb
 class Movie(models.Model):
-    tmdb_id = models.IntegerField(unique=True)  # ID do TMDb
-    title = models.CharField(max_length=255)
-    overview = models.TextField(null=True, blank=True)
-    release_date = models.DateField(null=True, blank=True)
-    vote_average = models.FloatField(default=0)
-    vote_count = models.IntegerField(default=0)
-    popularity = models.FloatField(default=0)
-    poster_path = models.URLField(max_length=500, null=True, blank=True)
-    backdrop_path = models.URLField(max_length=500, null=True, blank=True)
-    favorite = models.BooleanField(default=False)  # Novo campo para marcar como favorito
+    tmdb_id = models.IntegerField(unique=True)  # ID único do filme no TMDb
+    title = models.CharField(max_length=255)  # Título do filme
+    overview = models.TextField(null=True, blank=True)  # Sinopse do filme (opcional)
+    release_date = models.DateField(null=True, blank=True)  # Data de lançamento do filme (opcional)
+    vote_average = models.FloatField(default=0)  # Média de votos do filme
+    vote_count = models.IntegerField(default=0)  # Quantidade de votos recebidos pelo filme
+    popularity = models.FloatField(default=0)  # Popularidade do filme
+    poster_path = models.URLField(max_length=500, null=True, blank=True)  # URL do poster do filme (opcional)
+    backdrop_path = models.URLField(max_length=500, null=True, blank=True)  # URL da imagem de fundo do filme (opcional)
+    favorite = models.BooleanField(default=False)  # Campo para marcar o filme como favorito
 
     def __str__(self):
-        return self.title
+        return self.title  # Retorna o título do filme como representação em string
+
+
+# Modelo de série, representando dados de séries com informações do TMDb
 class Series(models.Model):
-    id_tmdb = models.IntegerField(unique=True)  # id do TMDB
-    title = models.CharField(max_length=100)  # título da série traduzido
-    title_original = models.CharField(max_length=100)  # título original
-    overview = models.TextField()  # sinopse pode ser longa, removi o max_length
-    status = models.CharField(max_length=50)  # status da série (e.g., 'Ended', 'Returning Series')
-    num_season = models.IntegerField()  # número de temporadas
-    num_episode = models.IntegerField()  # número de episódios
-    popularity = models.FloatField()  # popularidade da série de acordo com a API
-    release_date = models.DateField()  # data de lançamento da série
-    length_serie = models.IntegerField(null=True, blank=True)  # duração total da série (opcional)
-    vote_average = models.FloatField()  # média de votos da série
-    genre_ids = models.JSONField()  # lista de gêneros (JSON é uma boa opção para listas)
-    language_original = models.CharField(max_length=20)  # idioma original
-    language = models.CharField(max_length=20)  # idioma traduzido
-    cast_serie = models.TextField()  # elenco (usar TextField para uma lista grande)
-    director_serie = models.TextField()  # diretor (usar TextField para uma lista grande)
-    poster_path = models.URLField(max_length=255)  # poster da série (URL)
+    id_tmdb = models.IntegerField(unique=True)  # ID único da série no TMDb
+    title = models.CharField(max_length=100)  # Título traduzido da série
+    title_original = models.CharField(max_length=100)  # Título original da série
+    overview = models.TextField()  # Sinopse da série
+    status = models.CharField(max_length=50)  # Status da série (e.g., 'Ended', 'Returning Series')
+    num_season = models.IntegerField()  # Número de temporadas
+    num_episode = models.IntegerField()  # Número de episódios
+    popularity = models.FloatField()  # Popularidade da série
+    release_date = models.DateField()  # Data de lançamento da série
+    length_serie = models.IntegerField(null=True, blank=True)  # Duração total da série (opcional)
+    vote_average = models.FloatField()  # Média de votos da série
+    genre_ids = models.JSONField()  # Lista de IDs de gêneros em formato JSON
+    language_original = models.CharField(max_length=20)  # Idioma original da série
+    language = models.CharField(max_length=20)  # Idioma traduzido da série
+    cast_serie = models.TextField()  # Elenco da série
+    director_serie = models.TextField()  # Diretores da série
+    poster_path = models.URLField(max_length=255)  # URL do poster da série
 
     def __str__(self):
-        return self.title
-   
-      
+        return self.title  # Retorna o título da série como representação em string
 
-# Avaliação de séries
-class Overview_serie (Base):
-    id_series = models.ForeignKey(Series, on_delete=models.CASCADE) # id da tabela série
-    overview_text_serie = models.TextField(max_length=500) # Avaliação em comentário na série
-    date_overview = models.DateField () # data da avaliação (metadado)
-    stars = models.DecimalField(max_digits=3, decimal_places=1, default=0.0) # estrelas da série dada pelo usuário
 
-    
-    
-    # Comentário da avaliação da série
-class Comment_overview_series (Base):
-    id_overview_serie = models.ForeignKey (Overview_serie, on_delete=models.CASCADE) #id da avaliação da série
-    text = models.TextField(max_length=200) # comentário na avaliação feito na série
-    date_comment = models.DateField() # data do comentário feito na avaliação (metadado)
+# Modelo de avaliação de série, permitindo comentários e classificação em estrelas
+class Overview_serie(Base):
+    id_series = models.ForeignKey(Series, on_delete=models.CASCADE)  # Chave estrangeira para o modelo de série
+    overview_text_serie = models.TextField(max_length=500)  # Texto de avaliação/comentário da série
+    date_overview = models.DateField()  # Data da avaliação
+    stars = models.DecimalField(max_digits=3, decimal_places=1, default=0.0)  # Classificação em estrelas para a série
 
-    
-    
-    
-    # Avaliação do Filme
-class Overview_movie (Base):
-    id_movie = models.ForeignKey(Movie, on_delete=models.CASCADE) # id da tabela movie
-    overview_text_movie = models.TextField(max_length=500) # Avaliação em comentário no filme
-    date_overview = models.DateField () # data da avaliação (metadado)
-    stars = models.DecimalField(max_digits=3, decimal_places=1, default=0.0) # estrelas da série dada pelo usuário
-    
-    
-    
-    # Comentário da avaliação do filme
-class Comment_overview_movies (Base):
-    id_overview_movie = models.ForeignKey (Overview_movie, on_delete=models.CASCADE) #id da avaliação do filme
-    text = models.TextField(max_length=200) # comentário na avaliação feito no filme
-    date_comment = models.DateField() # data do comentário feito na avaliação (metadado)
-       
+
+# Modelo de comentário em uma avaliação de série
+class Comment_overview_series(Base):
+    id_overview_serie = models.ForeignKey(Overview_serie, on_delete=models.CASCADE)  # Chave estrangeira para a avaliação da série
+    text = models.TextField(max_length=200)  # Texto do comentário
+    date_comment = models.DateField()  # Data do comentário
+
+
+# Modelo de avaliação de filme, permitindo comentários e classificação em estrelas
+class Overview_movie(Base):
+    id_movie = models.ForeignKey(Movie, on_delete=models.CASCADE)  # Chave estrangeira para o modelo de filme
+    overview_text_movie = models.TextField(max_length=500)  # Texto de avaliação/comentário do filme
+    date_overview = models.DateField()  # Data da avaliação
+    stars = models.DecimalField(max_digits=3, decimal_places=1, default=0.0)  # Classificação em estrelas para o filme
+
+
+# Modelo de comentário em uma avaliação de filme
+class Comment_overview_movies(Base):
+    id_overview_movie = models.ForeignKey(Overview_movie, on_delete=models.CASCADE)  # Chave estrangeira para a avaliação do filme
+    text = models.TextField(max_length=200)  # Texto do comentário
+    date_comment = models.DateField()  # Data do comentário
+
+
+# Modelo de lista de exibição, permitindo que o usuário crie listas de filmes e séries
 class WatchList(Base):
-    name = models.CharField(max_length=255)  # Nome da lista
-    movies = models.ManyToManyField(Movie, blank=True)  # Relacionamento opcional com Movie
-    series = models.ManyToManyField(Series, blank=True)  # Relacionamento opcional com Series
+    name = models.CharField(max_length=255)  # Nome da lista de exibição
+    movies = models.ManyToManyField(Movie, blank=True)  # Relacionamento opcional com o modelo de filmes
+    series = models.ManyToManyField(Series, blank=True)  # Relacionamento opcional com o modelo de séries
 
     def __str__(self):
-        return self.name
+        return self.name  # Retorna o nome da lista de exibição como representação em string
