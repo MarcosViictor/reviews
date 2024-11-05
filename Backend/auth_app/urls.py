@@ -1,6 +1,6 @@
 # auth_app/urls.py
 from django.urls import path
-from .views import UserCreateView, CustomTokenObtainPairView, UserStatusView, TestAuthView, PostListCreateView, PostListCreateView
+from .views import UserCreateView, CustomTokenObtainPairView, UserStatusView, TestAuthView, PostListCreateView, PostListCreateView, ProtectedView
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
@@ -10,4 +10,5 @@ urlpatterns = [
     path('status/', UserStatusView.as_view(), name='user_status'),
     path('test-auth/', TestAuthView.as_view(), name='test_auth'),
     path('posts/', PostListCreateView.as_view(), name='post-list-create'),
+    path('page/',  ProtectedView.as_view(), name="protected-page-view")
 ]

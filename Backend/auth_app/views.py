@@ -3,9 +3,9 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import get_user_model
-from .serializers import UserSerializer, PostSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from .serializers import UserSerializer, PostSerializer
 from .models import Post
 
 User = get_user_model()
@@ -29,7 +29,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-        # Adiciona dados adicionais ao token
         token['username'] = user.username
         token['email'] = user.email
         return token
@@ -40,7 +39,6 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            # Retorna o token e os dados adicionais do usuário
             return Response({
                 'access': serializer.validated_data.get('access'),
                 'refresh': serializer.validated_data.get('refresh'),
@@ -80,9 +78,15 @@ class PostListCreateView(generics.ListCreateAPIView):
     serializer_class = PostSerializer
 
     def get_queryset(self):
-        # Filtra os posts para exibir apenas os do usuário autenticado
+        # Exibe apenas os posts do usuário autenticado
         return Post.objects.filter(owner=self.request.user)
 
     def perform_create(self, serializer):
-        # Define o usuário autenticado como o dono do post
+        # Salva o post associando ao usuário autenticado
         serializer.save(owner=self.request.user)
+
+class ProtectedView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({"message": "Você está autenticado e pode acessar esta página!"})
