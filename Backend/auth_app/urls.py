@@ -9,6 +9,7 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('status/', UserStatusView.as_view(), name='user_status'),
     path('test-auth/', TestAuthView.as_view(), name='test_auth'),
-    path('posts/', PostListCreateView.as_view(), name='post-list-create'),
     path('page/',  ProtectedView.as_view(), name="protected-page-view")
+    
+    #se quiser criar uma rota de página do frontend com proteção, deve ser feito no urls.py do reviews app, pois assim evita a rota tendo que ser api/*pagina*, virando apenas pagina/.
 ]
