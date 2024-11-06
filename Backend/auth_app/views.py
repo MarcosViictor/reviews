@@ -90,3 +90,9 @@ class ProtectedView(APIView):
 
     def get(self, request):
         return Response({"message": "Você está autenticado e pode acessar esta página!"})
+
+    def handle_exception(self, exc):
+        if isinstance(exc, AuthenticationFailed):
+            login_url = request.build_absolute_uri(reverse('login'))  # Altere 'login' para o nome correto
+            return Response({"detail": "Não autenticado.", "login_url": login_url}, status=status.HTTP_401_UNAUTHORIZED)
+        return super().handle_exception(exc)
