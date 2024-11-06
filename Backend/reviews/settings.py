@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    'app',
     "auth_app",
     'rest_framework_simplejwt',
     'django.contrib.sites',
@@ -41,6 +42,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'reviews.urls'
@@ -126,3 +129,11 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),  # Expiração do token de acesso
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),   # Expiração do token de refresh (pode ser maior)
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # Porta do Vite
+    "http://127.0.0.1:5173",  
+]
+
+# para permitir todas as origens (somente para desenvolvimento, tenha cuidado em produção):
+#CORS_ALLOW_ALL_ORIGINS = True
