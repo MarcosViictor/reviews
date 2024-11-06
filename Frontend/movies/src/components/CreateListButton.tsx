@@ -1,5 +1,5 @@
 import { api } from "../context/api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CreateOrEditList from "./CreateOrEditList";
 
 
@@ -18,8 +18,10 @@ const CreateList = () => {
 
     const postList = async () => {
         try {
-            const res = await api.get('watchlists/',
-              
+            const res = await api.post('watchlists/',
+              {
+                name: nameList
+              }
             )
             console.log(res)
             setModalCreate(false)
@@ -28,13 +30,9 @@ const CreateList = () => {
         }
     }
 
-    useEffect(() => {
-        postList()
-    }, [])
-
 
     return(
-        <section>
+        <section className="pt-12 pb-5">
             <div className="flex justify-center items-center">
                 <button onClick={modalButtonCreate} className="bg-teal-900 text-white p-4 rounded-borderRadius">
                     Criar lista
