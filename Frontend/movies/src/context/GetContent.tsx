@@ -13,8 +13,6 @@ interface ContentContextType {
   setSeries: React.Dispatch<React.SetStateAction<Movie[]>>;
   recomendation: Movie[];
   setRecomendation: React.Dispatch<React.SetStateAction<Movie[]>>;
-  favorites: Movie[];
-  setFavorites: React.Dispatch<React.SetStateAction<Movie[]>>;
   rated: Movie[];
   setTopRated: React.Dispatch<React.SetStateAction<Movie[]>>;
   genreMovies: Movie[];
@@ -90,15 +88,6 @@ export const GetContentProvider = ({ children }: { children: ReactNode }) => {
       }
     };
 
-    const getFavorites = async (): Promise<void> => {
-      try {
-        const res = await api.get('movies/list/');
-        setFavorites(res.data.results);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
     const getTopRated = async (): Promise<void> => {
       try {
         const res = await api.get('discovery/movie/');
@@ -129,7 +118,6 @@ export const GetContentProvider = ({ children }: { children: ReactNode }) => {
 
     getRecomendation();
     getTopRated();
-    getFavorites();
     getSeries();
     getMovies();
     getGenreMovie();
@@ -146,8 +134,6 @@ export const GetContentProvider = ({ children }: { children: ReactNode }) => {
         setSeries,
         recomendation,
         setRecomendation,
-        favorites,
-        setFavorites,
         rated,
         setTopRated,
         genreMovies,
