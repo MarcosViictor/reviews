@@ -12,8 +12,6 @@ services:
       - db
     networks:
       - app-network
-    ports:
-      - "8001:8000"  # Mapeia a porta 8001 do host para a porta 8000 do container
 
   web2:
     build:
@@ -28,8 +26,6 @@ services:
       - db
     networks:
       - app-network
-    ports:
-      - "8002:8000"  # Mapeia a porta 8002 do host para a porta 8000 do container
 
   db:
     image: postgres:13
