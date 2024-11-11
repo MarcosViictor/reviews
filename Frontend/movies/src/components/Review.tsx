@@ -13,7 +13,7 @@ const Review = () => {
     const [rating, setRating] = useState<number>(0);
     const [reviewText, setReviewText] = useState<string>('');
     const [date, setDate] = useState<string>()
-    const [isLiked, setIsLiked] = useState<boolean>(true);
+    const [isLiked, setIsLiked] = useState<boolean>(false);
     const { id } = useParams<{ id: string }>();
 
     
@@ -36,23 +36,24 @@ const Review = () => {
             };
         }
 
-    const handleLike = () => {
-        setIsLiked(!isLiked) //muda pra não isLiked ou seja, false
+    const FavAction = async(like: boolean) => {
+        try {
+            const res = await api.post('movies/favorite/', {
+                tmdb_id : id,
+                favorite: like
+            })
+            console.log(res)
+           
+        } catch (err) {
+            console.error('Não foi possível curtir o filme' + err)
+        }
     }
 
-
-
-    // const send = (event: React.MouseEvent<HTMLButtonElement>) => {
-    //     event.preventDefault()
-    //     console.log(reviewText)
-    //     console.log(rating)
-    //     console.log(date)
-    //     setReviewText('')
-    //     setDate('')
-
-    //     //função para enviar form
-        
-    // }
+    const handleLike = () => {
+        const newIsLiked = !isLiked;
+        setIsLiked(newIsLiked);
+        FavAction(newIsLiked);
+    }
 
     const handleRating = (value: number) => {
         setRating(value);
@@ -103,7 +104,7 @@ const Review = () => {
                 <div className="flex justify-around pt-5 items-center 2xl:pt-6">
 
                     <button className="flex flex-col items-center gap-2" onClick={handleLike}>
-                        {isLiked ? <img className="w-11" src={FavIcon} /> : <img className="w-11" src={FavIconLikedfrom} />}
+                        {isLiked ? <img className="w-11" src={FavIconLikedfrom} /> :  <img className="w-11" src={FavIcon} /> }
 
                         <span>Favoritar</span>
                         
