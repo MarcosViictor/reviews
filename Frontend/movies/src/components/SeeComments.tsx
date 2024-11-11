@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../context/api";
 import { useParams } from "react-router-dom";
 
@@ -11,33 +11,54 @@ interface PropsComments{
     date: string
 }
 
+interface Comment {
+    text: string;
+    date_comment: string;
+    id_overview_movie: number
+
+}
+
 
 const SeeComments : React.FC<PropsComments> = ({handleCommentChange, modalButtonCreate, postComment, comment, handleDateChange, date}) => {
 
     const { id } = useParams<{ id: string }>();
+    const [comments, setComments] = useState<Comment[]>([])
 
     useEffect(() => {
         const getComments = async () => {
             try {
-                const res = await api.get(`comments/overview/movies/`)
-                console.log(res)
+                const res = await api.get(`comments/overview/movies/${id}`);
+                const data = Array.isArray(res.data) ? res.data : []; // Verifica se `res.data` é um array
+                setComments(data);
+                console.log(data);
             } catch (err) {
                 console.error(err)
             }
         }
 
         getComments()
-    }, [])
+    }, [id])
    
     return (
         <>
             <div>
-                
+            
 
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
                     <div className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-sm w-full">
+                        <h2 className="text-lg font-semibold mb-4 text-center">Fazer comentário</h2>
+                        {Array.isArray(comments) && comments.length > 0 ? (
+        comments.map((comment) => (
+            <p key={comment.id_overview_movie}>
+                {comment.text}
+            </p>
+        ))
+    ) : (
+        <p>Nenhum comentário disponível.</p>
+    )}
+
                         <div>
-                            <h2 className="text-lg font-semibold mb-4 text-center">Fazer comentário</h2>
+                            
                             <div>
                                 <textarea onChange={handleCommentChange} value={comment} className="w-full h-[12rem] rounded-borderRadius p-3 bg-gray-900 text-white outline-none"></textarea>
                                 <div className="flex justify-center space-x-4">
