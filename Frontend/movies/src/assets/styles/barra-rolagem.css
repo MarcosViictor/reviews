@@ -55,3 +55,21 @@ figure::-webkit-scrollbar-track {
   background-color: rgba(0, 0, 0, 0.9);
 } */
 
+/* Estilos para o container de rolagem */
+.scroll-container::-webkit-scrollbar {
+  width: 7px;
+  height: 10px; 
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;  
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: gray; 
+  border-radius: 20px; 
+}
+
+
+
+

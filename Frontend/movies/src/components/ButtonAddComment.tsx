@@ -35,6 +35,8 @@ const ButtonAddComment : React.FC = () => {
 
             console.log(res)
             setModalCreate(false)
+            setComment('')
+            setDate('')
         } catch (err) {
             console.error(err)
         }
@@ -44,7 +46,7 @@ const ButtonAddComment : React.FC = () => {
     return(
         <>
             <button onClick={modalButtonCreate} className="bg-[#09405d65] text-white p-4 rounded-borderRadius text-[1rem]"> Comentários</button>
-            <button>Ver comentários</button>
+        
             {modalCreate === true &&
                    <SeeComments modalButtonCreate={modalButtonCreate}
                    handleCommentChange={handleCommentChange}
