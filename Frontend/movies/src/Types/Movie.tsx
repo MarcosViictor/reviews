@@ -11,5 +11,6 @@ export interface Movie {
     backdrop_path: string;
     first_air_date: string
     genre_ids: number[]
+    tmdb_id: number;
 
 }

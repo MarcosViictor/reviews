@@ -13,6 +13,7 @@ import Update from '../assets/img/update.svg'
 import Delete from '../assets/img/delete.svg'
 import PopUpDelete from "./PopUpDelete";
 import UpdateReview from "./UpdateReview";
+import ButtonAddComment from "./ButtonAddComment";
 
 const OverviewComment : React.FC = () => {
 
@@ -107,7 +108,7 @@ const OverviewComment : React.FC = () => {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-900">
+        <div className="flex items-center justify-center min-h-screen bg-gray-900 flex-col gap-5">
         <section className="bg-gray-800 rounded-lg shadow-lg p-6 max-w-2xl mx-auto flex flex-row gap-6 items-start w-[38rem]">
             {movie && (
                 <div className="flex-shrink-0 flex gap-5">
@@ -167,6 +168,8 @@ const OverviewComment : React.FC = () => {
                 modalButtonDelete={modalButtonDelete} 
                 deleteComment={deleteComment}
             />}
+
+            <ButtonAddComment />
     </div>
 
 
