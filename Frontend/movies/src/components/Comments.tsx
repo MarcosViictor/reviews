@@ -1,11 +1,16 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import GetContentContext from "../context/GetContent";
 import User from '../assets/img/person-icon.svg'
 import StarRating from '../components/Rating'
+import CommentTMDB from "./CommentTMDB";
 
 const Comments : React.FC = () => {
-
+    const [activeCommentId, setActiveCommentId] = useState<string | null>(null);
     const  context  = useContext(GetContentContext)
+
+    const modalButtonComment = (id: string | null) => {
+        setActiveCommentId(id);
+    };
 
 
     if (!context) {
@@ -22,7 +27,7 @@ const Comments : React.FC = () => {
                             {reviews.map((review) => (
                                 <div key={review.id} className="flex flex-col items-start bg-comments rounded-borderRadius p-2 cursor-pointer transition-all hover:bg-commentsHover">
                                     {review.author_details.avatar_path ? (
-                                        <div className="flex pb-2">
+                                        <div className="flex pb-2"  onClick={() => modalButtonComment(review.id)}>
                                             <img
                                                 src={`https://image.tmdb.org/t/p/w500${review.author_details.avatar_path}`}
                                                 className="rounded-full w-16 h-16 mx-4"
@@ -37,7 +42,7 @@ const Comments : React.FC = () => {
                                                 </div>
                                         </div>
                                         ) : (
-                                        <div className="flex pb-2">
+                                        <div className="flex pb-2"  onClick={() => modalButtonComment(review.id)}>
                                             <img
                                                 src={User}
                                                 alt="Default avatar"
@@ -59,13 +64,25 @@ const Comments : React.FC = () => {
                             
                             
                                     </li>
+                                    {activeCommentId === review.id && (
+                                        <CommentTMDB
+                                            username={review.author_details.username}
+                                            rating={review.author_details.rating}
+                                            created_at={review.created_at}
+                                            content={review.content}
+                                            modalButtonComment={() => modalButtonComment(null)}
+                                        />
+                                    )}
                                 </div>
+                                
                             ))}
                         </div> 
                         )
                         : (
                             <p className="text-center  text-white text-[1.5rem]">Não há avaliações disponíveis</p>
                         )}
+
+                   
         </section>
         </>
     )
