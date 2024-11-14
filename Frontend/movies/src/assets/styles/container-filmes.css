@@ -77,3 +77,44 @@ p.teste {
     line-height: 1.5;
     max-width: 45vw; /* Altere conforme necessário */
 }
+
+/* Esconde os detalhes do filme inicialmente */
+.movie-card .nome-filme {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: absolute; /* Para sobrepor a imagem */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.movie-card .figPoster {
+    position: relative;
+}
+
+.movie-card:hover .nome-filme {
+    opacity: 1; /* Torna visível ao passar o mouse */
+}
+
+.movie-card .imgPoster {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.movie-card {
+    position: relative;
+    margin: 10px;
+}
+
+.nome-filme span {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+}
+
+.estrela {
+    margin-top: 5px;
+}
