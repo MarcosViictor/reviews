@@ -12,6 +12,7 @@ import SearchPage from './Pages/SearchPage';
 import { SearchProvider } from './context/searchContext';
 import HistoryPage from './Pages/HistoryPage';
 import OverviewCommentPage from './Pages/OverviewComment';
+import Community from './Pages/Community';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
                     <Route path='/genre/:id/overview-movie/:id' element={<Overview />} />
                     <Route path='/history' element={<HistoryPage />} />
                     <Route path='/comments/:id' element={<OverviewCommentPage /> } />
+                    <Route path='/community' element={<Community />} />
                   </Routes>
                 </Router>
             

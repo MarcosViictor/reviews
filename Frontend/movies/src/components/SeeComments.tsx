@@ -102,15 +102,15 @@ const SeeComments : React.FC<PropsComments> = ({handleCommentChange, modalButton
                                     </div>
                                 
                                 </div>
-                                                        </div>
                             </div>
+                        </div>
                     }
-                    </div>
-                    
                 </div>
-                
+                    
             </div>
-        </>
+                
+        </div>
+    </>
     )
 }
 
