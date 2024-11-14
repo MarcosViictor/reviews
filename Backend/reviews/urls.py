@@ -1,3 +1,20 @@
+<<<<<<< HEAD
+from django.contrib import admin
+from django.urls import path, include
+from auth_app.views import ProtectedView, PostListCreateView
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include('auth_app.urls')),  # Inclui todas as rotas do seu app de autenticação com o prefixo `api/`
+    path('posts/', PostListCreateView.as_view(), name='post-list-create'),
+    #pagina temporaria para testar posts no banco
+    
+    path('page/', ProtectedView.as_view(), name='protected-page-view'),  
+    
+    # Rota direta sem prefixo
+    #utilizar ProtectedView.as_view() para proteger a pagina
+]
+=======
 """
 URL configuration for reviews project.
 
@@ -21,3 +38,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include('app.urls')),  # Incluindo as URLs do aplicativo
 ]
+>>>>>>> 24b81cc9e019c4d09f986c4a440ca693c3a61535
