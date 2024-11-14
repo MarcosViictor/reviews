@@ -4,7 +4,7 @@ import { api } from "../context/api";
 // import { useGetId } from "../context/IdContext";
 import { useEffect, useState } from "react";
 import { OverviewItem } from "./History";
-import StarRating from "./Rating";
+import StarRatingReview from "./RatingReview";
 import axios from "axios";
 import { Movie } from "../Types/Movie";
 import { useNavigate } from 'react-router-dom';
@@ -125,7 +125,7 @@ const OverviewComment : React.FC = () => {
                                 {new Date(commentOverview?.date_overview || 'Data não disponível').toLocaleDateString()}
                             </p>
                             <div className="flex items-center mb-3 text-white">
-                                <StarRating rating={commentOverview?.stars ?? 0} />
+                                <StarRatingReview rating={commentOverview?.stars ?? 0} />
                             </div>
                             <p className="text-gray-200 w-full max-w-sm break-words overflow-hidden">
                                 {commentOverview?.overview_text_movie}

@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import GetContentContext  from '../context/GetContent.tsx'
-const imgSerie = import.meta.env.VITE_IMG
 import { Link } from 'react-router-dom';
 import '../assets/styles/container-filmes.css'
 import { useGetId } from '../context/IdContext.tsx';

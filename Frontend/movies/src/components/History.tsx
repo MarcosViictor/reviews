@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../context/api";
 import axios from "axios";
-import StarRating from "./Rating";
+import StarRatingReview from "./RatingReview";
 import { Movie } from "../Types/Movie";
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -98,7 +98,7 @@ const History: React.FC = () => {
                                                     </p>
                                                     <p className="text-sm text-gray-400">{formattedDate}</p>
                                                     <div className="flex text-[1.3rem]">
-                                                        <StarRating rating={item.stars} />
+                                                        <StarRatingReview rating={item.stars} />
                                                     </div>
                                                 </div>
                                             </div>
