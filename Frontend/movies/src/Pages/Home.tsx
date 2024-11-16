@@ -2,6 +2,7 @@ import Recomendation from '../components/Recomendation.tsx';
 import MovieCard from '../components/MovieCard.tsx';
 import SeriesCard from '../components/SerieCard.tsx';
 import SideBar from '../components/SideBar.tsx';
+import Footer from '../components/Footer.tsx';
 // import TopRated from '../components/TopRated.tsx';
 // import Header from '../components/Header.tsx';
 
@@ -21,6 +22,7 @@ const Home = () => {
                     <SeriesCard />
                     {/* <TopRated /> */}
                 </main>
+                <Footer />
         </div>
         
     )
