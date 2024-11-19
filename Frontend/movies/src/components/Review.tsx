@@ -14,7 +14,9 @@ const Review: React.FC = () => {
     const [isLiked, setIsLiked] = useState<boolean>(false);
     const [feedbackMessage, setFeedbackMessage] = useState<string>('');
     const [showNotification, setShowNotification] = useState<boolean>(false); // Estado para controle da notificação
+    const tamanho: number = 255;
     const { id } = useParams<{ id: string }>();
+    const textoRestante = tamanho - reviewText.length;
 
     const postReview = async () => {
         try {
@@ -72,8 +74,10 @@ const Review: React.FC = () => {
                     onChange={handleReviewTextChange}
                     value={reviewText}
                     placeholder="Escreva sua avaliação:"
-                    className="w-full min-h-[150px] mt-3 bg-search outline-none p-4 rounded-borderRadius resize-none 2xl:h-[300px]"
+                    className="w-full min-h-[150px] mt-3 bg-search outline-none p-4 rounded-borderRadius resize-none 2xl:h-[300px] overflow-y-hidden"
+                    maxLength={tamanho}
                 />
+                <p className="text-end text-[0.8rem] text-[#c7c7c7]">{textoRestante} caracteres restantes</p>
                 <input
                     type="date"
                     onChange={handleDateChange}

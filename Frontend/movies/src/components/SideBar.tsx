@@ -6,6 +6,7 @@ import Historico from "../assets/img/historico.svg"
 import Profile from '../assets/img/person-icon.svg'
 import Search from '../assets/img/search.svg'
 import People from '../assets/img/people.svg'
+import Game from '../assets/img/game.svg'
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import styled from 'styled-components';
@@ -132,7 +133,13 @@ const SideBar: React.FC = () => {
                         </Span>
                     </li>
                     <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
-                        <img src={Profile} alt="SVG Perfil" />
+                        <img className="w-7 mr-[-4px]" src={Game} alt="SVG Comunidade" />
+                        <Span active={isActive} >
+                            <Link to="/framed">Framed</Link>
+                        </Span>
+                    </li>
+                    <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
+                        <img  src={Profile} alt="SVG Perfil" />
                         <Span active={isActive} >Perfil</Span>
                     </li>
                </Ul>
