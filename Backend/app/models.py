@@ -57,27 +57,20 @@ class Overview_serie (Base):
     overview_text_serie = models.TextField(max_length=500) # Avaliação em comentário na série
     date_overview = models.DateField () # data da avaliação (metadado)
     stars = models.DecimalField(max_digits=3, decimal_places=1, default=0.0) # estrelas da série dada pelo usuário
-
-    
-    
+   
     # Comentário da avaliação da série
 class Comment_overview_series (Base):
     id_overview_serie = models.ForeignKey (Overview_serie, on_delete=models.CASCADE) #id da avaliação da série
     text = models.TextField(max_length=200) # comentário na avaliação feito na série
     date_comment = models.DateField() # data do comentário feito na avaliação (metadado)
-
-    
-    
-    
+   
     # Avaliação do Filme
 class Overview_movie (Base):
     id_movie = models.ForeignKey(Movie, on_delete=models.CASCADE) # id da tabela movie
     overview_text_movie = models.TextField(max_length=500) # Avaliação em comentário no filme
     date_overview = models.DateField () # data da avaliação (metadado)
     stars = models.DecimalField(max_digits=3, decimal_places=1, default=0.0) # estrelas da série dada pelo usuário
-    
-    
-    
+   
     # Comentário da avaliação do filme
 class Comment_overview_movies (Base):
     id_overview_movie = models.ForeignKey (Overview_movie, on_delete=models.CASCADE) #id da avaliação do filme
