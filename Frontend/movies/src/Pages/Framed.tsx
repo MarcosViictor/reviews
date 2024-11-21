@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Movie } from "../Types/Movie";
 import styled from 'styled-components';
 import PopUpFramed from "../components/PopUpFramed";
+import Loading from "../components/Loading";
 
 const Input = styled.input < {active: string} >`
     border: 2px solid
@@ -48,21 +49,27 @@ const Framed : React.FC = () => {
     
       
     const getRandomMovies = async () => {
-        const response = await axios.get(
-            `https://api.themoviedb.org/3/movie/top_rated?language=pt-BR`,
-              {
-                  headers : {
-                     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTJhMzA0YzE2ZmRhN2QzNmMxMWEzM2JlNzNmNmY0OSIsIm5iZiI6MTcyODY3NzA4OC40NTc4NzUsInN1YiI6IjY2N2IyZjdiOWEyMzkxMjUxOWU0NjhhMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.88BdLmUfZA85VLGhusWnsTu7xrh0POaqFoX5P9QQUBQ'}
-              }
-            
-        );
 
-        const movies = response.data.results;
+        const totalPages = 5; // Defina o número de páginas a buscar
+        const allMovies = [];
+
+        for (let page = 1; page <= totalPages; page++) {
+          const response = await axios.get(
+              `https://api.themoviedb.org/3/movie/top_rated?language=pt-BR&page=${page}`,
+              {
+                  headers: {
+                      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTJhMzA0YzE2ZmRhN2QzNmMxMWEzM2JlNzNmNmY0OSIsIm5iZiI6MTcyODY3NzA4OC40NTc4NzUsInN1YiI6IjY2N2IyZjdiOWEyMzkxMjUxOWU0NjhhMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.88BdLmUfZA85VLGhusWnsTu7xrh0POaqFoX5P9QQUBQ',
+                  },
+              }
+          );
+          allMovies.push(...response.data.results);
+      }
+
         const randomMovies : Movie[] = [];
     
-        while (randomMovies.length < 10) {
-            const randomIndex = Math.floor(Math.random() * movies.length);
-            const movie = movies[randomIndex];
+        while (randomMovies.length < 15) {
+            const randomIndex = Math.floor(Math.random() * allMovies.length);
+            const movie = allMovies[randomIndex];
     
             // Garantir que não adiciona filmes repetidos
             if (!randomMovies.some((m) => m.id === movie.id)) {
@@ -72,7 +79,6 @@ const Framed : React.FC = () => {
     
         return randomMovies;
       
-        // Pegue os 10 filmes mais populares
     };
 
     useEffect(() => {
@@ -90,6 +96,12 @@ const Framed : React.FC = () => {
         getMovies();
         console.log(guess)
     }, []);
+
+    const nextMovie = () => {
+      setIndexImage(indexImage - 1);
+      setCurrentMovieIndex(currentMovieIndex + 1);
+
+    }
 
    
 
@@ -124,7 +136,7 @@ const Framed : React.FC = () => {
         setGuess("");
     };
 
-    if (!movies.length) return <p>Carregando...</p>;
+    if (!movies.length) return <Loading />;
 
     const currentMovie = movies[currentMovieIndex];
     const currentImage = currentMovie.images[currentImageIndex];
@@ -153,7 +165,14 @@ const Framed : React.FC = () => {
               placeholder="Adivinhe o filme..."
               className="w-full my-5 p-2 outline-none rounded-borderRadius bg-search text-white"
             />
-            <button onClick={handleGuess} className="bg-[#5b5d719f] py-2 px-4 rounded-borderRadius transition-all text-white hover:bg-[#5b5d714b]">Enviar</button>
+            <div className="flex gap-4">
+              <button onClick={handleGuess} className="bg-[#5b5d719f] py-2 px-4 rounded-borderRadius transition-all text-white hover:bg-[#5b5d714b]">
+                Enviar
+              </button>
+              <button onClick={nextMovie} className="bg-[#5b5d719f] py-2 px-4 rounded-borderRadius transition-all text-white hover:bg-[#5b5d714b]">
+                Pular
+              </button>
+            </div>
           
               
               </div>
