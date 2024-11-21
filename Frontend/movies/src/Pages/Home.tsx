@@ -16,7 +16,7 @@ const Home = () => {
             {/* <Header /> */}
             <Recomendation />
             
-                <main className='m-Body flex flex-col gap-4 mt-5'>
+                <main className='m-Body flex flex-col gap-4 mt-5 phone:mr-2 phone:mt-2'>
                     
                     <MovieCard />
                     <SeriesCard />

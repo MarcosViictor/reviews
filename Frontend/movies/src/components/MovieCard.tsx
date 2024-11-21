@@ -23,7 +23,7 @@ const MovieCard: React.FC = () => {
 
     return (
         <section>
-            <h2 className='text-[1.5rem] text-start mb-4 font-[700] text-white uppercase'>Filmes Populares da semana</h2>
+            <h2 className='text-[1.5rem] text-start mb-4 font-[700] text-white uppercase phone:text-[1.3rem]'>Filmes Populares da semana</h2>
 
             {movies.length > 0 ? (
                 <ul className='container-filmes'>

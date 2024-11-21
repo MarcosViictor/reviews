@@ -29,7 +29,7 @@ const SeriesCard = () => {
      
     return (
         <section>
-          <h2 className='text-[1.5rem] text-start mb-4 font-[700] text-white uppercase'>Filmes melhores avaliados</h2>
+          <h2 className='text-[1.5rem] text-start mb-4 font-[700] text-white uppercase phone:text-[1.3rem]'>Filmes melhores avaliados</h2>
           {rated.length > 0 ? (
             
           <ul className='container-filmes flex-row-reverse'>
