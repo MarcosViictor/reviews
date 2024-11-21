@@ -5,29 +5,33 @@ import { useEffect, useState } from "react";
 import Loading from "./Loading";
 import StarRating from "./Rating";
 import { LuDices } from "react-icons/lu";
+import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
+import { Link } from "react-router-dom";
+
 
 const SugestionRandom : React.FC = () => {
 
     const [movie, setMovie] = useState<Movie | null>(null)
+    const [id, setId] = useState<number| null >(null)
+
+    const getRandomMovies = async () => {
+        try{
+            const response = await api.get(`/discovery/movie`);
+            const movies = response.data.results;
+
+            const randomIndex = Math.floor(Math.random() * movies.length);
+            const selectedMovieId = movies[randomIndex].id; 
+
+            await searchMovieById(selectedMovieId)
+            setId(selectedMovieId)
+        } catch (err) {
+            console.error('Erro ao escolher filme aleatório: '+ err)
+        }
+       
+    }
+
 
     useEffect(() => {
-        const getRandomMovies = async () => {
-            try{
-                const response = await api.get(`/discovery/movie`);
-                const movies = response.data.results;
-
-                const randomIndex = Math.floor(Math.random() * movies.length);
-                const selectedMovieId = movies[randomIndex].id; 
-
-                console.log(selectedMovieId)
-                
-                await searchMovieById(selectedMovieId)
-            } catch (err) {
-                console.error('Erro ao escolher filme aleatório: '+ err)
-            }
-           
-        }
-
          getRandomMovies()
     }, [])
 
@@ -40,7 +44,6 @@ const SugestionRandom : React.FC = () => {
                       }
                 }
             )
-            console.log(res)
             setMovie(res.data)
         } catch (err) {
             console.error("Erro ao encontrar o filme" + err)
@@ -60,13 +63,16 @@ const SugestionRandom : React.FC = () => {
                         <h1 className="">RANDOM MOVIE</h1>
                  </span>
                     <div className="flex gap-4">
-                        <figure className="flex justify-center">
-                            <img
-                                className="w-[300px] rounded-borderRadius flex justify-center"
-                                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                                alt={movie.title}
-                            />
-                        </figure>
+                        <Link to={`/overview-movie/${id}`}>
+                            <figure className="flex justify-center">
+                                <img
+                                    className=" shadow-container w-[300px] rounded-borderRadius flex justify-center transition-all hover:w-[305px]"
+                                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                                    alt={movie.title}
+                                />
+                            </figure>
+                        </Link>
+                        
                         <div className="">
                             <h1 className="pt-3 text-[1.4rem]">{movie.title}</h1>
                             <span className="flex text-[1.3rem]">
@@ -74,7 +80,9 @@ const SugestionRandom : React.FC = () => {
                             </span>
                             <p className=" max-w-sm break-words overflow-ellipsis  pt-3">{movie.overview}</p>
                             <span className="justify-center flex pt-3">
-                                <button className="bg-slate-600 p-2 rounded-borderRadius">random spotify</button>
+                                <button onClick={getRandomMovies} className="bg-slate-600 px-5 py-2 text-[2rem] rounded-borderRadius transition-all hover:bg-slate-700">
+                                <GiPerspectiveDiceSixFacesRandom />
+                                </button>
                             </span>
                         </div>
                     
