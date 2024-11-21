@@ -30,6 +30,8 @@ const SugestionRandom : React.FC = () => {
        
     }
 
+    
+
 
     useEffect(() => {
          getRandomMovies()

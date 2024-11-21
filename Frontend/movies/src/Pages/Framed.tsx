@@ -50,7 +50,7 @@ const Framed : React.FC = () => {
       
     const getRandomMovies = async () => {
 
-        const totalPages = 5; // Defina o número de páginas a buscar
+        const totalPages = 50; // Defina o número de páginas a buscar
         const allMovies = [];
 
         for (let page = 1; page <= totalPages; page++) {
@@ -67,7 +67,7 @@ const Framed : React.FC = () => {
 
         const randomMovies : Movie[] = [];
     
-        while (randomMovies.length < 15) {
+        while (randomMovies.length < 60) {
             const randomIndex = Math.floor(Math.random() * allMovies.length);
             const movie = allMovies[randomIndex];
     
@@ -100,7 +100,9 @@ const Framed : React.FC = () => {
     const nextMovie = () => {
       setIndexImage(indexImage - 1);
       setCurrentMovieIndex(currentMovieIndex + 1);
-
+      if (indexImage === 0){
+        setIsEnd(true)
+      }
     }
 
    
@@ -111,7 +113,7 @@ const Framed : React.FC = () => {
       if (guess.toLowerCase() === movies[currentMovieIndex].title.toLowerCase()) {
         setIsCorrect('green'); // Define a cor para verde se acertar
         setPoints((prevPoints) => prevPoints + indexImage); // Adiciona os pontos atuais ao total
-
+        setIndexImage(5);
         // Reinicia os estados para o próximo filme sem alterar as chances restantes
         setCurrentMovieIndex(currentMovieIndex + 1);
         setCurrentImageIndex(0);
@@ -139,6 +141,10 @@ const Framed : React.FC = () => {
     if (!movies.length) return <Loading />;
 
     const currentMovie = movies[currentMovieIndex];
+  if (!currentMovie || !currentMovie.images) {
+      console.error("a lista de filmes chegou ao final");
+      return null;
+  }
     const currentImage = currentMovie.images[currentImageIndex];
       
 
