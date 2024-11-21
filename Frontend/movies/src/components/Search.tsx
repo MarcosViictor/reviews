@@ -40,9 +40,9 @@ const Search : React.FC = () => {
 
     return(
         <>
-            <form className="flex items-center justify-center mx-8 mb-10 mt-8 gap-3 bg-search p-[0.7rem] rounded-full">
+            <form className="flex items-center justify-center mx-8 mb-10 mt-8 gap-3 bg-search p-[0.7rem] rounded-full phone:mr-4">
                     <img className="w-5" src={SearchIcon} alt="Search SVG" />
-                    <input className="w-[20rem] bg-transparent outline-none text-white" 
+                    <input className="w-[20rem] bg-transparent outline-none text-white phone:w-[14rem]" 
                         type="text" 
                         placeholder="pesquisar" 
                         onChange={searchChange}

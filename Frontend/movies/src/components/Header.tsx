@@ -3,10 +3,8 @@ import Search from "./Search";
 const Header : React.FC = () => {
     return (
         <>
-            <div className="flex justify-between items-center mx-[6rem]" >
-                <h3>Favoritos</h3>
+            <div className="flex justify-center items-center mx-[6rem]" >
                 <Search />
-                <span>Imagem</span>
             </div>
         </>
     )
