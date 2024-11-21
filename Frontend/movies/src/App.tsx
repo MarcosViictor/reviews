@@ -14,6 +14,7 @@ import HistoryPage from './Pages/HistoryPage';
 import OverviewCommentPage from './Pages/OverviewComment';
 import Framed from './Pages/Framed';
 import Community from './Pages/Community';
+import Sugestion from './Pages/Sugestion';
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
                     <Route path='/comments/:id' element={<OverviewCommentPage /> } />
                     <Route path='/community' element={<Community />} />
                     <Route path='/framed' element={<Framed />} />
+                    <Route path='/sugestion' element={<Sugestion />} />
                   </Routes>
                 </Router>
             
