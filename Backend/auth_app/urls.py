@@ -1,6 +1,6 @@
 # auth_app/urls.py
 from django.urls import path
-from .views import UserCreateView, CustomTokenObtainPairView, UserStatusView, TestAuthView, PostListCreateView, PostListCreateView, ProtectedView
+from .views import UserCreateView, CustomTokenObtainPairView, UserStatusView, TestAuthView,ProtectedView
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [

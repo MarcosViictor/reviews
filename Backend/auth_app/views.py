@@ -1,20 +1,20 @@
 from rest_framework import generics, status
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth import get_user_model
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from .serializers import UserSerializer, PostSerializer
-from .models import Post
+from .serializers import UserSerializer
 
 User = get_user_model()
 
+# Registro de usuários
 class UserCreateView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
-    
+
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
@@ -25,31 +25,21 @@ class UserCreateView(generics.CreateAPIView):
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+# Customização do JWT Token
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
+        # Adicione informações extras ao token, se necessário
         token['username'] = user.username
         token['email'] = user.email
         return token
 
+# Login usando JWT
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            return Response({
-                'access': serializer.validated_data.get('access'),
-                'refresh': serializer.validated_data.get('refresh'),
-                'user': {
-                    'username': serializer.user.username,
-                    'email': serializer.user.email,
-                }
-            }, status=status.HTTP_200_OK)
-        
-        return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
-
+# Verificar status do usuário autenticado
 class UserStatusView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -57,42 +47,30 @@ class UserStatusView(APIView):
         user = request.user
         return Response({
             'detail': 'Usuário autenticado',
+            'id': user.id,
             'username': user.username,
             'email': user.email,
-            'first_name': user.first_name,
-            'last_name': user.last_name,
-            'token_valid': True,
         })
 
+# Testar autenticação
 class TestAuthView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
         return Response({
-            'detail': 'Autenticação bem-sucedida!',
+            'detail': 'Você está autenticado!',
             'username': request.user.username,
         })
-
-class PostListCreateView(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticated]
-    serializer_class = PostSerializer
-
-    def get_queryset(self):
-        # Exibe apenas os posts do usuário autenticado
-        return Post.objects.filter(owner=self.request.user)
-
-    def perform_create(self, serializer):
-        # Salva o post associando ao usuário autenticado
-        serializer.save(owner=self.request.user)
 
 class ProtectedView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        return Response({"message": "Você está autenticado e pode acessar esta página!"})
-
-    def handle_exception(self, exc):
-        if isinstance(exc, AuthenticationFailed):
-            login_url = request.build_absolute_uri(reverse('login'))  # Altere 'login' para o nome correto
-            return Response({"detail": "Não autenticado.", "login_url": login_url}, status=status.HTTP_401_UNAUTHORIZED)
-        return super().handle_exception(exc)
+        return Response({
+            "message": "Bem-vindo à página protegida. Você está autenticado.",
+            "user": {
+                "id": request.user.id,
+                "username": request.user.username,
+                "email": request.user.email
+            }
+        })
