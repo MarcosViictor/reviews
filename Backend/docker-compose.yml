@@ -1,7 +1,8 @@
+
 services:
   web1:
     build:
-      context: .  # Diretório onde está o Dockerfile
+      context: .
     container_name: django_app_1
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
@@ -9,7 +10,7 @@ services:
     env_file:
       - .env
     depends_on:
-      - db
+      - db_primary
     networks:
       - app-network
 
@@ -23,21 +24,41 @@ services:
     env_file:
       - .env
     depends_on:
-      - db
+      - db_primary
     networks:
       - app-network
 
-  db:
+  db_primary:
     image: postgres:13
-    container_name: postgres_db
+    container_name: postgres_primary
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_primary_data:/var/lib/postgresql/data
+      - ./primary:/docker-entrypoint-initdb.d
     networks:
       - app-network
+
+  db_replica:
+    image: postgres:13
+    container_name: postgres_replica
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - postgres_replica_data:/var/lib/postgresql/data
+      - ./replica:/docker-entrypoint-initdb.d
+    networks:
+      - app-network
+    depends_on:
+      - db_primary
+    user: postgres
+    command: ["bash", "/docker-entrypoint-initdb.d/init_replica.sh"]
 
   nginx:
     image: nginx:latest
@@ -45,7 +66,7 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - "80:80"  # Porta exposta para acesso externo
+      - "80:80"
     depends_on:
       - web1
       - web2
@@ -53,7 +74,8 @@ services:
       - app-network
 
 volumes:
-  postgres_data:
+  postgres_primary_data:
+  postgres_replica_data:
 
 networks:
   app-network:
