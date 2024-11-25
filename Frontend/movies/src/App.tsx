@@ -15,6 +15,8 @@ import OverviewCommentPage from './Pages/OverviewComment';
 import Framed from './Pages/Framed';
 import Community from './Pages/Community';
 import Sugestion from './Pages/Sugestion';
+import Cadastro from './Pages/Cadastro';
+import Login from './Pages/Login';
 
 function App() {
 
@@ -39,6 +41,8 @@ function App() {
                     <Route path='/community' element={<Community />} />
                     <Route path='/framed' element={<Framed />} />
                     <Route path='/sugestion' element={<Sugestion />} />
+                    <Route path='/cadastro' element={<Cadastro />} />
+                    <Route path='/login' element={<Login />} />
                   </Routes>
                 </Router>
             
