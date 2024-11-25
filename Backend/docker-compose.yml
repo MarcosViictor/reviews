@@ -9,7 +9,7 @@ services:
     env_file:
       - .env
     depends_on:
-      - db
+      - postgresql-master
     networks:
       - app-network
 
@@ -23,19 +23,45 @@ services:
     env_file:
       - .env
     depends_on:
-      - db
+      - postgresql-master
     networks:
       - app-network
 
-  db:
-    image: postgres:13
-    container_name: postgres_db
-    environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
+  postgresql-master:
+    image: docker.io/bitnami/postgresql:17
+    container_name: postgres_master
+    ports:
+      - '5432:5432'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - 'postgresql_master_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_REPLICATION_MODE=master
+      - POSTGRESQL_REPLICATION_USER=repl_user
+      - POSTGRESQL_REPLICATION_PASSWORD=repl_password
+      - POSTGRESQL_USERNAME=${DB_USER}
+      - POSTGRESQL_PASSWORD=${DB_PASSWORD}
+      - POSTGRESQL_DATABASE=${DB_NAME}
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - app-network
+
+  postgresql-slave:
+    image: docker.io/bitnami/postgresql:17
+    container_name: postgres_slave
+    ports:
+      - '5433:5432'
+    depends_on:
+      - postgresql-master
+    volumes:
+      - 'postgresql_slave_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_REPLICATION_MODE=slave
+      - POSTGRESQL_REPLICATION_USER=repl_user
+      - POSTGRESQL_REPLICATION_PASSWORD=repl_password
+      - POSTGRESQL_MASTER_HOST=postgres_master
+      - POSTGRESQL_MASTER_PORT_NUMBER=5432
+      - POSTGRESQL_PASSWORD=${DB_PASSWORD}
+      - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - app-network
 
@@ -54,6 +80,10 @@ services:
 
 volumes:
   postgres_data:
+  postgresql_master_data:
+    driver: local
+  postgresql_slave_data:
+    driver: local
 
 networks:
   app-network:
