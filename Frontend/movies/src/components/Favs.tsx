@@ -49,7 +49,7 @@ const Favs : React.FC = () => {
 
             <div >
             {movieDetails.length > 0 ? (
-                        <ul className='container-filmes flex flex-wrap justify-center px-[10rem]'>
+                        <ul className='container-filmes container-filmes-search flex flex-wrap justify-center px-[10rem]'>
                             {movieDetails.map((movie) => (
                                 <Link to={`/overview-movie/${movie.id}`} key={movie.id}>
                                     <li>

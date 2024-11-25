@@ -45,14 +45,14 @@ const genres = [
 
 
     return(
-        <section className='m-Body flex flex-col gap-4'>
+        <section className='m-Body flex flex-col gap-4 phone:mr-[1rem]'>
             <div className='m-auto '>
-                <ul className='grid grid-cols-4 gap-x-16 gap-y-8'>
+                <ul className='grid grid-cols-4 gap-x-16 gap-y-8 phone:grid-cols-2 phone:gap-2'>
                    {genres.map((genres, index) => (
 
                             <li key={index} className='relative cursor-pointer ' onClick={() => getGenreId(genres.id)}>
                                 <img src={genres.img} alt="" />
-                                <span className='absolute inset-0 flex justify-center items-center text-[1.5rem] font-[200] text-white'>{genres.name}</span>
+                                <span className='absolute inset-0 flex justify-center items-center text-[1.5rem] font-[200] text-white phone:text-[1.3rem]'>{genres.name}</span>
                             </li>
 
                     ))}
