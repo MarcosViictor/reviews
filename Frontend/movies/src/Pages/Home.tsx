@@ -2,7 +2,7 @@ import Recomendation from '../components/Recomendation.tsx';
 import MovieCard from '../components/MovieCard.tsx';
 import SeriesCard from '../components/SerieCard.tsx';
 import SideBar from '../components/SideBar.tsx';
-import Genres from '../components/Genres.tsx';
+import Footer from '../components/Footer.tsx';
 // import TopRated from '../components/TopRated.tsx';
 // import Header from '../components/Header.tsx';
 
@@ -16,13 +16,13 @@ const Home = () => {
             {/* <Header /> */}
             <Recomendation />
             
-                <main className='m-Body flex flex-col gap-4 mt-5'>
+                <main className='m-Body flex flex-col gap-4 mt-5 phone:mr-2 phone:mt-2'>
                     
                     <MovieCard />
                     <SeriesCard />
                     {/* <TopRated /> */}
-                    <Genres />
                 </main>
+                <Footer />
         </div>
         
     )

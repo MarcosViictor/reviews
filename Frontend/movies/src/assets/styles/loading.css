@@ -37,3 +37,17 @@
     stroke-dashoffset: -125px;
   }
 }
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%); /* Começa fora da tela à direita */
+  }
+  100% {
+    transform: translateX(0); /* Move para a posição normal */
+  }
+}
+
+.animate-slideIn {
+  animation: slideIn 0.3s ease-out forwards; 
+}
+

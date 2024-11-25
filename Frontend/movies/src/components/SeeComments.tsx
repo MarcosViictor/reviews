@@ -50,7 +50,7 @@ const SeeComments : React.FC<PropsComments> = ({handleCommentChange, modalButton
             
 
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-                    <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-[40rem]  max-h-[70%]">
+                    <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-[40rem]  max-h-[70%] phone:w-[15rem] phone:ml-5">
                         <h2 className="text-lg font-semibold mb-4 text-center">Comentários</h2>
                         <div className="scroll-container rounded-borderRadius flex flex-col gap-3 overflow-y-auto max-h-[400px] mb-4 //md:max-h-[300px]">
                             {comments.length > 0 ? (
@@ -78,7 +78,7 @@ const SeeComments : React.FC<PropsComments> = ({handleCommentChange, modalButton
                             </div>
                     {modalComment === true &&
                         <div className="fixed inset-0 flex items-center justify-center flex-col bg-black bg-opacity-50 backdrop-blur-sm">
-                            <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-[30rem]">
+                            <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-[30rem] phone:w-[20rem] phone:ml-14">
                                 <h2 className="text-lg font-semibold mb-4 text-center">Fazer comentário</h2>
                                 <div>
                                     <textarea onChange={handleCommentChange} value={comment} className="w-full h-[12rem] rounded-borderRadius p-3 bg-gray-900 text-white outline-none"></textarea>
@@ -102,15 +102,15 @@ const SeeComments : React.FC<PropsComments> = ({handleCommentChange, modalButton
                                     </div>
                                 
                                 </div>
-                                                        </div>
                             </div>
+                        </div>
                     }
-                    </div>
-                    
                 </div>
-                
+                    
             </div>
-        </>
+                
+        </div>
+    </>
     )
 }
 

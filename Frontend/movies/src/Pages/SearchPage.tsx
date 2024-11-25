@@ -3,6 +3,7 @@ import SideBar from "../components/SideBar";
 import Genres from "../components/Genres";
 import SearchResults from "../components/SearchResults";
 import { useSearch } from "../context/searchContext";
+import Footer from "../components/Footer";
 
 const SearchPage : React.FC = () => {
 
@@ -16,6 +17,7 @@ const SearchPage : React.FC = () => {
             <div className="flex flex-col gap-4">
                 {searchResult && searchResult.length > 0 ? <SearchResults /> : <Genres />}
             </div>
+            <Footer />
         </>
     )
 }

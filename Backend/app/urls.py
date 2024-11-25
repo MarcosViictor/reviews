@@ -1,10 +1,6 @@
-
 from django.urls import path
-
 from .views.favorites.MovieFavorite.movie_favorite import FavoriteMovieDetailView, FavoriteMovieListView, FavoriteMovieView
-
 from .views.List.movie.add_list import WatchListCreateView, WatchListDetailView
-
 from .views.list_filmes_e_series.list_movies import ListMoviesView
 from .views.list_filmes_e_series.list_series import ListSeriesViews
 from .views.list_filmes_e_series.list_series_popular import ListSeriesPopularViews

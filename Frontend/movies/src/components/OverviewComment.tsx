@@ -4,7 +4,7 @@ import { api } from "../context/api";
 // import { useGetId } from "../context/IdContext";
 import { useEffect, useState } from "react";
 import { OverviewItem } from "./History";
-import StarRating from "./Rating";
+import StarRatingReview from "./RatingReview";
 import axios from "axios";
 import { Movie } from "../Types/Movie";
 import { useNavigate } from 'react-router-dom';
@@ -109,25 +109,25 @@ const OverviewComment : React.FC = () => {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-900 flex-col gap-5">
-        <section className="bg-gray-800 rounded-lg shadow-lg p-6 max-w-2xl mx-auto flex flex-row gap-6 items-start w-[38rem]">
+        <section className="bg-gray-800 rounded-lg shadow-lg p-6 max-w-2xl mx-auto flex flex-row gap-6 items-start w-[38rem] phone:w-full phone:max-w-[18rem] phone:ml-[6rem] phone:max-h-[55rem]">
             {movie && (
-                <div className="flex-shrink-0 flex gap-5">
+                <div className="flex-shrink-0 flex gap-5 ">
                     <img
-                        className="w-36 h-52 rounded-lg shadow-md object-cover"
+                        className="w-36 h-52 rounded-lg shadow-md object-cover phone:w-20 phone:h-28"
                         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                         alt={movie.title}
                     />
 
-                    <div className="flex flex-col relative w-[25.1rem]">
+                    <div className="flex flex-col relative w-[25.1rem] phone:w-full">
                         <h3 className="text-2xl font-bold text-white mb-1">{movie.title}</h3>
                         <div className="mb-4">
                             <p className="text-sm text-gray-400">
                                 {new Date(commentOverview?.date_overview || 'Data não disponível').toLocaleDateString()}
                             </p>
                             <div className="flex items-center mb-3 text-white">
-                                <StarRating rating={commentOverview?.stars ?? 0} />
+                                <StarRatingReview rating={commentOverview?.stars ?? 0} />
                             </div>
-                            <p className="text-gray-200 w-full max-w-sm break-words overflow-hidden">
+                            <p className="text-gray-200 w-full max-w-sm break-words overflow-hidden phone:w-36 phone:pb-[1.5rem]">
                                 {commentOverview?.overview_text_movie}
                             </p>
                         </div>

@@ -12,5 +12,5 @@ export interface Movie {
     first_air_date: string
     genre_ids: number[]
     tmdb_id: number;
-
+    images: { file_path: string }[];
 }

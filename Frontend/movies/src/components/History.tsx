@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { api } from "../context/api";
 import axios from "axios";
-import StarRating from "./Rating";
+import StarRatingReview from "./RatingReview";
 import { Movie } from "../Types/Movie";
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useGetId } from "../context/IdContext";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export interface OverviewItem {
     tmdb_id: number;
@@ -21,25 +22,31 @@ const History: React.FC = () => {
     const [movieDetails, setMovieDetails] = useState<Movie[]>([]);
     const imgFilme = import.meta.env.VITE_IMG;
     const { setIdComment } = useGetId();
+    const token = Cookies.get('token');
 
+    // Ordena a lista de avaliações por data (mais recente primeiro)
+    const sortedOverview = [...overview].sort((a, b) => new Date(b.date_overview).getTime() - new Date(a.date_overview).getTime());
 
-
-    const reviewsByDate = overview.reduce<{ [date: string]: OverviewItem[] }>((acc, item) => {
-        const dateKey = format(new Date(item.date_overview), 'MMMM yyyy', {locale: ptBR}); 
+    const reviewsByDate = sortedOverview.reduce<{ [date: string]: OverviewItem[] }>((acc, item) => {
+        const dateKey = format(new Date(item.date_overview), 'MMMM yyyy', { locale: ptBR });
         if (!acc[dateKey]) acc[dateKey] = [];
         acc[dateKey].push(item);
         return acc;
     }, {});
 
-    const getIdComment = (id : number) => {
-        setIdComment(id)
-        console.log(id)
-    }
+    const getIdComment = (id: number) => {
+        setIdComment(id);
+        console.log(id);
+    };
 
     useEffect(() => {
         const GetOverview = async () => {
             try {
-                const res = await api.get('movies/overviews/');
+                const res = await api.get('movies/overviews/', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                });
                 setOverview(res.data); // Set overview data
                 console.log(res.data);
 
@@ -63,46 +70,52 @@ const History: React.FC = () => {
     }, []);
 
     return (
-        <div className="flex flex-col mx-52">
-            {Object.entries(reviewsByDate).map(([monthYear, reviews]) => (
-                <div key={monthYear} className="date-group">
-                    <h3 className="text-xl font-bold text-white ml-[8rem] mt-6 border-l-4 w-[13rem] text-start p-2">{monthYear.toLocaleUpperCase()}</h3>
+        <div className="flex flex-col mx-52 phone:mx-0">
+            {overview.length === 0 ? (
+                <div className="flex justify-center items-center h-full mt-[21%]">
+                    <p className="text-white text-xl font-semibold">Você ainda não fez uma avaliação :(</p>
+                </div>
+            ) : (
+                Object.entries(reviewsByDate).map(([monthYear, reviews]) => (
+                    <div key={monthYear} className="date-group">
+                        <h3 className="text-xl font-bold text-white ml-[8rem] mt-6 border-l-4 w-[13rem] text-start p-2 phone:ml-20 phone:mt-1">
+                            {monthYear.toLocaleUpperCase()}
+                        </h3>
 
-                    {reviews.map((item, index) => {
-                        const movie = movieDetails.find((movie) => movie.id === item.tmdb_id);
-                        const formattedDate = format(new Date(item.date_overview), 'dd/MM/yyyy', { locale: ptBR }); 
-                        
+                        {reviews.map((item, index) => {
+                            const movie = movieDetails.find((movie) => movie.id === item.tmdb_id);
+                            const formattedDate = format(new Date(item.date_overview), 'dd/MM/yyyy', { locale: ptBR });
 
-                        return (
-                            <Link to={`/comments/${item.id}`} onClick={() => getIdComment(item.id)} key={index}>
-                
-                                <div className="text-white gap-8 border-b flex flex-col ml-[8rem] mr-[4.5rem]">
-                                    {movie && (
-                                        <div className="flex items-start gap-5 cursor-pointer transition-all p-5 hover:bg-comments">
-                                            <div>
-                                                <img
-                                                    className="w-20 rounded-borderRadius"
-                                                    src={imgFilme + movie.poster_path || '/path/to/placeholder.jpg'}
-                                                    alt={movie.title || 'Imagem indisponível'}
-                                                />
-                                            </div>
-                                            <div className="flex flex-col items-start">
-                                                <p className="text-[1.3rem] font-semibold">
-                                                    {movie.title || 'Título não disponível'}
-                                                </p>
-                                                <p className="text-sm text-gray-400">{formattedDate}</p> {/* Data completa */}
-                                                <div className="flex text-[1.3rem]">
-                                                    <StarRating rating={item.stars} />
+                            return (
+                                <Link to={`/comments/${item.id}`} onClick={() => getIdComment(item.id)} key={index}>
+                                    <div className="text-white gap-8 border-b flex flex-col ml-[8rem] mr-[4.5rem] phone:ml-[5rem] phone:mr-5">
+                                        {movie && (
+                                            <div className="flex items-start gap-5 cursor-pointer transition-all p-5 hover:bg-comments">
+                                                <div>
+                                                    <img
+                                                        className="w-20 rounded-borderRadius"
+                                                        src={imgFilme + movie.poster_path || '/path/to/placeholder.jpg'}
+                                                        alt={movie.title || 'Imagem indisponível'}
+                                                    />
+                                                </div>
+                                                <div className="flex flex-col items-start">
+                                                    <p className="text-[1.3rem] font-semibold">
+                                                        {movie.title || 'Título não disponível'}
+                                                    </p>
+                                                    <p className="text-sm text-gray-400">{formattedDate}</p>
+                                                    <div className="flex text-[1.3rem]">
+                                                        <StarRatingReview rating={item.stars} />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    )}
-                                </div>
-                            </Link>
-                        );
-                    })}
-                </div>
-            ))}
+                                        )}
+                                    </div>
+                                </Link>
+                            );
+                        })}
+                    </div>
+                ))
+            )}
         </div>
     );
 };

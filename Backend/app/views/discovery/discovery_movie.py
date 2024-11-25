@@ -11,7 +11,7 @@ class DiscoveryMovieView(APIView):
 
     def get(self, request, *args, **kwargs):
 
-        url = 'https://api.themoviedb.org/3/movie/top_rated'
+        url = 'https://api.themoviedb.org/3/movie/top_rated?language=pt-BR'
 
         headers = {
             "accept": "application/json",
