@@ -27,7 +27,6 @@ export const GetContentProvider = ({ children }: { children: ReactNode }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [series, setSeries] = useState<Movie[]>([]);
   const [recomendation, setRecomendation] = useState<Movie[]>([]);
-  const [favorites, setFavorites] = useState<Movie[]>([]);
   const [rated, setTopRated] = useState<Movie[]>([]);
   const [genreMovies, setGenreMovies] = useState<Movie[]>([]);
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -55,7 +54,6 @@ export const GetContentProvider = ({ children }: { children: ReactNode }) => {
                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTJhMzA0YzE2ZmRhN2QzNmMxMWEzM2JlNzNmNmY0OSIsIm5iZiI6MTcyODY3NzA4OC40NTc4NzUsInN1YiI6IjY2N2IyZjdiOWEyMzkxMjUxOWU0NjhhMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.88BdLmUfZA85VLGhusWnsTu7xrh0POaqFoX5P9QQUBQ'}
               });
             setReviews(response.data.results);
-            console.log(response.data.results)
           } catch (err) {
             console.error(err)
           }

@@ -17,7 +17,7 @@ const UpdateReview: React.FC<UpdateReviewProps> = ({updateComment, handleRating,
     return (
         
             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-                <section  className="mr-8 w-[25rem] bg-search  rounded-borderRadius px-6 text-white flex flex-col pt-6 ">
+                <section  className="mr-8 w-[25rem] bg-search  rounded-borderRadius px-6 text-white flex flex-col pt-6 phone:w-[20rem] phone:ml-24">
                 <div className="flex justify-center items-start ">
                     {[1, 2, 3, 4, 5].map((star) => (
                             <button key={star} className=" " onClick={() => handleRating(star)}>

@@ -66,6 +66,10 @@ export default {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
       },
+      screens: {
+        'phone': { max: '430px' }, 
+        'computer': {min: '1920px'}
+      },
     },
   },
   plugins: [],

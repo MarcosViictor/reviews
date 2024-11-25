@@ -17,21 +17,21 @@ const Recomendation = () => {
     return (
         <section className='p-2 ml-16'> 
         {/* diminuir aqui o height*/}
-        <figure className='grid grid-flow-col w-[screen] pb-2 overflow-x-scroll gap-[2rem] rounded-br-borderRadius'>
+        <figure className='grid grid-flow-col w-[screen] pb-2 overflow-x-scroll gap-[2rem]  rounded-br-borderRadius phone:h-[32vh] phone:overflow-y-hidden'>
            {recomendation.map(recomendation => (
                     
-                    <div key={recomendation.id} className='relative w-[50vw] gap-4'>
+                    <div key={recomendation.id} className='relative w-[50vw] gap-4 phone:h-[40vh] phone:w-[90vw]'>
                         <img
-                            className='w-[50vw]  rounded-borderRadius object-cover filter blur-[3px]'
+                            className='w-[50vw]  rounded-borderRadius object-cover filter blur-[3px] phone:h-[30vh] phone:w-screen phone:blur-0'
                             src={imgFilme + recomendation.backdrop_path}
                             alt={recomendation.title}
                         />
-                        <div className='absolute inset-0 flex flex-row-reverse justify-end items-center p-10 text-white gap-4'>
+                        <div className='absolute inset-0 flex flex-row-reverse justify-end items-center p-10 text-white gap-4 '>
                             <span>
-                                <h3 className='text-[2rem] pb-1 font-bold'>{recomendation.title}</h3>
-                                <button className='border-2 p-1 rounded-[7px] ease-in-out duration-300 hover:bg-gray-500 '>Saiba mais</button>
+                                <h3 className='text-[2rem]  pb-1 font-bold phone:hidden'>{recomendation.title}</h3>
+                                <button className='border-2 p-1 rounded-[7px] ease-in-out duration-300 hover:bg-gray-500  phone:hidden'>Saiba mais</button>
                             </span>
-                            <img className='w-[15rem] rounded-borderRadius ' src={imgFilme + recomendation.poster_path} alt="" />
+                            <img className='w-[15rem] rounded-borderRadius phone:hidden' src={imgFilme + recomendation.poster_path} alt="" />
                             
                         </div>
                     </div>
