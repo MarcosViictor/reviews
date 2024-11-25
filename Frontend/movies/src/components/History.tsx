@@ -64,7 +64,7 @@ const History: React.FC = () => {
     }, []);
 
     return (
-        <div className="flex flex-col mx-52">
+        <div className="flex flex-col mx-52 phone:mx-0">
             {overview.length === 0 ? (
                 <div className="flex justify-center items-center h-full mt-[21%]">
                     <p className="text-white text-xl font-semibold">Você ainda não fez uma avaliação :(</p>
@@ -72,7 +72,7 @@ const History: React.FC = () => {
             ) : (
                 Object.entries(reviewsByDate).map(([monthYear, reviews]) => (
                     <div key={monthYear} className="date-group">
-                        <h3 className="text-xl font-bold text-white ml-[8rem] mt-6 border-l-4 w-[13rem] text-start p-2">
+                        <h3 className="text-xl font-bold text-white ml-[8rem] mt-6 border-l-4 w-[13rem] text-start p-2 phone:ml-20 phone:mt-1">
                             {monthYear.toLocaleUpperCase()}
                         </h3>
 
@@ -82,7 +82,7 @@ const History: React.FC = () => {
 
                             return (
                                 <Link to={`/comments/${item.id}`} onClick={() => getIdComment(item.id)} key={index}>
-                                    <div className="text-white gap-8 border-b flex flex-col ml-[8rem] mr-[4.5rem]">
+                                    <div className="text-white gap-8 border-b flex flex-col ml-[8rem] mr-[4.5rem] phone:ml-[5rem] phone:mr-5">
                                         {movie && (
                                             <div className="flex items-start gap-5 cursor-pointer transition-all p-5 hover:bg-comments">
                                                 <div>

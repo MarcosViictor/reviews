@@ -68,6 +68,7 @@ export default {
       },
       screens: {
         'phone': { max: '430px' }, 
+        'computer': {min: '1920px'}
       },
     },
   },

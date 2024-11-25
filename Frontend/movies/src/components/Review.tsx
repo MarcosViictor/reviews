@@ -74,7 +74,7 @@ const Review: React.FC = () => {
                     onChange={handleReviewTextChange}
                     value={reviewText}
                     placeholder="Escreva sua avaliação:"
-                    className="w-full min-h-[130px] mt-3 bg-search outline-none p-4 rounded-borderRadius resize-none overflow-y-hidden"
+                    className="w-full min-h-[130px] computer:h-[270px] mt-3 bg-search outline-none p-4 rounded-borderRadius resize-none overflow-y-hidden"
                     maxLength={tamanho}
                 />
                 <p className="text-end text-[0.8rem] text-[#c7c7c7]">{textoRestante} caracteres restantes</p>
