@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useGetId } from "../context/IdContext";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export interface OverviewItem {
     tmdb_id: number;
@@ -21,6 +22,7 @@ const History: React.FC = () => {
     const [movieDetails, setMovieDetails] = useState<Movie[]>([]);
     const imgFilme = import.meta.env.VITE_IMG;
     const { setIdComment } = useGetId();
+    const token = Cookies.get('token');
 
     // Ordena a lista de avaliações por data (mais recente primeiro)
     const sortedOverview = [...overview].sort((a, b) => new Date(b.date_overview).getTime() - new Date(a.date_overview).getTime());
@@ -40,7 +42,11 @@ const History: React.FC = () => {
     useEffect(() => {
         const GetOverview = async () => {
             try {
-                const res = await api.get('movies/overviews/');
+                const res = await api.get('movies/overviews/', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                });
                 setOverview(res.data); // Set overview data
                 console.log(res.data);
 

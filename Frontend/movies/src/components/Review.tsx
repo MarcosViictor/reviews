@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import Notification from "./Notification";
 import { api } from "../context/api";
 import { useParams } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Review: React.FC = () => {
     const [rating, setRating] = useState<number>(0);
@@ -17,15 +18,24 @@ const Review: React.FC = () => {
     const tamanho: number = 255;
     const { id } = useParams<{ id: string }>();
     const textoRestante = tamanho - reviewText.length;
+    const token = Cookies.get('token');
 
     const postReview = async () => {
         try {
-            const res = await api.post('movies/overviews/', {
-                tmdb_id_input: id,
-                overview_text_movie: reviewText,
-                date_overview: date,
-                stars: rating
-            });
+            const res = await api.post(
+                'movies/overviews/',
+                {
+                    tmdb_id_input: id,
+                    overview_text_movie: reviewText,
+                    date_overview: date,
+                    stars: rating,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                } 
+            );
             console.log(res.data);
             setReviewText('');
             setDate('');
@@ -44,7 +54,12 @@ const Review: React.FC = () => {
             await api.post('movies/favorite/', {
                 tmdb_id: id,
                 favorite: newIsLiked
-            });
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            } );
             setIsLiked(newIsLiked);
         } catch (err) {
             console.error('Não foi possível curtir o filme: ' + err);
