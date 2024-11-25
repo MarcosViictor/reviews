@@ -9,19 +9,20 @@ class OverviewMovieSerializer(serializers.ModelSerializer):
     tmdb_id = serializers.IntegerField(source='id_movie.tmdb_id', read_only=True)  # Exibe o `tmdb_id` do filme na resposta
     tmdb_id_input = serializers.IntegerField(write_only=True)  # Campo usado apenas para input
     owner = serializers.ReadOnlyField(source='owner.username')  # Nome do usuário autenticado na resposta
-
+    owner_id = serializers.ReadOnlyField(source='owner.id')
     class Meta:
         model = Overview_movie
         fields = [
             'id',
-            'tmdb_id',  # Para exibir na resposta
-            'tmdb_id_input',  # Para receber o ID no input
-            'overview_text_movie',  # Texto da avaliação
-            'date_overview',  # Data da avaliação
-            'stars',  # Nota
-            'owner',  # Nome do usuário
+            'tmdb_id',
+            'tmdb_id_input',
+            'overview_text_movie',
+            'date_overview',  # Torne este campo editável
+            'stars',
+            'owner',
+            'owner_id'
         ]
-        read_only_fields = ['id', 'tmdb_id', 'date_overview', 'owner']
+        read_only_fields = ['id', 'tmdb_id', 'owner','owner_id']
 
     def create(self, validated_data):
         # Verifica se o usuário está autenticado
@@ -77,8 +78,9 @@ class CommentOverviewSeriesSerializer(serializers.ModelSerializer):
             'text',
             'date_comment',
             'owner',
+            'owner_id'
         ]
-        read_only_fields = ['id', 'date_comment', 'owner']
+        read_only_fields = ['id', 'date_comment', 'owner', 'owner_id']
 
     def create(self, validated_data):
         validated_data['owner'] = self.context['request'].user  # Associa o usuário autenticado
