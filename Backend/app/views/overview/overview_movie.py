@@ -3,9 +3,11 @@ from rest_framework import generics
 from rest_framework.views import APIView
 from app.models import Overview_movie
 from app.serializers import OverviewMovieSerializer
+# from rest_framework.permissions import IsAuthenticated
 
 
 class OverviewMovieListCreateView(generics.ListCreateAPIView):
+    # permission_classes = [IsAuthenticated]
     queryset = Overview_movie.objects.all()
     serializer_class = OverviewMovieSerializer
 # class OverviewMovieDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -14,6 +16,7 @@ class OverviewMovieListCreateView(generics.ListCreateAPIView):
 #     lookup_field = 'id_movie'
 
 class OverviewMovieDetailView(generics.RetrieveUpdateDestroyAPIView):
+    # permission_classes = [IsAuthenticated]
     serializer_class = OverviewMovieSerializer
     lookup_field = 'id'  # Usa o ID da avaliação para recuperar um comentário específico
     lookup_url_kwarg = 'id'  # Parâmetro da URL a ser usado para buscar a avaliação correta

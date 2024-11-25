@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password, check_password
-
+from auth_app.models import CustomUser
+from django.utils.timezone import now
 # Create your models here.
 
 class Base (models.Model):
@@ -52,38 +53,48 @@ class Series(models.Model):
       
 
 # Avaliação de séries
-class Overview_serie (Base):
-    id_series = models.ForeignKey(Series, on_delete=models.CASCADE) # id da tabela série
-    overview_text_serie = models.TextField(max_length=500) # Avaliação em comentário na série
-    date_overview = models.DateField () # data da avaliação (metadado)
-    stars = models.DecimalField(max_digits=3, decimal_places=1, default=0.0) # estrelas da série dada pelo usuário
+class Overview_serie(Base):
+    id_series = models.ForeignKey(Series, on_delete=models.CASCADE)  # id da tabela série
+    overview_text_serie = models.TextField(max_length=500)  # Avaliação em comentário na série
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="overview_series")
+    date_overview = models.DateField()  # data da avaliação (metadado)
+    stars = models.DecimalField(max_digits=3, decimal_places=1, default=0.0)  # estrelas da série dada pelo usuário
 
-    
-    
-    # Comentário da avaliação da série
-class Comment_overview_series (Base):
-    id_overview_serie = models.ForeignKey (Overview_serie, on_delete=models.CASCADE) #id da avaliação da série
-    text = models.TextField(max_length=200) # comentário na avaliação feito na série
-    date_comment = models.DateField() # data do comentário feito na avaliação (metadado)
+    def __str__(self):
+        return f"{self.id_series} - {self.owner.username}"
 
-    
-    
-    
-    # Avaliação do Filme
-class Overview_movie (Base):
-    id_movie = models.ForeignKey(Movie, on_delete=models.CASCADE) # id da tabela movie
-    overview_text_movie = models.TextField(max_length=500) # Avaliação em comentário no filme
-    date_overview = models.DateField () # data da avaliação (metadado)
-    stars = models.DecimalField(max_digits=3, decimal_places=1, default=0.0) # estrelas da série dada pelo usuário
-    
-    
-    
-    # Comentário da avaliação do filme
-class Comment_overview_movies (Base):
-    id_overview_movie = models.ForeignKey (Overview_movie, on_delete=models.CASCADE) #id da avaliação do filme
-    text = models.TextField(max_length=200) # comentário na avaliação feito no filme
-    date_comment = models.DateField() # data do comentário feito na avaliação (metadado)
-       
+
+class Comment_overview_series(Base):
+    id_overview_serie = models.ForeignKey(Overview_serie, on_delete=models.CASCADE)  # id da avaliação da série
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="comments_overview_series")
+    text = models.TextField(max_length=200)  # comentário na avaliação feito na série
+    date_comment = models.DateField(default=now)   # data do comentário feito na avaliação (metadado)
+
+    def __str__(self):
+        return f"Comment by {self.owner.username} on {self.id_overview_serie}"
+
+
+class Overview_movie(Base):
+    id_movie = models.ForeignKey(Movie, on_delete=models.CASCADE)  # id da tabela movie
+    overview_text_movie = models.TextField(max_length=500)  # Avaliação em comentário no filme
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="overview_movies")
+    date_overview = models.DateField(default=now)  
+    stars = models.DecimalField(max_digits=3, decimal_places=1, default=0.0)  # estrelas do filme dadas pelo usuário
+
+    def __str__(self):
+        return f"{self.id_movie} - {self.owner.username}"
+
+
+class Comment_overview_movies(Base):
+    id_overview_movie = models.ForeignKey(Overview_movie, on_delete=models.CASCADE)  # id da avaliação do filme
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="comments_overview_movies")
+    text = models.TextField(max_length=200)  # comentário na avaliação feito no filme
+    date_comment = models.DateField()  # data do comentário feito na avaliação (metadado)
+
+    def __str__(self):
+        return f"Comment by {self.owner.username} on {self.id_overview_movie}"
+
+
 class WatchList(Base):
     name = models.CharField(max_length=255)  # Nome da lista
     movies = models.ManyToManyField(Movie, blank=True)  # Relacionamento opcional com Movie

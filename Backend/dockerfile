@@ -1,22 +1,15 @@
-# Use a imagem base do Python
 FROM python:3.10
 
-# Instala as dependências do sistema para o PostgreSQL e outras
-RUN apt-get update && \
-    apt-get install -y libpq-dev gcc && \
-    rm -rf /var/lib/apt/lists/*
-
-# Define o diretório de trabalho no contêiner
 WORKDIR /app
 
-# Copia o arquivo requirements.txt para o contêiner
 COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-# Instala as dependências do projeto
-RUN pip install --upgrade pip && pip install -r requirements.txt
-
-# Copiar o restante do código do projeto para o contêiner
 COPY . .
 
-# Define o comando padrão para iniciar o Django
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Copia o script de entrada e torna-o executável
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Usa o script de entrada como comando do contêiner
+CMD ["/entrypoint.sh"]
