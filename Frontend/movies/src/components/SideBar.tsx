@@ -8,9 +8,12 @@ import Search from '../assets/img/search.svg'
 import People from '../assets/img/people.svg'
 import Game from '../assets/img/game.svg'
 import Dice from '../assets/img/dice.svg'
+import Logout from '../assets/img/logout.svg'
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom"
+import Cookies from "js-cookie"
 
 const AsideStyle = styled.aside< {active: boolean} >`
         position: fixed;
@@ -87,6 +90,13 @@ const SideBar: React.FC = () => {
         setIsActive(true);
     }
 
+    const navigate = useNavigate()
+
+    const LogoutUser = () => {
+        navigate('/login')
+        Cookies.remove('token');
+    }
+
 
 
     return(
@@ -148,6 +158,10 @@ const SideBar: React.FC = () => {
                     <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
                         <img className="ml-1" src={Profile} alt="SVG Perfil" />
                         <Span active={isActive} >Perfil</Span>
+                    </li>
+                    <li onClick={LogoutUser} className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
+                        <img className=" w-7" src={Logout} alt="SVG Logout" />
+                        <Span active={isActive} >Logout</Span>
                     </li>
                </Ul>
             </AsideStyle>
