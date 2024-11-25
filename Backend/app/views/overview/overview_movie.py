@@ -3,17 +3,16 @@ from rest_framework import generics
 from rest_framework.views import APIView
 from app.models import Overview_movie
 from app.serializers import OverviewMovieSerializer
-# from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 
 
 class OverviewMovieListCreateView(generics.ListCreateAPIView):
-    # permission_classes = [IsAuthenticated]
-    queryset = Overview_movie.objects.all()
+    permission_classes = [IsAuthenticated]  # Exige autenticação
     serializer_class = OverviewMovieSerializer
-# class OverviewMovieDetailView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Overview_movie.objects.all()
-#     serializer_class = OverviewMovieSerializer
-#     lookup_field = 'id_movie'
+
+    def get_queryset(self):
+        # Filtra as avaliações do usuário autenticado
+        return Overview_movie.objects.filter(owner=self.request.user)
 
 class OverviewMovieDetailView(generics.RetrieveUpdateDestroyAPIView):
     # permission_classes = [IsAuthenticated]
