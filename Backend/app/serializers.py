@@ -69,7 +69,7 @@ class OverviewSerieSerializer(serializers.ModelSerializer):
 
 class CommentOverviewSeriesSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')  # Mostra o nome do usuário autenticado
-
+    
     class Meta:
         model = Comment_overview_series
         fields = [
@@ -87,8 +87,8 @@ class CommentOverviewSeriesSerializer(serializers.ModelSerializer):
         return Comment_overview_series.objects.create(**validated_data)
 
 class CommentOverviewMoviesSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')  # Mostra o nome do usuário autenticado
-
+    owner = serializers.ReadOnlyField(source='owner.username')  
+    owner_id = serializers.ReadOnlyField(source='owner.id')
     class Meta:
         model = Comment_overview_movies
         fields = [
@@ -97,8 +97,9 @@ class CommentOverviewMoviesSerializer(serializers.ModelSerializer):
             'text',
             'date_comment',
             'owner',
+            'owner_id'
         ]
-        read_only_fields = ['id', 'date_comment', 'owner']
+        read_only_fields = ['id', 'date_comment', 'owner', 'owner_id']
 
     def create(self, validated_data):
         validated_data['owner'] = self.context['request'].user  # Associa o usuário autenticado
