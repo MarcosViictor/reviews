@@ -80,7 +80,7 @@ class CommentOverviewSeriesSerializer(serializers.ModelSerializer):
             'owner',
             'owner_id'
         ]
-        read_only_fields = ['id', 'date_comment', 'owner', 'owner_id']
+        read_only_fields = ['id', 'owner', 'owner_id']
 
     def create(self, validated_data):
         validated_data['owner'] = self.context['request'].user  # Associa o usuário autenticado
@@ -95,11 +95,10 @@ class CommentOverviewMoviesSerializer(serializers.ModelSerializer):
             'id',
             'id_overview_movie',
             'text',
-            'date_comment',
             'owner',
             'owner_id'
         ]
-        read_only_fields = ['id', 'date_comment', 'owner', 'owner_id']
+        read_only_fields = ['id', 'owner', 'owner_id']
 
     def create(self, validated_data):
         validated_data['owner'] = self.context['request'].user  # Associa o usuário autenticado

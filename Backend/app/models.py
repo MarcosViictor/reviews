@@ -89,8 +89,8 @@ class Comment_overview_movies(Base):
     id_overview_movie = models.ForeignKey(Overview_movie, on_delete=models.CASCADE)  # id da avaliação do filme
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="comments_overview_movies")
     text = models.TextField(max_length=200)  # comentário na avaliação feito no filme
-    date_comment = models.DateField()  # data do comentário feito na avaliação (metadado)
-
+    date_comment = models.DateField(default=now)   # data do comentário feito na avaliação (metadado)
+    
     def __str__(self):
         return f"Comment by {self.owner.username} on {self.id_overview_movie}"
 
