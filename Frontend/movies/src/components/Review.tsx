@@ -1,7 +1,7 @@
 import { FaRegStar, FaStar } from "react-icons/fa";
 import FavIcon from '../assets/img/fav.svg';
 import FavIconLiked from '../assets/img/fav-icon.svg';
-import ListIcon from '../assets/img/list.svg';
+// import ListIcon from '../assets/img/list.svg';
 import React, { useState } from "react";
 import Notification from "./Notification";
 import { api } from "../context/api";
@@ -104,15 +104,15 @@ const Review: React.FC = () => {
                     Enviar Avaliação
                 </button>
 
-                <div className="flex justify-around pt-5 items-center">
+                <div className="flex justify-around pt-6 items-center">
                     <button onClick={toggleFavorite} className="flex flex-col items-center gap-2">
                         <img className="w-11" src={isLiked ? FavIconLiked : FavIcon} alt="Favoritar" />
                         <span>Favoritar</span>
                     </button>
-                    <button className="flex flex-col items-center gap-2">
+                    {/* <button className="flex flex-col items-center gap-2">
                         <img className="w-12" src={ListIcon} alt="Adicionar à Lista" />
                         <span>Adicionar à Lista</span>
-                    </button>
+                    </button> */}
                 </div>
             </div>
 

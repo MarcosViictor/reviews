@@ -13,7 +13,7 @@ import Update from '../assets/img/update.svg'
 import Delete from '../assets/img/delete.svg'
 import PopUpDelete from "./PopUpDelete";
 import UpdateReview from "./UpdateReview";
-import ButtonAddComment from "./ButtonAddComment";
+// import ButtonAddComment from "./ButtonAddComment";
 
 const OverviewComment : React.FC = () => {
 
@@ -169,7 +169,7 @@ const OverviewComment : React.FC = () => {
                 deleteComment={deleteComment}
             />}
 
-            <ButtonAddComment />
+            {/* <ButtonAddComment /> */}
     </div>
 
 

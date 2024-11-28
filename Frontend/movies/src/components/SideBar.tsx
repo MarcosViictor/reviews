@@ -1,11 +1,11 @@
 import Logo from "../assets/img/logo-oculos.svg"
 import Home from "../assets/img/home.svg"
-import Recentes from "../assets/img/recentes.svg"
+// import Recentes from "../assets/img/recentes.svg"
 import Favoritos from "../assets/img/fav.svg"
 import Historico from "../assets/img/historico.svg"
-import Profile from '../assets/img/person-icon.svg'
+// import Profile from '../assets/img/person-icon.svg'
 import Search from '../assets/img/search.svg'
-import People from '../assets/img/people.svg'
+// import People from '../assets/img/people.svg'
 import Game from '../assets/img/game.svg'
 import Dice from '../assets/img/dice.svg'
 import Logout from '../assets/img/logout.svg'
@@ -118,13 +118,13 @@ const SideBar: React.FC = () => {
                             <Link to="/search/movie">Pesquisar</Link>
                         </Span>
                     </li>
-                    <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
+                    {/* <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
                         <img src={Recentes} alt="SVG Recentes" />
                         <Span active={isActive} > 
                             <Link to='/lists'>Listas</Link>
                         </Span>
                        
-                    </li>
+                    </li> */}
                     <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
                         <img src={Favoritos} alt="SVG Favoritos" />
                         <Span active={isActive} >
@@ -137,12 +137,12 @@ const SideBar: React.FC = () => {
                             <Link to="/history">Histórico</Link>
                         </Span>
                     </li>
-                    <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
+                    {/* <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
                         <img className="w-6 mr-[-4px]" src={People} alt="SVG Comunidade" />
                         <Span active={isActive} >
                             <Link to="/community">Comunidade</Link>
                         </Span>
-                    </li>
+                    </li> */}
                     <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
                         <img className="w-7 mr-[-4px]" src={Game} alt="SVG Comunidade" />
                         <Span active={isActive} >
@@ -155,10 +155,10 @@ const SideBar: React.FC = () => {
                             <Link to="/sugestion">Sugestão</Link>
                         </Span>
                     </li>
-                    <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
+                    {/* <li className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
                         <img className="ml-1" src={Profile} alt="SVG Perfil" />
                         <Span active={isActive} >Perfil</Span>
-                    </li>
+                    </li> */}
                     <li onClick={LogoutUser} className="flex gap-6 items-center cursor-pointer transition-all hover:text-[1.4rem] //hover:font-[500] "> 
                         <img className=" w-7" src={Logout} alt="SVG Logout" />
                         <Span active={isActive} >Logout</Span>
